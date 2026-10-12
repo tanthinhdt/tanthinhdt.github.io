@@ -1,3 +1,5 @@
+const publicAsset = (path) => `${import.meta.env.BASE_URL}${path}`;
+
 export const profileData = {
   name: "Duong Tan Thinh",
   nativeName: "Dương Tấn Thịnh",
@@ -61,7 +63,7 @@ export const publicationsData = [
     citationSource: "Crossref",
     citationChecked: "October 2026",
     isHighlight: true,
-    certificateUrl: "/certificates/2023-isico-conference-certificate.pdf",
+    certificateUrl: publicAsset("certificates/2023-isico-conference-certificate.pdf"),
     abstract: "Applies self-supervised Vision Transformers (ViT) and Bidirectional Encoder representation from Image Transformers (BEiT) to high-precision medicinal plant classification, significantly improving recognition accuracy over conventional CNN architectures.",
     keywords: ["Vision Transformer (ViT)", "BEiT", "Plant Recognition", "Computer Vision", "Medicinal Species"],
     bibtex: `@article{nhut2024medicinal,
@@ -151,7 +153,7 @@ export const credentialsData = [
     issuer: "ISICO",
     year: "2023",
     description: "Conference certificate related to the paper “Medicinal plant recognition based on Vision Transformer and BEiT.”",
-    fileUrl: "/certificates/2023-isico-conference-certificate.pdf"
+    fileUrl: publicAsset("certificates/2023-isico-conference-certificate.pdf")
   },
   {
     id: "credential-ielts-2024",
@@ -172,7 +174,7 @@ export const credentialsData = [
     issuer: "FPT University",
     year: "2023",
     description: "Certificate issued by FPT University for completing the AI Engineer apprenticeship at Gradients Technologies Joint Stock Company.",
-    fileUrl: "/certificates/fpt-university-ai-engineer-apprenticeship-2023.pdf",
+    fileUrl: publicAsset("certificates/fpt-university-ai-engineer-apprenticeship-2023.pdf"),
     experienceId: "exp-gradients-ai-engineer"
   }
 ];
@@ -183,7 +185,7 @@ export const educationData = [
     degree: "Combined Master's and PhD",
     institution: "Sungkyunkwan University",
     period: "Sep 2025 - Present",
-    logo: "/skku-logo.png",
+    logo: publicAsset("skku-logo.png"),
     details: "Major: Integrative Biotechnology."
   },
   {
@@ -192,7 +194,7 @@ export const educationData = [
     institution: "FPT University",
     period: "Sep 2020 - Sep 2024",
     grade: "Excellent",
-    logo: "/fpt-university-logo.jpg",
+    logo: publicAsset("fpt-university-logo.jpg"),
     details: "Major: Artificial Intelligence."
   }
 ];
@@ -204,7 +206,7 @@ export const awardsData = [
     organization: "FPT University",
     year: "Nov 2024",
     description: "Honored as Valedictorian of the Engineering and Technology Batch 3, recognizing exceptional academic excellence and leadership.",
-    imageUrl: "/awards/valedictorian-engineering-technology-batch-3-2024.jpg",
+    imageUrl: publicAsset("awards/valedictorian-engineering-technology-batch-3-2024.jpg"),
     sourceUrl: "https://www.facebook.com/srofptuhcmc/posts/542707318585556/"
   }
 ];
