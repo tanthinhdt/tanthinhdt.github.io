@@ -262,12 +262,26 @@ export default function HomePage() {
             <div className="flex" style={{ flexDirection: 'column', gap: '1rem' }}>
               {educationData.map((edu) => (
                 <motion.div key={edu.id} variants={itemVariants} className="glass-panel" style={{ padding: '1.5rem' }}>
-                  <div className="flex items-center gap-2 mb-1">
-                    <span className="tag">{edu.period}</span>
+                  <div className="flex gap-3">
+                    {edu.logo && (
+                      <div style={{ width: '92px', height: '81px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                        <img
+                          src={edu.logo}
+                          alt={`${edu.institution} logo`}
+                          style={{ width: '81px', height: 'auto', display: 'block' }}
+                        />
+                      </div>
+                    )}
+                    <div>
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="tag">{edu.period}</span>
+                      </div>
+                      <h3 className="mb-1" style={{ fontSize: '1.15rem' }}>{edu.degree}</h3>
+                      <div className="text-sm mb-2" style={{ fontWeight: 600, color: 'var(--text-primary)' }}>{edu.institution}</div>
+                      <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>{edu.details}</p>
+                      {edu.grade && <p className="text-sm" style={{ color: 'var(--accent-primary)', fontWeight: 600 }}>Grade: {edu.grade}</p>}
+                    </div>
                   </div>
-                  <h3 className="mb-1" style={{ fontSize: '1.15rem' }}>{edu.degree}</h3>
-                  <div className="text-sm mb-2" style={{ fontWeight: 600, color: 'var(--text-primary)' }}>{edu.institution}</div>
-                  <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>{edu.details}</p>
                 </motion.div>
               ))}
 

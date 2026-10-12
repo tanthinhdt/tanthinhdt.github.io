@@ -57,13 +57,25 @@ export default function AboutPage() {
             </h2>
             <div className="flex" style={{ flexDirection: 'column', gap: '1.25rem' }}>
               {educationData.map(edu => (
-                <div key={edu.id}>
-                  <div className="flex items-center gap-2 mb-1">
-                    <span className="tag">{edu.period}</span>
+                <div key={edu.id} className="flex gap-3">
+                  {edu.logo && (
+                    <div style={{ width: '92px', height: '81px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                      <img
+                        src={edu.logo}
+                        alt={`${edu.institution} logo`}
+                        style={{ width: '81px', height: 'auto', display: 'block' }}
+                      />
+                    </div>
+                  )}
+                  <div>
+                    <div className="flex items-center gap-2 mb-1">
+                      <span className="tag">{edu.period}</span>
+                    </div>
+                    <h3 style={{ fontSize: '1.2rem', marginBottom: '0.25rem' }}>{edu.degree}</h3>
+                    <div className="text-sm mb-2" style={{ fontWeight: 600, color: 'var(--text-primary)' }}>{edu.institution}</div>
+                    <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem' }}>{edu.details}</p>
+                    {edu.grade && <p className="text-sm" style={{ color: 'var(--accent-primary)', fontWeight: 600 }}>Grade: {edu.grade}</p>}
                   </div>
-                  <h3 style={{ fontSize: '1.2rem', marginBottom: '0.25rem' }}>{edu.degree}</h3>
-                  <div className="text-sm mb-2" style={{ fontWeight: 600, color: 'var(--text-primary)' }}>{edu.institution}</div>
-                  <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem' }}>{edu.details}</p>
                 </div>
               ))}
             </div>
