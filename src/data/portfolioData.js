@@ -61,6 +61,7 @@ export const publicationsData = [
     citationSource: "Crossref",
     citationChecked: "October 2026",
     isHighlight: true,
+    certificateUrl: "/certificates/2023-isico-conference-certificate.pdf",
     abstract: "Applies self-supervised Vision Transformers (ViT) and Bidirectional Encoder representation from Image Transformers (BEiT) to high-precision medicinal plant classification, significantly improving recognition accuracy over conventional CNN architectures.",
     keywords: ["Vision Transformer (ViT)", "BEiT", "Plant Recognition", "Computer Vision", "Medicinal Species"],
     bibtex: `@article{nhut2024medicinal,
@@ -144,6 +145,14 @@ export const experienceData = [
 ];
 
 export const credentialsData = [
+  {
+    id: "credential-isico-2023",
+    title: "ISICO 2023 Conference Certificate",
+    issuer: "ISICO",
+    year: "2023",
+    description: "Conference certificate related to the paper “Medicinal plant recognition based on Vision Transformer and BEiT.”",
+    fileUrl: "/certificates/2023-isico-conference-certificate.pdf"
+  },
   {
     id: "credential-ielts-2024",
     title: "International English Language Testing System (IELTS)",

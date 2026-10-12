@@ -175,6 +175,18 @@ export default function PublicationsPage() {
                   Read Paper <ExternalLink size={15} />
                 </a>
 
+                {pub.certificateUrl && (
+                  <a
+                    href={pub.certificateUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-secondary"
+                    style={{ padding: '0.6rem 1.25rem', fontSize: '0.875rem' }}
+                  >
+                    View Conference Certificate <ExternalLink size={15} />
+                  </a>
+                )}
+
                 <button 
                   onClick={() => handleCopyBibtex(pub.id, pub.bibtex)}
                   className="icon-btn" 
