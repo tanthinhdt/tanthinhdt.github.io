@@ -140,10 +140,10 @@ export default function HomePage() {
                 <div style={{ flex: '1 1 340px' }}>
                   <div className="flex items-center gap-2 mb-2" style={{ flexWrap: 'wrap' }}>
                     <span className="tag">{pub.year}</span>
-                    <span className="tag" style={{ background: 'rgba(14, 165, 233, 0.08)', color: 'var(--accent-cyan)', borderColor: 'rgba(14, 165, 233, 0.2)' }}>
+                    <span className="tag" style={{ background: 'rgba(20, 184, 166, 0.08)', color: 'var(--accent-cyan)', borderColor: 'rgba(20, 184, 166, 0.2)' }}>
                       {pub.type}
                     </span>
-                    <span className="tag" style={{ background: 'rgba(124, 58, 237, 0.08)', color: 'var(--accent-purple)', borderColor: 'rgba(124, 58, 237, 0.2)' }}>
+                    <span className="tag" style={{ background: 'rgba(5, 150, 105, 0.08)', color: 'var(--accent-purple)', borderColor: 'rgba(5, 150, 105, 0.2)' }}>
                       Featured
                     </span>
                   </div>

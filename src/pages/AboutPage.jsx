@@ -30,7 +30,7 @@ export default function AboutPage() {
           </div>
 
           <h2 style={{ fontSize: '1.5rem', marginBottom: '0.25rem' }}>{profileData.name}</h2>
-          <div className="text-sm mb-3 text-gradient" style={{ fontWeight: 600 }}>{profileData.nativeName}</div>
+          <div className="text-sm mb-3" style={{ color: 'var(--accent-purple)', fontWeight: 600 }}>{profileData.nativeName}</div>
 
           <div className="flex gap-2 mb-4" style={{ justifyContent: 'center', flexWrap: 'wrap' }}>
             <span className="alias-chip">English: <strong>{profileData.englishName}</strong></span>

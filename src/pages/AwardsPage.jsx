@@ -27,7 +27,7 @@ export default function AwardsPage() {
             transition={{ duration: 0.4 }}
           >
             <div className="flex items-center gap-2 mb-3">
-              <span className="tag" style={{ background: 'rgba(124, 58, 237, 0.08)', color: 'var(--accent-purple)', borderColor: 'rgba(124, 58, 237, 0.2)' }}>
+              <span className="tag" style={{ background: 'rgba(5, 150, 105, 0.08)', color: 'var(--accent-purple)', borderColor: 'rgba(5, 150, 105, 0.2)' }}>
                 {award.year}
               </span>
               <span className="tag">{award.organization}</span>
