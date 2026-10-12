@@ -426,6 +426,131 @@ a:hover {
   color: var(--text-primary);
 }
 
+.citation-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.25rem 0.65rem;
+  border-radius: 9999px;
+  background: var(--tag-bg);
+  border: 1px solid var(--tag-border);
+  color: var(--tag-color);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.citation-note {
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  margin-top: -0.55rem;
+  margin-bottom: 1.25rem;
+}
+
+.visitor-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+}
+
+.visitor-countries-panel {
+  padding: 1.5rem;
+}
+
+.visitor-map-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.7fr) minmax(220px, 0.8fr);
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.visitor-map {
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid var(--glass-border);
+  border-radius: 14px;
+  background: rgba(125, 125, 125, 0.04);
+}
+
+.visitor-map svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.visitor-map-country {
+  transition: fill 0.2s ease;
+}
+
+.visitor-map-marker {
+  fill: var(--accent-primary);
+  opacity: 0.25;
+  stroke: var(--accent-primary);
+  stroke-width: 1;
+  animation: visitorPulse 2.5s ease-out infinite;
+}
+
+.visitor-map-marker-core {
+  fill: var(--accent-primary);
+}
+
+@keyframes visitorPulse {
+  0%, 100% { opacity: 0.25; }
+  50% { opacity: 0.8; }
+}
+
+.visitor-country-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+}
+
+.visitor-country {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  color: var(--text-secondary);
+}
+
+.visitor-country-name {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  min-width: 0;
+}
+
+.visitor-flag {
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
+.visitor-country strong {
+  color: var(--text-primary);
+  font-size: 1.05rem;
+}
+
+.visitor-data-note {
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  margin-top: 1rem;
+}
+
+@media (max-width: 760px) {
+  .visitor-map-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .visitor-country-list {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  }
+}
+
 /* Multi-page Nav Items */
 .nav-item {
   padding: 0.45rem 0.9rem;

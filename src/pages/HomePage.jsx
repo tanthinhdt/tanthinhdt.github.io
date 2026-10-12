@@ -1,10 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Mail, FileText, ChevronRight, BookOpen, Award, Briefcase, GraduationCap, MapPin, Globe, Sparkles, ExternalLink, ArrowRight } from 'lucide-react';
+import { Mail, FileText, ChevronRight, BookOpen, Award, Briefcase, GraduationCap, MapPin, Globe, Sparkles, ExternalLink, ArrowRight, Quote, Users } from 'lucide-react';
+import { ComposableMap, Geographies, Geography, Marker } from 'react-simple-maps';
+import worldMap from 'world-atlas/countries-110m.json';
 import portraitImg from '../assets/portrait.png';
 import { GithubIcon, LinkedinIcon } from '../components/Icons';
-import { profileData, publicationsData, experienceData, educationData, awardsData } from '../data/portfolioData';
+import { profileData, publicationsData, experienceData, educationData, awardsData, visitorCountriesData } from '../data/portfolioData';
 
 export default function HomePage() {
   const containerVariants = {
@@ -25,6 +27,27 @@ export default function HomePage() {
   };
 
   const highlightPubs = publicationsData.filter(p => p.isHighlight);
+  const visitorCountryNames = {
+    Vietnam: ['Vietnam'],
+    'South Korea': ['South Korea', 'Korea'],
+    'United States': ['United States', 'United States of America'],
+    Japan: ['Japan']
+  };
+  const visitorLocations = {
+    Vietnam: [108, 16],
+    'South Korea': [128, 36],
+    'United States': [-100, 38],
+    Japan: [138, 36]
+  };
+  const visitorCounts = Object.fromEntries(
+    visitorCountriesData.map((entry) => [entry.country, entry.visitors])
+  );
+  const maxVisitors = Math.max(...visitorCountriesData.map((entry) => entry.visitors), 1);
+
+  const getCountryVisitors = (countryName) => {
+    const entry = Object.entries(visitorCountryNames).find(([, aliases]) => aliases.includes(countryName));
+    return entry ? visitorCounts[entry[0]] ?? 0 : 0;
+  };
 
   return (
     <div className="page-content">
@@ -146,6 +169,10 @@ export default function HomePage() {
                     <span className="tag" style={{ background: 'rgba(5, 150, 105, 0.08)', color: 'var(--accent-purple)', borderColor: 'rgba(5, 150, 105, 0.2)' }}>
                       Featured
                     </span>
+                    <span className="citation-badge">
+                      <Quote size={13} />
+                      {pub.citationCount} {pub.citationCount === 1 ? 'citation' : 'citations'}
+                    </span>
                   </div>
                   <h3 className="mb-2" style={{ fontSize: '1.2rem', lineHeight: 1.4 }}>
                     <a href={pub.link} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-primary)' }}>
@@ -253,6 +280,78 @@ export default function HomePage() {
               ))}
             </div>
           </div>
+        </div>
+      </motion.section>
+
+      {/* Visitor Countries Section */}
+      <motion.section
+        className="section"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-80px" }}
+        variants={containerVariants}
+      >
+        <div className="container">
+          <div className="visitor-heading">
+            <div>
+              <motion.h2 variants={itemVariants} className="section-title" style={{ marginBottom: '0.5rem' }}>
+                <Globe size={28} style={{ color: 'var(--accent-primary)' }} />
+                Visitors around the world
+              </motion.h2>
+              <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem' }}>
+                Countries represented in recent website visits
+              </p>
+            </div>
+            <Users size={34} style={{ color: 'var(--accent-primary)', opacity: 0.7 }} />
+          </div>
+
+          <motion.div variants={itemVariants} className="glass-panel visitor-countries-panel">
+            <div className="visitor-map-layout">
+              <div className="visitor-map" aria-label="World map showing visitor countries">
+                <ComposableMap projectionConfig={{ scale: 145 }} width={800} height={390}>
+                  <Geographies geography={worldMap}>
+                    {({ geographies }) => geographies.map((geo) => {
+                      const visitors = getCountryVisitors(geo.properties.name);
+                      return (
+                        <Geography
+                          key={geo.rsmKey}
+                          geography={geo}
+                          className={visitors > 0 ? 'visitor-map-country is-visited' : 'visitor-map-country'}
+                          style={{
+                            default: { fill: visitors > 0 ? `color-mix(in srgb, var(--accent-primary) ${35 + Math.round((visitors / maxVisitors) * 50)}%, var(--glass-bg))` : 'var(--glass-border)', outline: 'none' },
+                            hover: { fill: 'var(--accent-cyan)', outline: 'none' },
+                            pressed: { fill: 'var(--accent-primary)', outline: 'none' }
+                          }}
+                          tabIndex={visitors > 0 ? 0 : -1}
+                          aria-label={visitors > 0 ? `${geo.properties.name}: ${visitors} visitors` : geo.properties.name}
+                        />
+                      );
+                    })}
+                  </Geographies>
+                  {Object.entries(visitorLocations).map(([country, coordinates]) => (
+                    <Marker key={country} coordinates={coordinates}>
+                      <circle r={5 + ((visitorCounts[country] ?? 0) / maxVisitors) * 6} className="visitor-map-marker" />
+                      <circle r="3" className="visitor-map-marker-core" />
+                    </Marker>
+                  ))}
+                </ComposableMap>
+              </div>
+              <div className="visitor-country-list" aria-label="Visitor countries ranked by visitors">
+                {visitorCountriesData.map((entry) => (
+                  <div className="visitor-country" key={entry.country}>
+                    <div className="visitor-country-name">
+                      <span className="visitor-flag" aria-hidden="true">{entry.flag}</span>
+                      <span>{entry.country}</span>
+                    </div>
+                    <strong>{entry.visitors}</strong>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <p className="visitor-data-note">
+              Darker regions and markers represent more visitors.
+            </p>
+          </motion.div>
         </div>
       </motion.section>
     </div>
