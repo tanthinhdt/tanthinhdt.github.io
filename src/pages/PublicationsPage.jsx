@@ -116,6 +116,11 @@ export default function PublicationsPage() {
                   <Quote size={13} />
                   {pub.citationCount} {pub.citationCount === 1 ? 'citation' : 'citations'}
                 </span>
+                {pub.journalQuartile && (
+                  <span className="quartile-badge">
+                    {pub.journalQuartile} journal
+                  </span>
+                )}
               </div>
 
               <h2 style={{ fontSize: '1.35rem', lineHeight: 1.35, marginBottom: '0.75rem' }}>

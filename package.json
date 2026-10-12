@@ -8,6 +8,7 @@
     "build": "vite build",
     "lint": "oxlint",
     "update-citations": "node scripts/update-citations.mjs",
+    "update-journal-ranks": "node scripts/update-journal-ranks.mjs",
     "preview": "vite preview"
   },
   "dependencies": {
