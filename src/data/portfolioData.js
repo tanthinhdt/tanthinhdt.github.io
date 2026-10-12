@@ -86,28 +86,71 @@ export const visitorCountriesData = [
 
 export const experienceData = [
   {
-    id: "exp-1",
-    role: "Software & AI Engineer",
-    organization: "Research & Development",
-    period: "2023 - Present",
-    description: "Developing intelligent applications and machine learning workflows. Focused on high-efficiency model training, deployment, and intuitive modern interfaces.",
+    id: "exp-outlier-data-annotator",
+    role: "Data Annotator",
+    organization: "Outlier",
+    employmentType: "Freelance",
+    location: "Remote",
+    period: "Dec 2024 - Apr 2025 · 5 mos",
+    description: "Developed Vietnamese math-focused prompts to train an LLM’s logical reasoning skills.",
     highlights: [
-      "Engineered machine learning pipelines for model evaluation and inference acceleration",
-      "Designed full-stack web interfaces integrated with real-time AI endpoints",
-      "Collaborated on multimodal research involving computer vision and speech"
+      "Created Vietnamese math-focused prompts for logical reasoning training",
+      "Refined prompt quality and consistency for LLM development"
     ]
   },
   {
-    id: "exp-2",
-    role: "Research Assistant",
-    organization: "Computing & AI Laboratory",
-    period: "2021 - 2023",
-    description: "Conducted investigations into computer vision, machine learning models, and system performance optimizations.",
+    id: "exp-highbrow-qa-lead",
+    role: "QA Lead",
+    organization: "Highbrow Technology Inc",
+    employmentType: "Contract",
+    location: "Remote",
+    period: "Dec 2024 - May 2025 · 6 mos",
+    description: "Supervised a team of annotators, implementing QA processes to ensure data quality and consistency.",
     highlights: [
-      "Assisted in experimental benchmarks comparing Transformers and convolutional architectures",
-      "Processed and augmented multimedia datasets for speech and vision tasks",
-      "Co-authored scientific publications in peer-reviewed conferences and journals"
+      "Led and supported a team of data annotators",
+      "Implemented quality assurance processes for consistent, high-quality datasets",
+      "Monitored annotation quality and provided actionable feedback"
     ]
+  },
+  {
+    id: "exp-highbrow-data-annotator",
+    role: "Data Annotator",
+    organization: "Highbrow Technology Inc",
+    employmentType: "Contract",
+    location: "Remote",
+    period: "Nov 2024 · 1 mo",
+    description: "Developed and refined Vietnamese datasets to improve LLM response accuracy and fluency.",
+    highlights: [
+      "Annotated and refined Vietnamese-language datasets",
+      "Designed and reviewed prompts to improve LLM response quality",
+      "Applied consistent annotation guidelines across data quality workflows"
+    ]
+  },
+  {
+    id: "exp-gradients-ai-engineer",
+    credentialId: "credential-fptu-ai-engineer",
+    role: "AI Engineer",
+    organization: "Gradients Technologies Joint Stock Company",
+    employmentType: "Apprenticeship",
+    location: "Ho Chi Minh City, Vietnam · Hybrid",
+    period: "May 2023 - Sep 2023 · 5 mos",
+    description: "Contributed to Vietnamese language data refinement and retrieval workflows for AI applications.",
+    highlights: [
+      "Refined the Vietnamese part of the mC4 dataset",
+      "Helped implement a text retrieval system for Vietnamese"
+    ]
+  }
+];
+
+export const credentialsData = [
+  {
+    id: "credential-fptu-ai-engineer",
+    title: "AI Engineer Apprenticeship Certificate",
+    issuer: "FPT University",
+    year: "2023",
+    description: "Certificate issued by FPT University for completing the AI Engineer apprenticeship at Gradients Technologies Joint Stock Company.",
+    fileUrl: "/certificates/fpt-university-ai-engineer-apprenticeship-2023.pdf",
+    experienceId: "exp-gradients-ai-engineer"
   }
 ];
 

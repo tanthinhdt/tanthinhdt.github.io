@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Briefcase, CheckCircle2, Terminal } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { experienceData } from '../data/portfolioData';
 
 export default function ExperiencePage() {
@@ -12,7 +13,7 @@ export default function ExperiencePage() {
           Professional <span className="text-gradient">Experience</span>
         </h1>
         <p style={{ color: 'var(--text-secondary)', fontSize: '1.15rem', maxWidth: '680px' }}>
-          My journey in AI engineering, software development, and academic research laboratory collaborations.
+          My journey in AI engineering, data annotation, and quality assurance.
         </p>
       </div>
 
@@ -20,6 +21,7 @@ export default function ExperiencePage() {
         {experienceData.map((exp) => (
           <motion.div 
             key={exp.id} 
+            id={exp.id}
             className="glass-panel" 
             style={{ padding: '2.25rem' }}
             initial={{ opacity: 0, y: 15 }}
@@ -34,6 +36,11 @@ export default function ExperiencePage() {
             <div className="text-sm mb-3" style={{ fontWeight: 600, color: 'var(--accent-primary)', fontSize: '1rem' }}>
               {exp.organization}
             </div>
+            {(exp.employmentType || exp.location) && (
+              <div className="text-sm mb-3" style={{ color: 'var(--text-muted)' }}>
+                {[exp.employmentType, exp.location].filter(Boolean).join(' · ')}
+              </div>
+            )}
 
             <p style={{ color: 'var(--text-secondary)', fontSize: '1rem', lineHeight: 1.6, marginBottom: '1.5rem' }}>
               {exp.description}
@@ -51,6 +58,16 @@ export default function ExperiencePage() {
                 </div>
               ))}
             </div>
+
+            {exp.credentialId && (
+              <Link
+                className="btn-secondary"
+                to={`/credentials#${exp.credentialId}`}
+                style={{ marginTop: '1.5rem' }}
+              >
+                View Related Credential
+              </Link>
+            )}
           </motion.div>
         ))}
       </div>
