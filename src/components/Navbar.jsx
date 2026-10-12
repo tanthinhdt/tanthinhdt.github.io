@@ -45,6 +45,9 @@ export default function Navbar({ theme, toggleTheme }) {
             <NavLink to="/awards" className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
               Awards
             </NavLink>
+            <NavLink to="/credentials" className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
+              Credentials
+            </NavLink>
           </div>
 
           {/* Theme Switcher Button */}
@@ -96,6 +99,9 @@ export default function Navbar({ theme, toggleTheme }) {
             </NavLink>
             <NavLink to="/awards" onClick={closeMobile} className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
               Awards
+            </NavLink>
+            <NavLink to="/credentials" onClick={closeMobile} className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
+              Credentials
             </NavLink>
           </div>
         </div>

@@ -8,6 +8,7 @@ import AboutPage from './pages/AboutPage';
 import ExperiencePage from './pages/ExperiencePage';
 import PublicationsPage from './pages/PublicationsPage';
 import AwardsPage from './pages/AwardsPage';
+import CredentialsPage from './pages/CredentialsPage';
 import './index.css';
 
 export default function App() {
@@ -37,6 +38,7 @@ export default function App() {
             <Route path="/experience" element={<ExperiencePage />} />
             <Route path="/publications" element={<PublicationsPage />} />
             <Route path="/awards" element={<AwardsPage />} />
+            <Route path="/credentials" element={<CredentialsPage />} />
             <Route path="*" element={<HomePage />} />
           </Routes>
         </main>

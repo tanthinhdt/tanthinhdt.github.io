@@ -12,6 +12,7 @@ export default function Footer() {
           <Link to="/experience" style={{ color: 'var(--text-secondary)' }}>Experience</Link>
           <Link to="/publications" style={{ color: 'var(--text-secondary)' }}>Publications</Link>
           <Link to="/awards" style={{ color: 'var(--text-secondary)' }}>Awards</Link>
+          <Link to="/credentials" style={{ color: 'var(--text-secondary)' }}>Credentials</Link>
         </div>
         <p style={{ fontSize: '0.9rem' }}>
           © {new Date().getFullYear()} {profileData.name} ({profileData.englishName} / {profileData.koreanName}). All rights reserved.
