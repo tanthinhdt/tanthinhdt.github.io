@@ -156,11 +156,21 @@ export const credentialsData = [
 
 export const educationData = [
   {
+    id: "edu-2",
+    degree: "Combined Master's and PhD",
+    institution: "Sungkyunkwan University",
+    period: "Sep 2025 - Present",
+    logo: "/skku-logo.png",
+    details: "Major: Integrative Biotechnology."
+  },
+  {
     id: "edu-1",
-    degree: "Computer Science & Engineering",
-    institution: "Higher Education",
-    period: "2020 - Present",
-    details: "Specializing in Artificial Intelligence, Software Engineering, and High-Performance Computing."
+    degree: "Bachelor's degree",
+    institution: "FPT University",
+    period: "Sep 2020 - Sep 2024",
+    grade: "Excellent",
+    logo: "/fpt-university-logo.jpg",
+    details: "Major: Artificial Intelligence."
   }
 ];
 
