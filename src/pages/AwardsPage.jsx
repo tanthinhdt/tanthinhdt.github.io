@@ -20,6 +20,7 @@ export default function AwardsPage() {
         {awardsData.map((award) => (
           <motion.div 
             key={award.id} 
+            id={award.id}
             className="glass-panel" 
             style={{ padding: '1.5rem' }}
             initial={{ opacity: 0, y: 15 }}
