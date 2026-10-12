@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Mail, FileText, ChevronRight, BookOpen, Award, Briefcase, GraduationCap, MapPin, Globe, Sparkles, ExternalLink, ArrowRight, Quote, Users } from 'lucide-react';
+import { Mail, ChevronRight, BookOpen, Briefcase, Award, GraduationCap, MapPin, Globe, Cpu, Sparkles, ExternalLink, ArrowRight, Quote } from 'lucide-react';
 import { ComposableMap, Geographies, Geography, Marker } from 'react-simple-maps';
 import worldMap from 'world-atlas/countries-110m.json';
 import portraitImg from '../assets/portrait.png';
@@ -91,11 +91,40 @@ export default function HomePage() {
             <motion.p variants={itemVariants} style={{ fontSize: '1.15rem', color: 'var(--text-secondary)', maxWidth: '580px', marginBottom: '2rem' }}>
               {profileData.bio}
             </motion.p>
+
+            <motion.div variants={itemVariants} style={{ marginBottom: '2rem' }}>
+              <h2 className="flex items-center gap-2" style={{ fontSize: '1.1rem', marginBottom: '0.75rem' }}>
+                <Cpu size={20} style={{ color: 'var(--accent-purple)' }} />
+                Research Interests
+              </h2>
+              <div className="flex gap-2" style={{ flexWrap: 'wrap' }}>
+                <span className="alias-chip">
+                  <Sparkles size={14} style={{ color: 'var(--accent-primary)' }} />
+                  Anticancer Peptides
+                </span>
+                <span className="alias-chip">
+                  <Sparkles size={14} style={{ color: 'var(--accent-primary)' }} />
+                  Audio-Visual Speech Recognition (AVSR)
+                </span>
+                <span className="alias-chip">
+                  <Sparkles size={14} style={{ color: 'var(--accent-primary)' }} />
+                  Multimodal Deep Learning
+                </span>
+                <span className="alias-chip">
+                  <Sparkles size={14} style={{ color: 'var(--accent-primary)' }} />
+                  Medical Imaging
+                </span>
+              </div>
+            </motion.div>
             
             <motion.div variants={itemVariants} className="flex gap-3 items-center" style={{ flexWrap: 'wrap' }}>
-              <a href={`mailto:${profileData.email}`} className="btn-primary">
+              <a href={`mailto:${profileData.personalEmail}`} className="btn-primary">
                 <Mail size={18} />
-                Get in Touch
+                Personal Email
+              </a>
+              <a href={`mailto:${profileData.affiliationEmail}`} className="btn-secondary">
+                <Mail size={18} />
+                Affiliation Email
               </a>
               <a href={profileData.github} target="_blank" rel="noreferrer" className="icon-btn" aria-label="GitHub">
                 <GithubIcon size={20} />
@@ -106,9 +135,6 @@ export default function HomePage() {
               <a href={profileData.orcid} target="_blank" rel="noreferrer" className="icon-btn" aria-label="ORCID">
                 <OrcidIcon size={20} />
               </a>
-              <Link to="/about" className="icon-btn" aria-label="About">
-                <FileText size={20} />
-              </Link>
             </motion.div>
           </div>
 
@@ -131,6 +157,48 @@ export default function HomePage() {
         </div>
       </motion.section>
 
+      {/* Education Section */}
+      <motion.section
+        className="section"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-80px" }}
+        variants={containerVariants}
+      >
+        <div className="container">
+          <motion.h2 variants={itemVariants} className="section-title" style={{ marginBottom: '2rem' }}>
+            <GraduationCap size={28} style={{ color: 'var(--accent-primary)' }} />
+            Education
+          </motion.h2>
+          <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1rem' }}>
+            {educationData.map((edu) => (
+              <motion.div key={edu.id} variants={itemVariants} className="glass-panel" style={{ padding: '1.5rem' }}>
+                <div className="flex gap-3">
+                  {edu.logo && (
+                    <div style={{ width: '92px', height: '81px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                      <img
+                        src={edu.logo}
+                        alt={`${edu.institution} logo`}
+                        style={{ width: '81px', height: 'auto', display: 'block' }}
+                      />
+                    </div>
+                  )}
+                  <div>
+                    <div className="flex items-center gap-2 mb-1">
+                      <span className="tag">{edu.period}</span>
+                    </div>
+                    <h3 className="mb-1" style={{ fontSize: '1.15rem' }}>{edu.degree}</h3>
+                    <div className="text-sm mb-2" style={{ fontWeight: 600, color: 'var(--text-primary)' }}>{edu.institution}</div>
+                    <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>{edu.details}</p>
+                    {edu.grade && <p className="text-sm" style={{ color: 'var(--accent-primary)', fontWeight: 600 }}>Grade: {edu.grade}</p>}
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </motion.section>
+
       {/* Publications Highlights Section */}
       <motion.section 
         className="section"
@@ -146,9 +214,6 @@ export default function HomePage() {
                 <BookOpen size={28} style={{ color: 'var(--accent-primary)' }}/>
                 Highlighted Publications
               </motion.h2>
-              <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem' }}>
-                Selected peer-reviewed articles and conference contributions
-              </p>
             </div>
             <Link to="/publications" className="btn-primary" style={{ padding: '0.65rem 1.25rem', fontSize: '0.9rem' }}>
               View All Publications <ArrowRight size={16} />
@@ -215,7 +280,7 @@ export default function HomePage() {
         </div>
       </motion.section>
 
-      {/* Experience & Education Brief Overview */}
+      {/* Experience & Awards Brief Overview */}
       <motion.section 
         className="section"
         initial="hidden"
@@ -238,62 +303,43 @@ export default function HomePage() {
             
             <div className="flex" style={{ flexDirection: 'column', gap: '1rem' }}>
               {experienceData.map((exp) => (
-                <motion.div key={exp.id} variants={itemVariants} className="glass-panel" style={{ padding: '1.5rem' }}>
-                  <div className="flex items-center gap-2 mb-1">
-                    <span className="tag">{exp.period}</span>
-                  </div>
-                  <h3 className="mb-1" style={{ fontSize: '1.15rem' }}>{exp.role}</h3>
-                  <div className="text-sm mb-2" style={{ fontWeight: 500, color: 'var(--text-primary)' }}>{exp.organization}</div>
-                  <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>{exp.description}</p>
-                </motion.div>
+                <Link key={exp.id} to={`/experience#${exp.id}`} style={{ color: 'inherit', display: 'block' }}>
+                  <motion.div variants={itemVariants} className="glass-panel" style={{ padding: '1.5rem' }}>
+                    <div className="flex items-center gap-2 mb-1">
+                      <span className="tag">{exp.period}</span>
+                    </div>
+                    <h3 className="mb-1" style={{ fontSize: '1.15rem' }}>{exp.role}</h3>
+                    <div className="text-sm mb-2" style={{ fontWeight: 500, color: 'var(--text-primary)' }}>{exp.organization}</div>
+                    <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>{exp.description}</p>
+                  </motion.div>
+                </Link>
               ))}
             </div>
           </div>
 
-          {/* Education & Honors preview */}
+          {/* Awards preview */}
           <div>
             <div className="flex items-center" style={{ justifyContent: 'space-between', marginBottom: '2rem' }}>
               <motion.h2 variants={itemVariants} className="section-title" style={{ marginBottom: 0 }}>
-                <GraduationCap size={26} style={{ color: 'var(--accent-primary)' }}/> 
-                Education & Awards
+                <Award size={26} style={{ color: 'var(--accent-primary)' }}/> 
+                Awards
               </motion.h2>
-              <Link to="/about" style={{ fontSize: '0.9rem', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '4px' }}>
-                Full Bio <ChevronRight size={16} />
+              <Link to="/awards" style={{ fontSize: '0.9rem', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '4px' }}>
+                Details <ChevronRight size={16} />
               </Link>
             </div>
             
             <div className="flex" style={{ flexDirection: 'column', gap: '1rem' }}>
-              {educationData.map((edu) => (
-                <motion.div key={edu.id} variants={itemVariants} className="glass-panel" style={{ padding: '1.5rem' }}>
-                  <div className="flex gap-3">
-                    {edu.logo && (
-                      <div style={{ width: '92px', height: '81px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                        <img
-                          src={edu.logo}
-                          alt={`${edu.institution} logo`}
-                          style={{ width: '81px', height: 'auto', display: 'block' }}
-                        />
-                      </div>
-                    )}
-                    <div>
-                      <div className="flex items-center gap-2 mb-1">
-                        <span className="tag">{edu.period}</span>
-                      </div>
-                      <h3 className="mb-1" style={{ fontSize: '1.15rem' }}>{edu.degree}</h3>
-                      <div className="text-sm mb-2" style={{ fontWeight: 600, color: 'var(--text-primary)' }}>{edu.institution}</div>
-                      <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>{edu.details}</p>
-                      {edu.grade && <p className="text-sm" style={{ color: 'var(--accent-primary)', fontWeight: 600 }}>Grade: {edu.grade}</p>}
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-
               {awardsData.slice(0, 1).map((award) => (
-                <motion.div key={award.id} variants={itemVariants} className="glass-panel" style={{ padding: '1.5rem' }}>
-                  <div className="text-sm mb-1" style={{ color: 'var(--accent-purple)', fontWeight: 600 }}>{award.year}</div>
-                  <h3 className="mb-1" style={{ fontSize: '1.15rem' }}>{award.title}</h3>
-                  <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>{award.description}</p>
-                </motion.div>
+                <Link key={award.id} to={`/awards#${award.id}`} style={{ color: 'inherit', display: 'block' }}>
+                  <motion.div variants={itemVariants} className="glass-panel" style={{ padding: '1.5rem' }}>
+                    <div className="flex items-center gap-2 mb-1">
+                      <span className="tag">{award.year}</span>
+                    </div>
+                    <h3 className="mb-1" style={{ fontSize: '1.15rem' }}>{award.title}</h3>
+                    <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>{award.description}</p>
+                  </motion.div>
+                </Link>
               ))}
             </div>
           </div>
@@ -315,11 +361,7 @@ export default function HomePage() {
                 <Globe size={28} style={{ color: 'var(--accent-primary)' }} />
                 Visitors around the world
               </motion.h2>
-              <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem' }}>
-                Countries represented in recent website visits
-              </p>
             </div>
-            <Users size={34} style={{ color: 'var(--accent-primary)', opacity: 0.7 }} />
           </div>
 
           <motion.div variants={itemVariants} className="glass-panel visitor-countries-panel">
@@ -365,9 +407,6 @@ export default function HomePage() {
                 ))}
               </div>
             </div>
-            <p className="visitor-data-note">
-              Darker regions and markers represent more visitors.
-            </p>
           </motion.div>
         </div>
       </motion.section>

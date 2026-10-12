@@ -4,7 +4,6 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
 import HomePage from './pages/HomePage';
-import AboutPage from './pages/AboutPage';
 import ExperiencePage from './pages/ExperiencePage';
 import PublicationsPage from './pages/PublicationsPage';
 import AwardsPage from './pages/AwardsPage';
@@ -34,7 +33,6 @@ export default function App() {
         <main>
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/about" element={<AboutPage />} />
             <Route path="/experience" element={<ExperiencePage />} />
             <Route path="/publications" element={<PublicationsPage />} />
             <Route path="/awards" element={<AwardsPage />} />

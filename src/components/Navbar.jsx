@@ -33,9 +33,6 @@ export default function Navbar({ theme, toggleTheme }) {
             <NavLink to="/" end className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
               Home
             </NavLink>
-            <NavLink to="/about" className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
-              About
-            </NavLink>
             <NavLink to="/experience" className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
               Experience
             </NavLink>
@@ -87,9 +84,6 @@ export default function Navbar({ theme, toggleTheme }) {
           <div className="flex" style={{ flexDirection: 'column', gap: '0.5rem' }}>
             <NavLink to="/" end onClick={closeMobile} className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
               Home
-            </NavLink>
-            <NavLink to="/about" onClick={closeMobile} className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
-              About
             </NavLink>
             <NavLink to="/experience" onClick={closeMobile} className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
               Experience

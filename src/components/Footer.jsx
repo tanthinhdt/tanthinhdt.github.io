@@ -8,7 +8,6 @@ export default function Footer() {
       <div className="container">
         <div className="flex gap-4 mb-4" style={{ justifyContent: 'center', flexWrap: 'wrap' }}>
           <Link to="/" style={{ color: 'var(--text-secondary)' }}>Home</Link>
-          <Link to="/about" style={{ color: 'var(--text-secondary)' }}>About</Link>
           <Link to="/experience" style={{ color: 'var(--text-secondary)' }}>Experience</Link>
           <Link to="/publications" style={{ color: 'var(--text-secondary)' }}>Publications</Link>
           <Link to="/awards" style={{ color: 'var(--text-secondary)' }}>Awards</Link>
