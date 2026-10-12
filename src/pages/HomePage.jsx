@@ -113,73 +113,75 @@ export default function HomePage() {
         viewport={{ once: true, margin: "-80px" }}
         variants={containerVariants}
       >
-        <div className="flex items-center" style={{ justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem', marginBottom: '2.5rem' }}>
-          <div>
-            <motion.h2 variants={itemVariants} className="section-title" style={{ marginBottom: '0.5rem' }}>
-              <BookOpen size={28} style={{ color: 'var(--accent-primary)' }}/> 
-              Highlighted Publications
-            </motion.h2>
-            <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem' }}>
-              Selected peer-reviewed articles and conference contributions
-            </p>
+        <div className="container">
+          <div className="flex items-center" style={{ justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem', marginBottom: '2.5rem' }}>
+            <div>
+              <motion.h2 variants={itemVariants} className="section-title" style={{ marginBottom: '0.5rem' }}>
+                <BookOpen size={28} style={{ color: 'var(--accent-primary)' }}/>
+                Highlighted Publications
+              </motion.h2>
+              <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem' }}>
+                Selected peer-reviewed articles and conference contributions
+              </p>
+            </div>
+            <Link to="/publications" className="btn-primary" style={{ padding: '0.65rem 1.25rem', fontSize: '0.9rem' }}>
+              View All Publications <ArrowRight size={16} />
+            </Link>
           </div>
-          <Link to="/publications" className="btn-primary" style={{ padding: '0.65rem 1.25rem', fontSize: '0.9rem' }}>
-            View All Publications <ArrowRight size={16} />
-          </Link>
-        </div>
-        
-        <div className="flex" style={{ flexDirection: 'column', gap: '1.25rem' }}>
-          {highlightPubs.map((pub, index) => (
-            <motion.div 
-              key={index} 
-              variants={itemVariants} 
-              className="glass-panel" 
-              style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '1.5rem', flexWrap: 'wrap' }}
-            >
-              <div style={{ flex: '1 1 340px' }}>
-                <div className="flex items-center gap-2 mb-2" style={{ flexWrap: 'wrap' }}>
-                  <span className="tag">{pub.year}</span>
-                  <span className="tag" style={{ background: 'rgba(14, 165, 233, 0.08)', color: 'var(--accent-cyan)', borderColor: 'rgba(14, 165, 233, 0.2)' }}>
-                    {pub.type}
-                  </span>
-                  <span className="tag" style={{ background: 'rgba(124, 58, 237, 0.08)', color: 'var(--accent-purple)', borderColor: 'rgba(124, 58, 237, 0.2)' }}>
-                    Featured
-                  </span>
+
+          <div className="flex" style={{ flexDirection: 'column', gap: '1.25rem' }}>
+            {highlightPubs.map((pub, index) => (
+              <motion.div
+                key={index}
+                variants={itemVariants}
+                className="glass-panel"
+                style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '1.5rem', flexWrap: 'wrap' }}
+              >
+                <div style={{ flex: '1 1 340px' }}>
+                  <div className="flex items-center gap-2 mb-2" style={{ flexWrap: 'wrap' }}>
+                    <span className="tag">{pub.year}</span>
+                    <span className="tag" style={{ background: 'rgba(14, 165, 233, 0.08)', color: 'var(--accent-cyan)', borderColor: 'rgba(14, 165, 233, 0.2)' }}>
+                      {pub.type}
+                    </span>
+                    <span className="tag" style={{ background: 'rgba(124, 58, 237, 0.08)', color: 'var(--accent-purple)', borderColor: 'rgba(124, 58, 237, 0.2)' }}>
+                      Featured
+                    </span>
+                  </div>
+                  <h3 className="mb-2" style={{ fontSize: '1.2rem', lineHeight: 1.4 }}>
+                    <a href={pub.link} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-primary)' }}>
+                      {pub.title}
+                    </a>
+                  </h3>
+                  <div className="text-sm mb-1" style={{ color: 'var(--text-secondary)' }}>
+                    {pub.authors.map((author, i) => (
+                      <React.Fragment key={i}>
+                        {author.highlight ? (
+                          <strong style={{ color: 'var(--text-primary)', fontWeight: 700, textDecoration: 'underline', textUnderlineOffset: '3px', textDecorationColor: 'var(--accent-primary)' }}>
+                            {author.name}
+                          </strong>
+                        ) : (
+                          <span>{author.name}</span>
+                        )}
+                        {i < pub.authors.length - 1 && ', '}
+                      </React.Fragment>
+                    ))}
+                  </div>
+                  <div className="text-sm" style={{ color: 'var(--accent-primary)', fontWeight: 500 }}>{pub.venue}</div>
                 </div>
-                <h3 className="mb-2" style={{ fontSize: '1.2rem', lineHeight: 1.4 }}>
-                  <a href={pub.link} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-primary)' }}>
-                    {pub.title}
+                <div className="flex gap-2">
+                  <a
+                    href={pub.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-primary"
+                    style={{ padding: '0.6rem 1.2rem', fontSize: '0.875rem' }}
+                  >
+                    View Paper <ExternalLink size={15} />
                   </a>
-                </h3>
-                <div className="text-sm mb-1" style={{ color: 'var(--text-secondary)' }}>
-                  {pub.authors.map((author, i) => (
-                    <React.Fragment key={i}>
-                      {author.highlight ? (
-                        <strong style={{ color: 'var(--text-primary)', fontWeight: 700, textDecoration: 'underline', textUnderlineOffset: '3px', textDecorationColor: 'var(--accent-primary)' }}>
-                          {author.name}
-                        </strong>
-                      ) : (
-                        <span>{author.name}</span>
-                      )}
-                      {i < pub.authors.length - 1 && ', '}
-                    </React.Fragment>
-                  ))}
                 </div>
-                <div className="text-sm" style={{ color: 'var(--accent-primary)', fontWeight: 500 }}>{pub.venue}</div>
-              </div>
-              <div className="flex gap-2">
-                <a 
-                  href={pub.link} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="btn-primary" 
-                  style={{ padding: '0.6rem 1.2rem', fontSize: '0.875rem' }}
-                >
-                  View Paper <ExternalLink size={15} />
-                </a>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            ))}
+          </div>
         </div>
       </motion.section>
 
@@ -191,7 +193,7 @@ export default function HomePage() {
         viewport={{ once: true, margin: "-80px" }}
         variants={containerVariants}
       >
-        <div className="grid">
+        <div className="container grid">
           {/* Experience preview */}
           <div>
             <div className="flex items-center" style={{ justifyContent: 'space-between', marginBottom: '2rem' }}>
