@@ -149,9 +149,11 @@ export default function PublicationsPage() {
               <div className="mb-3" style={{ color: 'var(--accent-primary)', fontWeight: 600, fontSize: '0.95rem' }}>
                 {pub.venue}
               </div>
-              <p className="citation-note">
-                {pub.citationSource} citation snapshot · checked {pub.citationChecked} · not live
-              </p>
+              {pub.journalQuartile && (
+                <p className="citation-note">
+                  {pub.journalRankSource} · {pub.journalRankYear} {pub.journalQuartile} · checked {pub.journalRankChecked}
+                </p>
+              )}
 
               {/* Abstract */}
               <p style={{ color: 'var(--text-secondary)', fontSize: '0.925rem', marginBottom: '1.25rem', lineHeight: 1.6 }}>
