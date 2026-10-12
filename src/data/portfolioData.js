@@ -27,6 +27,9 @@ export const publicationsData = [
     category: "conference",
     doi: "10.1109/MAPR67746.2025.11133884",
     link: "https://ieeexplore.ieee.org/abstract/document/11133884/",
+    citationCount: 0,
+    citationSource: "Crossref",
+    citationChecked: "October 2026",
     isHighlight: true,
     abstract: "Investigates audio-visual speech recognition (AVSR) techniques specifically optimized for the Vietnamese language, addressing low-resource challenges and improving speech recognition accuracy by fusing visual lip dynamics with acoustic signals.",
     keywords: ["Speech Recognition", "Audio-Visual Fusion", "Deep Learning", "Vietnamese Language", "MAPR"],
@@ -53,6 +56,9 @@ export const publicationsData = [
     category: "journal",
     doi: "10.1016/j.procs.2024.02.165",
     link: "https://www.sciencedirect.com/science/article/pii/S187705092400351X",
+    citationCount: 16,
+    citationSource: "Crossref",
+    citationChecked: "October 2026",
     isHighlight: true,
     abstract: "Applies self-supervised Vision Transformers (ViT) and Bidirectional Encoder representation from Image Transformers (BEiT) to high-precision medicinal plant classification, significantly improving recognition accuracy over conventional CNN architectures.",
     keywords: ["Vision Transformer (ViT)", "BEiT", "Plant Recognition", "Computer Vision", "Medicinal Species"],
@@ -67,6 +73,15 @@ export const publicationsData = [
   doi={10.1016/j.procs.2024.02.165}
 }`
   }
+];
+
+// Replace these values with the country totals from the site's analytics provider.
+export const visitorCountriesData = [
+  { country: "Vietnam", flag: "🇻🇳", visitors: 68 },
+  { country: "South Korea", flag: "🇰🇷", visitors: 14 },
+  { country: "United States", flag: "🇺🇸", visitors: 9 },
+  { country: "Japan", flag: "🇯🇵", visitors: 6 },
+  { country: "Other countries", flag: "🌎", visitors: 3 }
 ];
 
 export const experienceData = [

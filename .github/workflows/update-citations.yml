@@ -1,0 +1,41 @@
+name: Update citation counts
+
+on:
+  schedule:
+    - cron: "0 3 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-citations
+  cancel-in-progress: true
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Update Crossref citation counts
+        run: npm run update-citations
+
+      - name: Commit changes
+        run: |
+          if git diff --quiet -- src/data/portfolioData.js; then
+            echo "Citation counts are already current."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/data/portfolioData.js
+          git commit -m "chore: update citation counts" -m "Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>"
+          git push

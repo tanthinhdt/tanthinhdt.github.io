@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { BookOpen, ExternalLink, Search, Copy, Check, FileCode, Tag } from 'lucide-react';
+import { BookOpen, ExternalLink, Search, Copy, Check, FileCode, Tag, Quote } from 'lucide-react';
 import { publicationsData } from '../data/portfolioData';
 
 export default function PublicationsPage() {
@@ -112,6 +112,10 @@ export default function PublicationsPage() {
                 <span className="tag" style={{ fontSize: '0.75rem', color: 'var(--text-muted)', background: 'transparent' }}>
                   DOI: {pub.doi}
                 </span>
+                <span className="citation-badge">
+                  <Quote size={13} />
+                  {pub.citationCount} {pub.citationCount === 1 ? 'citation' : 'citations'}
+                </span>
               </div>
 
               <h2 style={{ fontSize: '1.35rem', lineHeight: 1.35, marginBottom: '0.75rem' }}>
@@ -140,6 +144,9 @@ export default function PublicationsPage() {
               <div className="mb-3" style={{ color: 'var(--accent-primary)', fontWeight: 600, fontSize: '0.95rem' }}>
                 {pub.venue}
               </div>
+              <p className="citation-note">
+                {pub.citationSource} citation snapshot · checked {pub.citationChecked} · not live
+              </p>
 
               {/* Abstract */}
               <p style={{ color: 'var(--text-secondary)', fontSize: '0.925rem', marginBottom: '1.25rem', lineHeight: 1.6 }}>
