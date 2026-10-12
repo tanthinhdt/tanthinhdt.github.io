@@ -22,7 +22,7 @@ export default function ExperiencePage() {
           <motion.div 
             key={exp.id} 
             id={exp.id}
-            className="glass-panel" 
+            className="glass-panel anchor-target" 
             style={{ padding: '2.25rem' }}
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}

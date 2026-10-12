@@ -149,6 +149,10 @@ a:hover {
   box-shadow: var(--glass-shadow-hover);
 }
 
+.anchor-target {
+  scroll-margin-top: 7rem;
+}
+
 .text-gradient {
   background: var(--text-gradient);
   -webkit-background-clip: text;

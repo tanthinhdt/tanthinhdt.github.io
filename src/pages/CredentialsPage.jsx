@@ -21,7 +21,7 @@ export default function CredentialsPage() {
         <motion.div
           key={credential.id}
           id={credential.id}
-          className="glass-panel"
+          className="glass-panel anchor-target"
           style={{ padding: '2rem', maxWidth: '720px' }}
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
