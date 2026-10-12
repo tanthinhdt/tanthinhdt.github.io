@@ -313,16 +313,17 @@ a:hover {
 
 /* Hero section layout */
 .hero-wrapper {
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 280px;
   align-items: center;
-  justify-content: space-between;
-  gap: 3.5rem;
+  gap: 4rem;
   width: 100%;
 }
 
 @media (max-width: 868px) {
   .hero-wrapper {
     flex-direction: column-reverse;
+    display: flex;
     text-align: center;
     gap: 2.5rem;
   }
@@ -504,5 +505,4 @@ a:hover {
   border-color: var(--accent-primary);
   box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
 }
-
 

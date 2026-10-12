@@ -36,7 +36,7 @@ export default function HomePage() {
         animate="visible"
         variants={containerVariants}
       >
-        <div className="hero-wrapper">
+        <div className="container hero-wrapper">
           {/* Left Content */}
           <div style={{ flex: '1 1 500px' }}>
             <motion.div variants={itemVariants} className="flex items-center gap-2 mb-3" style={{ flexWrap: 'wrap' }}>
