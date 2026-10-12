@@ -41,19 +41,35 @@ export default function CredentialsPage() {
             {credential.description}
           </p>
 
-          <div className="flex gap-2" style={{ flexWrap: 'wrap' }}>
-            <a className="btn-primary" href={credential.fileUrl} target="_blank" rel="noreferrer">
-              <ExternalLink size={16} />
-              View Certificate
-            </a>
-            <a className="btn-secondary" href={credential.fileUrl} download>
-              <FileText size={16} />
-              Download PDF
-            </a>
-            <Link className="btn-secondary" to={`/experience#${credential.experienceId}`}>
-              View Related Experience
-            </Link>
-          </div>
+          {credential.scores && (
+            <div className="flex gap-2 mb-4" style={{ flexWrap: 'wrap' }}>
+              {credential.scores.map(({ skill, score }) => (
+                <span key={skill} className="tag">{skill}: {score}</span>
+              ))}
+            </div>
+          )}
+
+          {(credential.fileUrl || credential.experienceId) && (
+            <div className="flex gap-2" style={{ flexWrap: 'wrap' }}>
+              {credential.fileUrl && (
+                <>
+                  <a className="btn-primary" href={credential.fileUrl} target="_blank" rel="noreferrer">
+                    <ExternalLink size={16} />
+                    View Certificate
+                  </a>
+                  <a className="btn-secondary" href={credential.fileUrl} download>
+                    <FileText size={16} />
+                    Download PDF
+                  </a>
+                </>
+              )}
+              {credential.experienceId && (
+                <Link className="btn-secondary" to={`/experience#${credential.experienceId}`}>
+                  View Related Experience
+                </Link>
+              )}
+            </div>
+          )}
         </motion.div>
       ))}
     </div>

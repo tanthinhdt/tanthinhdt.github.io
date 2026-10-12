@@ -145,6 +145,19 @@ export const experienceData = [
 
 export const credentialsData = [
   {
+    id: "credential-ielts-2024",
+    title: "International English Language Testing System (IELTS)",
+    issuer: "IELTS",
+    year: "Dec 2024",
+    description: "Overall band score: 7.5.",
+    scores: [
+      { skill: "Listening", score: "9.0" },
+      { skill: "Reading", score: "9.0" },
+      { skill: "Writing", score: "6.5" },
+      { skill: "Speaking", score: "5.5" }
+    ]
+  },
+  {
     id: "credential-fptu-ai-engineer",
     title: "AI Engineer Apprenticeship Certificate",
     issuer: "FPT University",
