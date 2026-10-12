@@ -45,6 +45,14 @@ export default function AboutPage() {
           <a href={`mailto:${profileData.email}`} className="btn-primary" style={{ width: '100%', justifyContent: 'center' }}>
             <Mail size={16} /> Contact Me
           </a>
+          <a
+            href={profileData.orcid}
+            target="_blank"
+            rel="noreferrer"
+            style={{ display: 'inline-flex', justifyContent: 'center', width: '100%', marginTop: '1rem', fontSize: '0.9rem', fontWeight: 600 }}
+          >
+            View my ORCID profile
+          </a>
         </div>
 
         {/* Right card: Education & Research Focus */}

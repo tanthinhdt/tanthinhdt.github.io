@@ -5,7 +5,7 @@ import { Mail, FileText, ChevronRight, BookOpen, Award, Briefcase, GraduationCap
 import { ComposableMap, Geographies, Geography, Marker } from 'react-simple-maps';
 import worldMap from 'world-atlas/countries-110m.json';
 import portraitImg from '../assets/portrait.png';
-import { GithubIcon, LinkedinIcon } from '../components/Icons';
+import { GithubIcon, LinkedinIcon, OrcidIcon } from '../components/Icons';
 import { profileData, publicationsData, experienceData, educationData, awardsData, visitorCountriesData } from '../data/portfolioData';
 
 export default function HomePage() {
@@ -102,6 +102,9 @@ export default function HomePage() {
               </a>
               <a href={profileData.linkedin} target="_blank" rel="noreferrer" className="icon-btn" aria-label="LinkedIn">
                 <LinkedinIcon size={20} />
+              </a>
+              <a href={profileData.orcid} target="_blank" rel="noreferrer" className="icon-btn" aria-label="ORCID">
+                <OrcidIcon size={20} />
               </a>
               <Link to="/about" className="icon-btn" aria-label="About">
                 <FileText size={20} />

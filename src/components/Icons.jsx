@@ -14,3 +14,12 @@ export const LinkedinIcon = ({ size = 20 }) => (
     <circle cx="4" cy="4" r="2" />
   </svg>
 );
+
+export const OrcidIcon = ({ size = 20 }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" aria-hidden="true">
+    <circle cx="12" cy="12" r="10" fill="currentColor" />
+    <path d="M9 7.5h2.2a4.5 4.5 0 0 1 0 9H9v-9Zm1.8 1.7v5.6h.4a2.8 2.8 0 0 0 0-5.6h-.4Z" fill="var(--bg-color)" />
+    <circle cx="7.5" cy="8.2" r="1" fill="var(--bg-color)" />
+    <path d="M7 10.5h1v6H7z" fill="var(--bg-color)" />
+  </svg>
+);

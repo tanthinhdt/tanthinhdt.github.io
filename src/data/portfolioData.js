@@ -8,7 +8,8 @@ export const profileData = {
   bio: "Passionate software developer and researcher exploring the frontiers of artificial intelligence, intelligent systems, and scalable modern web applications.",
   email: "tanthinh.dt@gmail.com",
   github: "https://github.com/tanthinhdt",
-  linkedin: "https://linkedin.com",
+  linkedin: "https://www.linkedin.com/in/tanthinhdt",
+  orcid: "https://orcid.org/0009-0007-0142-7523",
 };
 
 export const publicationsData = [
