@@ -246,6 +246,16 @@ a:hover {
   gap: 2rem;
 }
 
+.award-card-layout {
+  min-height: 180px;
+}
+
+@media (max-width: 600px) {
+  .award-card-layout {
+    grid-template-columns: 1fr !important;
+  }
+}
+
 /* Modern Badges / Chips */
 .tag {
   display: inline-flex;

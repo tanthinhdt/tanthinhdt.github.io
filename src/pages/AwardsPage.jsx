@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Award, Trophy, Star } from 'lucide-react';
+import { ExternalLink, Trophy } from 'lucide-react';
 import { awardsData } from '../data/portfolioData';
 
 export default function AwardsPage() {
@@ -21,26 +21,53 @@ export default function AwardsPage() {
           <motion.div 
             key={award.id} 
             className="glass-panel" 
-            style={{ padding: '2rem' }}
+            style={{ padding: '1.5rem' }}
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4 }}
           >
-            <div className="flex items-center gap-2 mb-3">
-              <span className="tag" style={{ background: 'rgba(5, 150, 105, 0.08)', color: 'var(--accent-purple)', borderColor: 'rgba(5, 150, 105, 0.2)' }}>
-                {award.year}
-              </span>
-              <span className="tag">{award.organization}</span>
+            <div className="award-card-layout" style={{ display: 'grid', gridTemplateColumns: award.imageUrl ? 'minmax(0, 1fr) minmax(180px, 260px)' : '1fr', gap: '1.5rem', alignItems: 'center' }}>
+              <div>
+                <div className="flex items-center gap-2 mb-3" style={{ flexWrap: 'wrap' }}>
+                  <span className="tag" style={{ background: 'rgba(5, 150, 105, 0.08)', color: 'var(--accent-purple)', borderColor: 'rgba(5, 150, 105, 0.2)' }}>
+                    {award.year}
+                  </span>
+                  <span className="tag">{award.organization}</span>
+                </div>
+
+                <h2 style={{ fontSize: '1.3rem', marginBottom: '0.75rem', display: 'flex', alignItems: 'flex-start', gap: '0.5rem' }}>
+                  <Trophy size={20} style={{ color: 'var(--accent-purple)', flexShrink: 0, marginTop: '0.15rem' }} />
+                  <span>{award.title}</span>
+                </h2>
+
+                <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: 1.6 }}>
+                  {award.description}
+                </p>
+
+                {award.sourceUrl && (
+                  <a
+                    className="btn-secondary"
+                    href={award.sourceUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    style={{ marginTop: '1.25rem' }}
+                  >
+                    <ExternalLink size={16} />
+                    View FPT University Post
+                  </a>
+                )}
+              </div>
+
+              {award.imageUrl && (
+                <div style={{ padding: '0.5rem', borderRadius: '14px', background: 'var(--glass-bg)', border: '1px solid var(--glass-border)' }}>
+                  <img
+                    src={award.imageUrl}
+                    alt={`${award.title} certificate and commemorative plaque`}
+                    style={{ display: 'block', width: '100%', height: '150px', objectFit: 'cover', borderRadius: '9px' }}
+                  />
+                </div>
+              )}
             </div>
-
-            <h2 style={{ fontSize: '1.3rem', marginBottom: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-              <Trophy size={20} style={{ color: 'var(--accent-purple)' }} />
-              {award.title}
-            </h2>
-
-            <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: 1.6 }}>
-              {award.description}
-            </p>
           </motion.div>
         ))}
       </div>

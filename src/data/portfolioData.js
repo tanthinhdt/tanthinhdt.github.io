@@ -190,17 +190,12 @@ export const educationData = [
 
 export const awardsData = [
   {
-    id: "award-1",
-    title: "Academic Excellence Award",
-    organization: "Honors & Distinctions",
-    year: "Honors",
-    description: "Recognized for distinguished academic achievements in Computer Science and Engineering."
-  },
-  {
-    id: "award-2",
-    title: "Tech Hackathon Award",
-    organization: "Competitive Engineering",
-    year: "Competition",
-    description: "Developed innovative AI-driven software solutions in competitive programming and hackathon challenges."
+    id: "award-fptu-valedictorian-engineering-technology-2024",
+    title: "Valedictorian of the Engineering and Technology Batch 3",
+    organization: "FPT University",
+    year: "Nov 2024",
+    description: "Honored as Valedictorian of the Engineering and Technology Batch 3, recognizing exceptional academic excellence and leadership.",
+    imageUrl: "/awards/valedictorian-engineering-technology-batch-3-2024.jpg",
+    sourceUrl: "https://www.facebook.com/srofptuhcmc/posts/542707318585556/"
   }
 ];
