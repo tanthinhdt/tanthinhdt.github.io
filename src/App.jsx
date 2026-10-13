@@ -8,6 +8,7 @@ import ExperiencePage from './pages/ExperiencePage';
 import PublicationsPage from './pages/PublicationsPage';
 import AwardsPage from './pages/AwardsPage';
 import CredentialsPage from './pages/CredentialsPage';
+import { LanguageProvider } from './i18n';
 import './index.css';
 
 export default function App() {
@@ -25,10 +26,11 @@ export default function App() {
   };
 
   return (
-    <HashRouter>
-      <ScrollToTop />
-      <div className="app-container">
-        <Navbar theme={theme} toggleTheme={toggleTheme} />
+    <LanguageProvider>
+      <HashRouter>
+        <ScrollToTop />
+        <div className="app-container">
+          <Navbar theme={theme} toggleTheme={toggleTheme} />
         
         <main>
           <Routes>
@@ -41,8 +43,9 @@ export default function App() {
           </Routes>
         </main>
 
-        <Footer />
-      </div>
-    </HashRouter>
+          <Footer />
+        </div>
+      </HashRouter>
+    </LanguageProvider>
   );
 }
