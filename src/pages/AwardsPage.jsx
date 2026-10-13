@@ -35,7 +35,7 @@ export default function AwardsPage() {
                   <span className="tag" style={{ background: 'rgba(5, 150, 105, 0.08)', color: 'var(--accent-purple)', borderColor: 'rgba(5, 150, 105, 0.2)' }}>
                     {formatPeriod(award.year)}
                   </span>
-                  <span className="tag">{award.organization}</span>
+                  <span className="tag">{content(award.id, 'organization', award.organization)}</span>
                 </div>
 
                 <h2 style={{ fontSize: '1.3rem', marginBottom: '0.75rem', display: 'flex', alignItems: 'flex-start', gap: '0.5rem' }}>

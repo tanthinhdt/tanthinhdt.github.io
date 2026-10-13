@@ -78,7 +78,7 @@ const translations = {
     awards: {
       tag: 'Danh dự & Cuộc thi', title: 'Giải thưởng &', titleAccent: 'Danh dự',
       description: 'Ghi nhận thành tích học tập, các cuộc thi lập trình và hackathon.',
-      source: 'Xem bài đăng của FPT University'
+      source: 'Xem bài đăng của Đại học FPT'
     },
     credentials: {
       tag: 'Chứng chỉ', title: 'Chứng chỉ', titleAccent: 'chuyên môn',
@@ -119,7 +119,7 @@ const translations = {
     awards: {
       tag: '수상 및 대회', title: '수상 및', titleAccent: '영예',
       description: '학업 성취, 프로그래밍 대회 및 해커톤 수상 기록입니다.',
-      source: 'FPT University 게시물 보기'
+      source: 'FPT 대학교 게시물 보기'
     },
     credentials: {
       tag: '자격증', title: '전문', titleAccent: '자격증',
@@ -151,10 +151,10 @@ const contentTranslations = {
     },
     'credential-isico-2023': { title: 'Chứng nhận hội nghị ISICO 2023', description: 'Chứng nhận hội nghị liên quan đến bài báo “Nhận dạng cây thuốc dựa trên Vision Transformer và BEiT.”' },
     'credential-ielts-2024': { title: 'International English Language Testing System (IELTS)', description: 'Điểm tổng: 7.5.' },
-    'credential-fptu-ai-engineer': { title: 'Chứng nhận học việc Kỹ sư AI', description: 'Chứng nhận do Đại học FPT cấp sau khi hoàn thành chương trình học việc Kỹ sư AI tại Gradients Technologies Joint Stock Company.' },
+    'credential-fptu-ai-engineer': { title: 'Chứng nhận học việc Kỹ sư AI', issuer: 'Đại học FPT', description: 'Chứng nhận do Đại học FPT cấp sau khi hoàn thành chương trình học việc Kỹ sư AI tại Gradients Technologies Joint Stock Company.' },
     'edu-2': { degree: 'Thạc sĩ và Tiến sĩ liên thông', institution: 'Đại học Sungkyunkwan', details: 'Chuyên ngành: Công nghệ sinh học tích hợp.' },
     'edu-1': { degree: 'Bằng cử nhân', institution: 'Đại học FPT', details: 'Chuyên ngành: Trí tuệ nhân tạo.', grade: 'Xuất sắc' },
-    'award-fptu-valedictorian-engineering-technology-2024': { title: 'Thủ khoa Khóa 3 ngành Kỹ thuật và Công nghệ', description: 'Được vinh danh là Thủ khoa Khóa 3 ngành Kỹ thuật và Công nghệ nhờ thành tích học tập và năng lực lãnh đạo xuất sắc.' },
+    'award-fptu-valedictorian-engineering-technology-2024': { organization: 'Đại học FPT', title: 'Thủ khoa Khóa 3 ngành Kỹ thuật và Công nghệ', description: 'Được vinh danh là Thủ khoa Khóa 3 ngành Kỹ thuật và Công nghệ nhờ thành tích học tập và năng lực lãnh đạo xuất sắc.' },
     'mapr-2025': { title: 'Vietnamese Automatic Speech Recognition Utilizing Audio and Visual Data', abstract: 'Investigates audio-visual speech recognition (AVSR) techniques specifically optimized for the Vietnamese language, addressing low-resource challenges and improving speech recognition accuracy by fusing visual lip dynamics with acoustic signals.', keywords: ['Speech Recognition', 'Audio-Visual Fusion', 'Deep Learning', 'Vietnamese Language', 'MAPR'] },
     'procs-2024': { title: 'Medicinal plant recognition based on Vision Transformer and BEiT', abstract: 'Applies self-supervised Vision Transformers (ViT) and Bidirectional Encoder representation from Image Transformers (BEiT) to high-precision medicinal plant classification, significantly improving recognition accuracy over conventional CNN architectures.', keywords: ['Vision Transformer (ViT)', 'BEiT', 'Plant Recognition', 'Computer Vision', 'Medicinal Species'] }
   },
@@ -177,10 +177,10 @@ const contentTranslations = {
     },
     'credential-isico-2023': { title: 'ISICO 2023 학술대회 인증서', description: '“Vision Transformer와 BEiT 기반 약용 식물 인식” 논문과 관련된 학술대회 인증서입니다.' },
     'credential-ielts-2024': { title: 'International English Language Testing System (IELTS)', description: '종합 밴드 점수: 7.5.' },
-    'credential-fptu-ai-engineer': { title: 'AI 엔지니어 견습 인증서', description: 'Gradients Technologies Joint Stock Company에서 AI 엔지니어 견습 과정을 수료하여 FPT University에서 발급한 인증서입니다.' },
+    'credential-fptu-ai-engineer': { title: 'AI 엔지니어 견습 인증서', issuer: 'FPT 대학교', description: 'Gradients Technologies Joint Stock Company에서 AI 엔지니어 견습 과정을 수료하여 FPT 대학교에서 발급한 인증서입니다.' },
     'edu-2': { degree: '석사·박사 통합 과정', institution: '성균관대학교', details: '전공: 융합생명공학.' },
     'edu-1': { degree: '학사 학위', institution: 'FPT 대학교', details: '전공: 인공지능.', grade: '최우수' },
-    'award-fptu-valedictorian-engineering-technology-2024': { title: '공학 및 기술 3기 수석 졸업생', description: '탁월한 학업 성취와 리더십을 인정받아 공학 및 기술 3기 수석 졸업생으로 선정되었습니다.' },
+    'award-fptu-valedictorian-engineering-technology-2024': { organization: 'FPT 대학교', title: '공학 및 기술 3기 수석 졸업생', description: '탁월한 학업 성취와 리더십을 인정받아 공학 및 기술 3기 수석 졸업생으로 선정되었습니다.' },
     'mapr-2025': { title: 'Vietnamese Automatic Speech Recognition Utilizing Audio and Visual Data', abstract: 'Investigates audio-visual speech recognition (AVSR) techniques specifically optimized for the Vietnamese language, addressing low-resource challenges and improving speech recognition accuracy by fusing visual lip dynamics with acoustic signals.', keywords: ['Speech Recognition', 'Audio-Visual Fusion', 'Deep Learning', 'Vietnamese Language', 'MAPR'] },
     'procs-2024': { title: 'Medicinal plant recognition based on Vision Transformer and BEiT', abstract: 'Applies self-supervised Vision Transformers (ViT) and Bidirectional Encoder representation from Image Transformers (BEiT) to high-precision medicinal plant classification, significantly improving recognition accuracy over conventional CNN architectures.', keywords: ['Vision Transformer (ViT)', 'BEiT', 'Plant Recognition', 'Computer Vision', 'Medicinal Species'] }
   }

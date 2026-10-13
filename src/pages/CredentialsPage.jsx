@@ -32,7 +32,7 @@ export default function CredentialsPage() {
           >
             <div className="flex items-center gap-2 mb-3">
               <span className="tag">{formatPeriod(credential.year)}</span>
-              <span className="tag">{credential.issuer}</span>
+              <span className="tag">{content(credential.id, 'issuer', credential.issuer)}</span>
             </div>
 
             <h2 style={{ fontSize: '1.4rem', marginBottom: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
