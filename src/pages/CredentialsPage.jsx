@@ -3,17 +3,19 @@ import { motion } from 'framer-motion';
 import { Award, ExternalLink, FileText } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { credentialsData } from '../data/portfolioData';
+import { useLanguage } from '../i18n';
 
 export default function CredentialsPage() {
+  const { t, content } = useLanguage();
   return (
     <div className="page-content container" style={{ paddingTop: '7.5rem', minHeight: '85vh' }}>
       <div className="mb-6">
-        <span className="tag mb-2">Credentials</span>
+        <span className="tag mb-2">{t('credentials.tag')}</span>
         <h1 style={{ fontSize: 'clamp(2.2rem, 5vw, 3.5rem)', marginBottom: '0.75rem' }}>
-          Professional <span className="text-gradient">Credentials</span>
+          {t('credentials.title')} <span className="text-gradient">{t('credentials.titleAccent')}</span>
         </h1>
         <p style={{ color: 'var(--text-secondary)', fontSize: '1.15rem', maxWidth: '680px' }}>
-          Certificates and credentials that document my professional training and experience.
+          {t('credentials.description')}
         </p>
       </div>
 
@@ -35,11 +37,11 @@ export default function CredentialsPage() {
 
             <h2 style={{ fontSize: '1.4rem', marginBottom: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
               <Award size={22} style={{ color: 'var(--accent-purple)' }} />
-              {credential.title}
+              {content(credential.id, 'title', credential.title)}
             </h2>
 
             <p style={{ color: 'var(--text-secondary)', fontSize: '1rem', lineHeight: 1.6, marginBottom: '1.5rem' }}>
-              {credential.description}
+              {content(credential.id, 'description', credential.description)}
             </p>
 
             {credential.scores && (
@@ -56,17 +58,17 @@ export default function CredentialsPage() {
                   <>
                     <a className="btn-primary" href={credential.fileUrl} target="_blank" rel="noreferrer">
                       <ExternalLink size={16} />
-                      View Certificate
+                      {t('credentials.certificate')}
                     </a>
                     <a className="btn-secondary" href={credential.fileUrl} download>
                       <FileText size={16} />
-                      Download PDF
+                      {t('credentials.download')}
                     </a>
                   </>
                 )}
                 {credential.experienceId && (
                   <Link className="btn-secondary" to={`/experience#${credential.experienceId}`}>
-                    View Related Experience
+                    {t('credentials.experience')}
                   </Link>
                 )}
               </div>

@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { BookOpen, ExternalLink, Search, Copy, Check, FileCode, Tag, Quote } from 'lucide-react';
+import { ExternalLink, Search, Copy, Check, FileCode, Tag, Quote } from 'lucide-react';
 import { publicationsData } from '../data/portfolioData';
+import { useLanguage } from '../i18n';
 
 export default function PublicationsPage() {
+  const { t, content } = useLanguage();
   const [activeFilter, setActiveFilter] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [copiedId, setCopiedId] = useState(null);
@@ -27,10 +29,10 @@ export default function PublicationsPage() {
 
     const query = searchQuery.toLowerCase();
     const matchesSearch = 
-      pub.title.toLowerCase().includes(query) ||
+      content(pub.id, 'title', pub.title).toLowerCase().includes(query) ||
       pub.venue.toLowerCase().includes(query) ||
       pub.year.includes(query) ||
-      pub.keywords.some(k => k.toLowerCase().includes(query)) ||
+      content(pub.id, 'keywords', pub.keywords).some(k => k.toLowerCase().includes(query)) ||
       pub.authors.some(a => a.name.toLowerCase().includes(query));
 
     return matchesFilter && matchesSearch;
@@ -40,12 +42,12 @@ export default function PublicationsPage() {
     <div className="page-content container" style={{ paddingTop: '7.5rem', minHeight: '85vh' }}>
       {/* Page Header */}
       <div className="mb-6">
-        <span className="tag mb-2">Research & Scholarship</span>
+        <span className="tag mb-2">{t('publications.tag')}</span>
         <h1 style={{ fontSize: 'clamp(2.2rem, 5vw, 3.5rem)', marginBottom: '0.75rem' }}>
-          Publications & <span className="text-gradient">Research</span>
+          {t('publications.title')} <span className="text-gradient">{t('publications.titleAccent')}</span>
         </h1>
         <p style={{ color: 'var(--text-secondary)', fontSize: '1.15rem', maxWidth: '680px' }}>
-          Peer-reviewed articles, international conference proceedings, and academic contributions in Artificial Intelligence, Computer Vision, and Speech Processing.
+          {t('publications.description')}
         </p>
       </div>
 
@@ -58,19 +60,19 @@ export default function PublicationsPage() {
               className={`filter-btn ${activeFilter === 'all' ? 'active' : ''}`}
               onClick={() => setActiveFilter('all')}
             >
-              All Publications ({publicationsData.length})
+              {t('publications.all')} ({publicationsData.length})
             </button>
             <button 
               className={`filter-btn ${activeFilter === 'conference' ? 'active' : ''}`}
               onClick={() => setActiveFilter('conference')}
             >
-              Conferences (IEEE)
+              {t('publications.conferences')}
             </button>
             <button 
               className={`filter-btn ${activeFilter === 'journal' ? 'active' : ''}`}
               onClick={() => setActiveFilter('journal')}
             >
-              Journals (Elsevier)
+              {t('publications.journals')}
             </button>
           </div>
 
@@ -79,7 +81,7 @@ export default function PublicationsPage() {
             <Search size={16} style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }} />
             <input 
               type="text" 
-              placeholder="Search by title, author, topic..."
+              placeholder={t('publications.search')}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="search-input"
@@ -92,7 +94,7 @@ export default function PublicationsPage() {
       <div className="flex" style={{ flexDirection: 'column', gap: '1.75rem' }}>
         {filteredPubs.length === 0 ? (
           <div className="glass-panel" style={{ textAlign: 'center', padding: '3rem' }}>
-            <p style={{ color: 'var(--text-secondary)' }}>No publications match your search criteria.</p>
+            <p style={{ color: 'var(--text-secondary)' }}>{t('publications.empty')}</p>
           </div>
         ) : (
           filteredPubs.map((pub) => (
@@ -107,25 +109,25 @@ export default function PublicationsPage() {
               <div className="flex items-center gap-2 mb-3" style={{ flexWrap: 'wrap' }}>
                 <span className="tag">{pub.year}</span>
                 <span className="tag" style={{ background: 'rgba(20, 184, 166, 0.08)', color: 'var(--accent-cyan)', borderColor: 'rgba(20, 184, 166, 0.2)' }}>
-                  {pub.type}
+                  {pub.category === 'conference' ? t('publications.conference') : t('publications.journal')}
                 </span>
                 <span className="tag" style={{ fontSize: '0.75rem', color: 'var(--text-muted)', background: 'transparent' }}>
                   DOI: {pub.doi}
                 </span>
                 <span className="citation-badge">
                   <Quote size={13} />
-                  {pub.citationCount} {pub.citationCount === 1 ? 'citation' : 'citations'}
+                  {pub.citationCount} {pub.citationCount === 1 ? t('publications.citation') : t('publications.citations')}
                 </span>
                 {pub.journalQuartile && (
                   <span className="quartile-badge">
-                    {pub.journalQuartile} journal
+                    {pub.journalQuartile} {t('publications.journal')}
                   </span>
                 )}
               </div>
 
               <h2 style={{ fontSize: '1.35rem', lineHeight: 1.35, marginBottom: '0.75rem' }}>
                 <a href={pub.link} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-primary)' }}>
-                  {pub.title}
+                  {content(pub.id, 'title', pub.title)}
                 </a>
               </h2>
 
@@ -151,18 +153,18 @@ export default function PublicationsPage() {
               </div>
               {pub.journalQuartile && (
                 <p className="citation-note">
-                  {pub.journalRankSource} · {pub.journalRankYear} {pub.journalQuartile} · checked {pub.journalRankChecked}
+                  {pub.journalRankSource} · {pub.journalRankYear} {pub.journalQuartile} · {t('publications.checked')} {pub.journalRankChecked}
                 </p>
               )}
 
               {/* Abstract */}
               <p style={{ color: 'var(--text-secondary)', fontSize: '0.925rem', marginBottom: '1.25rem', lineHeight: 1.6 }}>
-                {pub.abstract}
+                {content(pub.id, 'abstract', pub.abstract)}
               </p>
 
               {/* Keywords */}
               <div className="flex gap-2 mb-4" style={{ flexWrap: 'wrap' }}>
-                {pub.keywords.map((kw, i) => (
+                {content(pub.id, 'keywords', pub.keywords).map((kw, i) => (
                   <span key={i} className="alias-chip" style={{ fontSize: '0.75rem', padding: '0.2rem 0.5rem' }}>
                     <Tag size={11} style={{ marginRight: 3, opacity: 0.7 }} />
                     {kw}
@@ -179,7 +181,7 @@ export default function PublicationsPage() {
                   className="btn-primary" 
                   style={{ padding: '0.6rem 1.25rem', fontSize: '0.875rem' }}
                 >
-                  Read Paper <ExternalLink size={15} />
+                  {t('publications.read')} <ExternalLink size={15} />
                 </a>
 
                 {pub.certificateUrl && (
@@ -190,7 +192,7 @@ export default function PublicationsPage() {
                     className="btn-secondary"
                     style={{ padding: '0.6rem 1.25rem', fontSize: '0.875rem' }}
                   >
-                    View Conference Certificate <ExternalLink size={15} />
+                    {t('publications.certificate')} <ExternalLink size={15} />
                   </a>
                 )}
 
@@ -198,17 +200,17 @@ export default function PublicationsPage() {
                   onClick={() => handleCopyBibtex(pub.id, pub.bibtex)}
                   className="icon-btn" 
                   style={{ width: 'auto', padding: '0.6rem 1rem', gap: '0.4rem', fontSize: '0.85rem', fontWeight: 500 }}
-                  title="Copy BibTeX Citation"
+                  title={t('publications.copy')}
                 >
                   {copiedId === pub.id ? (
                     <>
                       <Check size={16} style={{ color: '#10b981' }} />
-                      <span style={{ color: '#10b981' }}>BibTeX Copied!</span>
+                      <span style={{ color: '#10b981' }}>{t('publications.copied')}</span>
                     </>
                   ) : (
                     <>
                       <Copy size={16} />
-                      <span>Copy BibTeX</span>
+                      <span>{t('publications.copy')}</span>
                     </>
                   )}
                 </button>
@@ -219,7 +221,7 @@ export default function PublicationsPage() {
                   style={{ width: 'auto', padding: '0.6rem 1rem', gap: '0.4rem', fontSize: '0.85rem', fontWeight: 500 }}
                 >
                   <FileCode size={16} />
-                  <span>{expandedBibtex[pub.id] ? 'Hide BibTeX' : 'Show BibTeX'}</span>
+                  <span>{expandedBibtex[pub.id] ? t('publications.hide') : t('publications.show')}</span>
                 </button>
               </div>
 

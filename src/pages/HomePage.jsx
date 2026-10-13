@@ -7,8 +7,10 @@ import worldMap from 'world-atlas/countries-110m.json';
 import portraitImg from '../assets/portrait.png';
 import { GithubIcon, LinkedinIcon, OrcidIcon } from '../components/Icons';
 import { profileData, publicationsData, experienceData, educationData, awardsData, visitorCountriesData } from '../data/portfolioData';
+import { useLanguage } from '../i18n';
 
 export default function HomePage() {
+  const { t, content, formatPeriod } = useLanguage();
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: { 
@@ -66,53 +68,53 @@ export default function HomePage() {
               <span className="tag">
                 <Globe size={13} style={{ marginRight: 5, verticalAlign: 'middle' }} /> {profileData.origin}
               </span>
-              <span className="tag">{profileData.title}</span>
+              <span className="tag">{t('home.profileTitle')}</span>
             </motion.div>
             
             <motion.h1 variants={itemVariants} style={{ fontSize: 'clamp(2.5rem, 5.5vw, 4.2rem)', lineHeight: 1.15, marginBottom: '1rem' }}>
-              Hi, I'm <br />
+              {t('home.greeting')} <br />
               <span className="text-gradient">{profileData.name}</span>
             </motion.h1>
 
             {/* Name Badges */}
             <motion.div variants={itemVariants} className="name-alias-badges">
               <div className="alias-chip">
-                <span>English Name:</span> <strong>{profileData.englishName}</strong>
+                <span>{t('home.englishName')}</span> <strong>{profileData.englishName}</strong>
               </div>
               <div className="alias-chip">
-                <span>Korean Name:</span> <strong>{profileData.koreanName}</strong>
+                <span>{t('home.koreanName')}</span> <strong>{profileData.koreanName}</strong>
               </div>
               <div className="alias-chip">
                 <MapPin size={13} style={{ color: 'var(--accent-primary)' }} />
-                <span>From:</span> <strong>Vietnam</strong>
+                <span>{t('home.from')}</span> <strong>Vietnam</strong>
               </div>
             </motion.div>
 
             <motion.p variants={itemVariants} style={{ fontSize: '1.15rem', color: 'var(--text-secondary)', maxWidth: '580px', marginBottom: '2rem' }}>
-              {profileData.bio}
+              {t('home.profileBio')}
             </motion.p>
 
             <motion.div variants={itemVariants} style={{ marginBottom: '2rem' }}>
               <h2 className="flex items-center gap-2" style={{ fontSize: '1.1rem', marginBottom: '0.75rem' }}>
                 <Cpu size={20} style={{ color: 'var(--accent-purple)' }} />
-                Research Interests
+                {t('home.researchInterests')}
               </h2>
               <div className="flex gap-2" style={{ flexWrap: 'wrap' }}>
                 <span className="alias-chip">
                   <Sparkles size={14} style={{ color: 'var(--accent-primary)' }} />
-                  Anticancer Peptides
+                  {t('home.interest1')}
                 </span>
                 <span className="alias-chip">
                   <Sparkles size={14} style={{ color: 'var(--accent-primary)' }} />
-                  Audio-Visual Speech Recognition (AVSR)
+                  {t('home.interest2')}
                 </span>
                 <span className="alias-chip">
                   <Sparkles size={14} style={{ color: 'var(--accent-primary)' }} />
-                  Multimodal Deep Learning
+                  {t('home.interest3')}
                 </span>
                 <span className="alias-chip">
                   <Sparkles size={14} style={{ color: 'var(--accent-primary)' }} />
-                  Medical Imaging
+                  {t('home.interest4')}
                 </span>
               </div>
             </motion.div>
@@ -120,11 +122,11 @@ export default function HomePage() {
             <motion.div variants={itemVariants} className="flex gap-3 items-center" style={{ flexWrap: 'wrap' }}>
               <a href={`mailto:${profileData.personalEmail}`} className="btn-primary">
                 <Mail size={18} />
-                Personal Email
+                {t('home.personalEmail')}
               </a>
               <a href={`mailto:${profileData.affiliationEmail}`} className="btn-secondary">
                 <Mail size={18} />
-                Affiliation Email
+                {t('home.affiliationEmail')}
               </a>
               <a href={profileData.github} target="_blank" rel="noreferrer" className="icon-btn" aria-label="GitHub">
                 <GithubIcon size={20} />
@@ -168,7 +170,7 @@ export default function HomePage() {
         <div className="container">
           <motion.h2 variants={itemVariants} className="section-title" style={{ marginBottom: '2rem' }}>
             <GraduationCap size={28} style={{ color: 'var(--accent-primary)' }} />
-            Education
+            {t('home.education')}
           </motion.h2>
           <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1rem' }}>
             {educationData.map((edu) => (
@@ -178,19 +180,19 @@ export default function HomePage() {
                     <div style={{ width: '92px', height: '81px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                       <img
                         src={edu.logo}
-                        alt={`${edu.institution} logo`}
+                        alt={`${content(edu.id, 'institution', edu.institution)} logo`}
                         style={{ width: '81px', height: 'auto', display: 'block' }}
                       />
                     </div>
                   )}
                   <div>
                     <div className="flex items-center gap-2 mb-1">
-                      <span className="tag">{edu.period}</span>
+                      <span className="tag">{formatPeriod(edu.period)}</span>
                     </div>
-                    <h3 className="mb-1" style={{ fontSize: '1.15rem' }}>{edu.degree}</h3>
-                    <div className="text-sm mb-2" style={{ fontWeight: 600, color: 'var(--text-primary)' }}>{edu.institution}</div>
-                    <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>{edu.details}</p>
-                    {edu.grade && <p className="text-sm" style={{ color: 'var(--accent-primary)', fontWeight: 600 }}>Grade: {edu.grade}</p>}
+                    <h3 className="mb-1" style={{ fontSize: '1.15rem' }}>{content(edu.id, 'degree', edu.degree)}</h3>
+                    <div className="text-sm mb-2" style={{ fontWeight: 600, color: 'var(--text-primary)' }}>{content(edu.id, 'institution', edu.institution)}</div>
+                    <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>{content(edu.id, 'details', edu.details)}</p>
+                    {edu.grade && <p className="text-sm" style={{ color: 'var(--accent-primary)', fontWeight: 600 }}>{t('home.grade')} {content(edu.id, 'grade', edu.grade)}</p>}
                   </div>
                 </div>
               </motion.div>
@@ -212,11 +214,11 @@ export default function HomePage() {
             <div>
               <motion.h2 variants={itemVariants} className="section-title" style={{ marginBottom: '0.5rem' }}>
                 <BookOpen size={28} style={{ color: 'var(--accent-primary)' }}/>
-                Highlighted Publications
+                {t('home.highlightedPublications')}
               </motion.h2>
             </div>
             <Link to="/publications" className="btn-primary" style={{ padding: '0.65rem 1.25rem', fontSize: '0.9rem' }}>
-              View All Publications <ArrowRight size={16} />
+              {t('home.viewAllPublications')} <ArrowRight size={16} />
             </Link>
           </div>
 
@@ -232,19 +234,19 @@ export default function HomePage() {
                   <div className="flex items-center gap-2 mb-2" style={{ flexWrap: 'wrap' }}>
                     <span className="tag">{pub.year}</span>
                     <span className="tag" style={{ background: 'rgba(20, 184, 166, 0.08)', color: 'var(--accent-cyan)', borderColor: 'rgba(20, 184, 166, 0.2)' }}>
-                      {pub.type}
+                      {pub.category === 'conference' ? t('home.conference') : t('home.journal')}
                     </span>
                     <span className="tag" style={{ background: 'rgba(5, 150, 105, 0.08)', color: 'var(--accent-purple)', borderColor: 'rgba(5, 150, 105, 0.2)' }}>
-                      Featured
+                      {t('home.featured')}
                     </span>
                     <span className="citation-badge">
                       <Quote size={13} />
-                      {pub.citationCount} {pub.citationCount === 1 ? 'citation' : 'citations'}
+                      {pub.citationCount} {pub.citationCount === 1 ? t('home.citation') : t('home.citations')}
                     </span>
                   </div>
                   <h3 className="mb-2" style={{ fontSize: '1.2rem', lineHeight: 1.4 }}>
                     <a href={pub.link} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-primary)' }}>
-                      {pub.title}
+                      {content(pub.id, 'title', pub.title)}
                     </a>
                   </h3>
                   <div className="text-sm mb-1" style={{ color: 'var(--text-secondary)' }}>
@@ -271,7 +273,7 @@ export default function HomePage() {
                     className="btn-primary"
                     style={{ padding: '0.6rem 1.2rem', fontSize: '0.875rem' }}
                   >
-                    View Paper <ExternalLink size={15} />
+                    {t('home.viewPaper')} <ExternalLink size={15} />
                   </a>
                 </div>
               </motion.div>
@@ -294,10 +296,10 @@ export default function HomePage() {
             <div className="flex items-center" style={{ justifyContent: 'space-between', marginBottom: '2rem' }}>
               <motion.h2 variants={itemVariants} className="section-title" style={{ marginBottom: 0 }}>
                 <Briefcase size={26} style={{ color: 'var(--accent-primary)' }}/> 
-                Experience
+                {t('home.experience')}
               </motion.h2>
               <Link to="/experience" style={{ fontSize: '0.9rem', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '4px' }}>
-                Details <ChevronRight size={16} />
+                {t('home.details')} <ChevronRight size={16} />
               </Link>
             </div>
             
@@ -306,11 +308,11 @@ export default function HomePage() {
                 <Link key={exp.id} to={`/experience#${exp.id}`} style={{ color: 'inherit', display: 'block' }}>
                   <motion.div variants={itemVariants} className="glass-panel" style={{ padding: '1.5rem' }}>
                     <div className="flex items-center gap-2 mb-1">
-                      <span className="tag">{exp.period}</span>
+                      <span className="tag">{formatPeriod(exp.period)}</span>
                     </div>
-                    <h3 className="mb-1" style={{ fontSize: '1.15rem' }}>{exp.role}</h3>
+                    <h3 className="mb-1" style={{ fontSize: '1.15rem' }}>{content(exp.id, 'role', exp.role)}</h3>
                     <div className="text-sm mb-2" style={{ fontWeight: 500, color: 'var(--text-primary)' }}>{exp.organization}</div>
-                    <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>{exp.description}</p>
+                    <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>{content(exp.id, 'description', exp.description)}</p>
                   </motion.div>
                 </Link>
               ))}
@@ -322,10 +324,10 @@ export default function HomePage() {
             <div className="flex items-center" style={{ justifyContent: 'space-between', marginBottom: '2rem' }}>
               <motion.h2 variants={itemVariants} className="section-title" style={{ marginBottom: 0 }}>
                 <Award size={26} style={{ color: 'var(--accent-primary)' }}/> 
-                Awards
+                {t('home.awards')}
               </motion.h2>
               <Link to="/awards" style={{ fontSize: '0.9rem', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '4px' }}>
-                Details <ChevronRight size={16} />
+                {t('home.details')} <ChevronRight size={16} />
               </Link>
             </div>
             
@@ -336,8 +338,8 @@ export default function HomePage() {
                     <div className="flex items-center gap-2 mb-1">
                       <span className="tag">{award.year}</span>
                     </div>
-                    <h3 className="mb-1" style={{ fontSize: '1.15rem' }}>{award.title}</h3>
-                    <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>{award.description}</p>
+                    <h3 className="mb-1" style={{ fontSize: '1.15rem' }}>{content(award.id, 'title', award.title)}</h3>
+                    <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>{content(award.id, 'description', award.description)}</p>
                   </motion.div>
                 </Link>
               ))}
@@ -359,14 +361,14 @@ export default function HomePage() {
             <div>
               <motion.h2 variants={itemVariants} className="section-title" style={{ marginBottom: '0.5rem' }}>
                 <Globe size={28} style={{ color: 'var(--accent-primary)' }} />
-                Visitors around the world
+                {t('home.visitors')}
               </motion.h2>
             </div>
           </div>
 
           <motion.div variants={itemVariants} className="glass-panel visitor-countries-panel">
             <div className="visitor-map-layout">
-              <div className="visitor-map" aria-label="World map showing visitor countries">
+              <div className="visitor-map" aria-label={t('home.visitorsLabel')}>
                 <ComposableMap projectionConfig={{ scale: 145 }} width={800} height={390}>
                   <Geographies geography={worldMap}>
                     {({ geographies }) => geographies.map((geo) => {
@@ -395,12 +397,12 @@ export default function HomePage() {
                   ))}
                 </ComposableMap>
               </div>
-              <div className="visitor-country-list" aria-label="Visitor countries ranked by visitors">
+              <div className="visitor-country-list" aria-label={t('home.countryList')}>
                 {visitorCountriesData.map((entry) => (
                   <div className="visitor-country" key={entry.country}>
                     <div className="visitor-country-name">
                       <span className="visitor-flag" aria-hidden="true">{entry.flag}</span>
-                      <span>{entry.country}</span>
+                      <span>{t(`countries.${entry.country}`) === `countries.${entry.country}` ? entry.country : t(`countries.${entry.country}`)}</span>
                     </div>
                     <strong>{entry.visitors}</strong>
                   </div>

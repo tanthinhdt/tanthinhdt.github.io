@@ -2,17 +2,19 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ExternalLink, Trophy } from 'lucide-react';
 import { awardsData } from '../data/portfolioData';
+import { useLanguage } from '../i18n';
 
 export default function AwardsPage() {
+  const { t, content } = useLanguage();
   return (
     <div className="page-content container" style={{ paddingTop: '7.5rem', minHeight: '85vh' }}>
       <div className="mb-6">
-        <span className="tag mb-2">Honors & Competitions</span>
+        <span className="tag mb-2">{t('awards.tag')}</span>
         <h1 style={{ fontSize: 'clamp(2.2rem, 5vw, 3.5rem)', marginBottom: '0.75rem' }}>
-          Awards & <span className="text-gradient">Honors</span>
+          {t('awards.title')} <span className="text-gradient">{t('awards.titleAccent')}</span>
         </h1>
         <p style={{ color: 'var(--text-secondary)', fontSize: '1.15rem', maxWidth: '680px' }}>
-          Recognition of academic excellence, competitive coding challenges, and hackathons.
+          {t('awards.description')}
         </p>
       </div>
 
@@ -38,11 +40,11 @@ export default function AwardsPage() {
 
                 <h2 style={{ fontSize: '1.3rem', marginBottom: '0.75rem', display: 'flex', alignItems: 'flex-start', gap: '0.5rem' }}>
                   <Trophy size={20} style={{ color: 'var(--accent-purple)', flexShrink: 0, marginTop: '0.15rem' }} />
-                  <span>{award.title}</span>
+                  <span>{content(award.id, 'title', award.title)}</span>
                 </h2>
 
                 <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: 1.6 }}>
-                  {award.description}
+                  {content(award.id, 'description', award.description)}
                 </p>
 
                 {award.sourceUrl && (
@@ -54,7 +56,7 @@ export default function AwardsPage() {
                     style={{ marginTop: '1.25rem' }}
                   >
                     <ExternalLink size={16} />
-                    View FPT University Post
+                    {t('awards.source')}
                   </a>
                 )}
               </div>
