@@ -5,7 +5,7 @@ import { awardsData } from '../data/portfolioData';
 import { useLanguage } from '../i18n';
 
 export default function AwardsPage() {
-  const { t, content } = useLanguage();
+  const { t, content, formatPeriod } = useLanguage();
   return (
     <div className="page-content container" style={{ paddingTop: '7.5rem', minHeight: '85vh' }}>
       <div className="mb-6">
@@ -33,7 +33,7 @@ export default function AwardsPage() {
               <div>
                 <div className="flex items-center gap-2 mb-3" style={{ flexWrap: 'wrap' }}>
                   <span className="tag" style={{ background: 'rgba(5, 150, 105, 0.08)', color: 'var(--accent-purple)', borderColor: 'rgba(5, 150, 105, 0.2)' }}>
-                    {award.year}
+                    {formatPeriod(award.year)}
                   </span>
                   <span className="tag">{award.organization}</span>
                 </div>

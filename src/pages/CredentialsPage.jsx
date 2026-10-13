@@ -6,7 +6,7 @@ import { credentialsData } from '../data/portfolioData';
 import { useLanguage } from '../i18n';
 
 export default function CredentialsPage() {
-  const { t, content } = useLanguage();
+  const { t, content, formatPeriod } = useLanguage();
   return (
     <div className="page-content container" style={{ paddingTop: '7.5rem', minHeight: '85vh' }}>
       <div className="mb-6">
@@ -31,7 +31,7 @@ export default function CredentialsPage() {
             transition={{ duration: 0.4 }}
           >
             <div className="flex items-center gap-2 mb-3">
-              <span className="tag">{credential.year}</span>
+              <span className="tag">{formatPeriod(credential.year)}</span>
               <span className="tag">{credential.issuer}</span>
             </div>
 

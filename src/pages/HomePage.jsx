@@ -336,7 +336,7 @@ export default function HomePage() {
                 <Link key={award.id} to={`/awards#${award.id}`} style={{ color: 'inherit', display: 'block' }}>
                   <motion.div variants={itemVariants} className="glass-panel" style={{ padding: '1.5rem' }}>
                     <div className="flex items-center gap-2 mb-1">
-                      <span className="tag">{award.year}</span>
+                      <span className="tag">{formatPeriod(award.year)}</span>
                     </div>
                     <h3 className="mb-1" style={{ fontSize: '1.15rem' }}>{content(award.id, 'title', award.title)}</h3>
                     <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>{content(award.id, 'description', award.description)}</p>

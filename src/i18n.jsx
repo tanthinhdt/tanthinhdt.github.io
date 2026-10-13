@@ -150,7 +150,7 @@ const contentTranslations = {
       highlights: ['Tinh chỉnh phần tiếng Việt của bộ dữ liệu mC4', 'Hỗ trợ triển khai hệ thống truy hồi văn bản tiếng Việt']
     },
     'credential-isico-2023': { title: 'Chứng nhận hội nghị ISICO 2023', description: 'Chứng nhận hội nghị liên quan đến bài báo “Nhận dạng cây thuốc dựa trên Vision Transformer và BEiT.”' },
-    'credential-ielts-2024': { title: 'Hệ thống Kiểm tra Anh ngữ Quốc tế (IELTS)', description: 'Điểm tổng: 7.5.' },
+    'credential-ielts-2024': { title: 'International English Language Testing System (IELTS)', description: 'Điểm tổng: 7.5.' },
     'credential-fptu-ai-engineer': { title: 'Chứng nhận học việc Kỹ sư AI', description: 'Chứng nhận do Đại học FPT cấp sau khi hoàn thành chương trình học việc Kỹ sư AI tại Gradients Technologies Joint Stock Company.' },
     'edu-2': { degree: 'Thạc sĩ và Tiến sĩ liên thông', institution: 'Đại học Sungkyunkwan', details: 'Chuyên ngành: Công nghệ sinh học tích hợp.' },
     'edu-1': { degree: 'Bằng cử nhân', institution: 'Đại học FPT', details: 'Chuyên ngành: Trí tuệ nhân tạo.', grade: 'Xuất sắc' },
@@ -176,7 +176,7 @@ const contentTranslations = {
       highlights: ['mC4 데이터셋의 베트남어 부분 정제', '베트남어 텍스트 검색 시스템 구현 지원']
     },
     'credential-isico-2023': { title: 'ISICO 2023 학술대회 인증서', description: '“Vision Transformer와 BEiT 기반 약용 식물 인식” 논문과 관련된 학술대회 인증서입니다.' },
-    'credential-ielts-2024': { title: '국제 영어 능력 평가 시스템 (IELTS)', description: '종합 밴드 점수: 7.5.' },
+    'credential-ielts-2024': { title: 'International English Language Testing System (IELTS)', description: '종합 밴드 점수: 7.5.' },
     'credential-fptu-ai-engineer': { title: 'AI 엔지니어 견습 인증서', description: 'Gradients Technologies Joint Stock Company에서 AI 엔지니어 견습 과정을 수료하여 FPT University에서 발급한 인증서입니다.' },
     'edu-2': { degree: '석사·박사 통합 과정', institution: '성균관대학교', details: '전공: 융합생명공학.' },
     'edu-1': { degree: '학사 학위', institution: 'FPT 대학교', details: '전공: 인공지능.', grade: '최우수' },
