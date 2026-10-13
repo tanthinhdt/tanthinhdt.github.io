@@ -17,61 +17,63 @@ export default function CredentialsPage() {
         </p>
       </div>
 
-      {credentialsData.map((credential) => (
-        <motion.div
-          key={credential.id}
-          id={credential.id}
-          className="glass-panel anchor-target"
-          style={{ padding: '2rem', maxWidth: '720px' }}
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4 }}
-        >
-          <div className="flex items-center gap-2 mb-3">
-            <span className="tag">{credential.year}</span>
-            <span className="tag">{credential.issuer}</span>
-          </div>
-
-          <h2 style={{ fontSize: '1.4rem', marginBottom: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-            <Award size={22} style={{ color: 'var(--accent-purple)' }} />
-            {credential.title}
-          </h2>
-
-          <p style={{ color: 'var(--text-secondary)', fontSize: '1rem', lineHeight: 1.6, marginBottom: '1.5rem' }}>
-            {credential.description}
-          </p>
-
-          {credential.scores && (
-            <div className="flex gap-2 mb-4" style={{ flexWrap: 'wrap' }}>
-              {credential.scores.map(({ skill, score }) => (
-                <span key={skill} className="tag">{skill}: {score}</span>
-              ))}
+      <div className="credentials-list">
+        {credentialsData.map((credential) => (
+          <motion.div
+            key={credential.id}
+            id={credential.id}
+            className="glass-panel anchor-target"
+            style={{ padding: '2rem', maxWidth: '720px' }}
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4 }}
+          >
+            <div className="flex items-center gap-2 mb-3">
+              <span className="tag">{credential.year}</span>
+              <span className="tag">{credential.issuer}</span>
             </div>
-          )}
 
-          {(credential.fileUrl || credential.experienceId) && (
-            <div className="flex gap-2" style={{ flexWrap: 'wrap' }}>
-              {credential.fileUrl && (
-                <>
-                  <a className="btn-primary" href={credential.fileUrl} target="_blank" rel="noreferrer">
-                    <ExternalLink size={16} />
-                    View Certificate
-                  </a>
-                  <a className="btn-secondary" href={credential.fileUrl} download>
-                    <FileText size={16} />
-                    Download PDF
-                  </a>
-                </>
-              )}
-              {credential.experienceId && (
-                <Link className="btn-secondary" to={`/experience#${credential.experienceId}`}>
-                  View Related Experience
-                </Link>
-              )}
-            </div>
-          )}
-        </motion.div>
-      ))}
+            <h2 style={{ fontSize: '1.4rem', marginBottom: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              <Award size={22} style={{ color: 'var(--accent-purple)' }} />
+              {credential.title}
+            </h2>
+
+            <p style={{ color: 'var(--text-secondary)', fontSize: '1rem', lineHeight: 1.6, marginBottom: '1.5rem' }}>
+              {credential.description}
+            </p>
+
+            {credential.scores && (
+              <div className="flex gap-2 mb-4" style={{ flexWrap: 'wrap' }}>
+                {credential.scores.map(({ skill, score }) => (
+                  <span key={skill} className="tag">{skill}: {score}</span>
+                ))}
+              </div>
+            )}
+
+            {(credential.fileUrl || credential.experienceId) && (
+              <div className="flex gap-2" style={{ flexWrap: 'wrap' }}>
+                {credential.fileUrl && (
+                  <>
+                    <a className="btn-primary" href={credential.fileUrl} target="_blank" rel="noreferrer">
+                      <ExternalLink size={16} />
+                      View Certificate
+                    </a>
+                    <a className="btn-secondary" href={credential.fileUrl} download>
+                      <FileText size={16} />
+                      Download PDF
+                    </a>
+                  </>
+                )}
+                {credential.experienceId && (
+                  <Link className="btn-secondary" to={`/experience#${credential.experienceId}`}>
+                    View Related Experience
+                  </Link>
+                )}
+              </div>
+            )}
+          </motion.div>
+        ))}
+      </div>
     </div>
   );
 }

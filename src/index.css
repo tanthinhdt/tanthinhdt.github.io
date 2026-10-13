@@ -153,6 +153,12 @@ a:hover {
   scroll-margin-top: 7rem;
 }
 
+.credentials-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
 .text-gradient {
   background: var(--text-gradient);
   -webkit-background-clip: text;
