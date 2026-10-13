@@ -120,7 +120,7 @@ export default function PublicationsPage() {
                 </span>
                 {pub.journalQuartile && (
                   <span className="quartile-badge">
-                    {pub.journalQuartile} {t('publications.journal')}
+                    {t('publications.quartile')} {pub.journalQuartile}
                   </span>
                 )}
               </div>

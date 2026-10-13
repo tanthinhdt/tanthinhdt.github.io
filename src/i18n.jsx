@@ -28,9 +28,9 @@ const translations = {
     publications: {
       tag: 'Research & Scholarship', title: 'Publications &', titleAccent: 'Research',
       description: 'Peer-reviewed articles, international conference proceedings, and academic contributions in Artificial Intelligence, Computer Vision, and Speech Processing.',
-      all: 'All Publications', conferences: 'Conferences (IEEE)', journals: 'Journals (Elsevier)',
+      all: 'All Publications', conferences: 'Conferences', journals: 'Journals',
       search: 'Search by title, author, topic...', empty: 'No publications match your search criteria.',
-      citation: 'citation', citations: 'citations', journal: 'journal', conference: 'conference', checked: 'checked',
+      citation: 'citation', citations: 'citations', journal: 'journal', quartile: 'Journal', conference: 'conference', checked: 'checked',
       read: 'Read Paper', certificate: 'View Conference Certificate', copy: 'Copy BibTeX',
       copied: 'BibTeX Copied!', hide: 'Hide BibTeX', show: 'Show BibTeX'
     },
@@ -69,9 +69,9 @@ const translations = {
     publications: {
       tag: 'Nghiên cứu & Học thuật', title: 'Công bố &', titleAccent: 'Nghiên cứu',
       description: 'Các bài báo phản biện, kỷ yếu hội nghị quốc tế và đóng góp học thuật trong Trí tuệ nhân tạo, Thị giác máy tính và Xử lý tiếng nói.',
-      all: 'Tất cả công bố', conferences: 'Hội nghị (IEEE)', journals: 'Tạp chí (Elsevier)',
+      all: 'Tất cả công bố', conferences: 'Hội nghị', journals: 'Tạp chí',
       search: 'Tìm theo tiêu đề, tác giả, chủ đề...', empty: 'Không có công bố phù hợp với tìm kiếm.',
-      citation: 'trích dẫn', citations: 'trích dẫn', journal: 'tạp chí', conference: 'hội nghị', checked: 'kiểm tra',
+      citation: 'trích dẫn', citations: 'trích dẫn', journal: 'tạp chí', quartile: 'Tạp chí', conference: 'hội nghị', checked: 'kiểm tra',
       read: 'Đọc bài viết', certificate: 'Xem chứng nhận hội nghị', copy: 'Sao chép BibTeX',
       copied: 'Đã sao chép BibTeX!', hide: 'Ẩn BibTeX', show: 'Hiện BibTeX'
     },
@@ -110,9 +110,9 @@ const translations = {
     publications: {
       tag: '연구 및 학술 활동', title: '논문 및', titleAccent: '연구',
       description: '인공지능, 컴퓨터 비전 및 음성 처리 분야의 심사를 거친 논문과 국제 학술대회 발표 자료입니다.',
-      all: '전체 논문', conferences: '학술대회 (IEEE)', journals: '저널 (Elsevier)',
+      all: '전체 논문', conferences: '학술대회', journals: '저널',
       search: '제목, 저자, 주제로 검색...', empty: '검색 조건에 맞는 논문이 없습니다.',
-      citation: '회 인용', citations: '회 인용', journal: '저널', conference: '학술대회', checked: '확인',
+      citation: '회 인용', citations: '회 인용', journal: '저널', quartile: '저널', conference: '학술대회', checked: '확인',
       read: '논문 읽기', certificate: '학술대회 인증서 보기', copy: 'BibTeX 복사',
       copied: 'BibTeX가 복사되었습니다!', hide: 'BibTeX 숨기기', show: 'BibTeX 보기'
     },
