@@ -28,6 +28,8 @@ jobs:
         env:
           UMAMI_API_KEY: ${{ secrets.UMAMI_API_KEY }}
           UMAMI_SHARE_TOKEN: ${{ secrets.UMAMI_SHARE_TOKEN }}
+          UMAMI_SHARE_URL: ${{ secrets.UMAMI_SHARE_URL }}
+          UMAMI_SHARE_ID: ${{ secrets.UMAMI_SHARE_ID }}
         run: npm run update-visitors
 
       - name: Commit changes

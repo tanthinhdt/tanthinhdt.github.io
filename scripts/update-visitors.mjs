@@ -2,7 +2,8 @@ import { readFile, writeFile } from 'node:fs/promises';
 
 const WEBSITE_ID = process.env.UMAMI_WEBSITE_ID || '672b9d84-7f2b-4d64-ba8f-3cc5d026f9dc';
 const API_KEY = process.env.UMAMI_API_KEY;
-const SHARE_TOKEN = process.env.UMAMI_SHARE_TOKEN;
+let SHARE_TOKEN = process.env.UMAMI_SHARE_TOKEN;
+const SHARE_URL_OR_ID = process.env.UMAMI_SHARE_URL || process.env.UMAMI_SHARE_ID;
 
 // Curated centroid coordinates [longitude, latitude] for countries
 const COUNTRY_COORDINATES = {
@@ -63,21 +64,49 @@ function getFlagEmoji(code) {
   return String.fromCodePoint(...codePoints);
 }
 
+async function resolveShareToken(shareUrlOrId) {
+  if (!shareUrlOrId) return null;
+  const match = shareUrlOrId.match(/share\/([a-zA-Z0-9_-]+)/);
+  const shareId = match ? match[1] : shareUrlOrId.trim();
+
+  try {
+    const res = await fetch(`https://cloud.umami.is/api/share/${shareId}`, {
+      headers: { Accept: 'application/json' }
+    });
+    if (res.ok) {
+      const data = await res.json();
+      return data.token || data.shareToken || data.id;
+    }
+  } catch (err) {
+    console.warn(`[Umami Visitor Updater] Notice: Could not resolve share ID: ${err.message}`);
+  }
+  return null;
+}
+
 async function run() {
   const dataPath = new URL('../src/data/portfolioData.js', import.meta.url);
   const source = await readFile(dataPath, 'utf8');
 
-  if (!API_KEY && !SHARE_TOKEN) {
+  // Attempt to resolve public share token if provided
+  if (!SHARE_TOKEN && SHARE_URL_OR_ID) {
+    console.log(`Resolving free public Umami Share ID/URL: ${SHARE_URL_OR_ID}...`);
+    SHARE_TOKEN = await resolveShareToken(SHARE_URL_OR_ID);
+    if (SHARE_TOKEN) {
+      console.log('Successfully acquired public share token!');
+    }
+  }
+
+  if (!API_KEY && !SHARE_TOKEN && !SHARE_URL_OR_ID) {
     console.log('\n============================================================');
-    console.log('[Umami Visitor Updater] ℹ️  UMAMI_API_KEY is not configured.');
-    console.log('To automate Umami visitor tracking:');
-    console.log('  1. Open Umami Cloud: https://cloud.umami.is');
-    console.log('  2. Go to Settings / API Keys and create a new key.');
-    console.log('  3. Add the secret to GitHub:');
-    console.log('     Repository Settings -> Secrets and variables -> Actions');
-    console.log('     Name: UMAMI_API_KEY');
-    console.log('     Value: <your-umami-api-key>');
-    console.log('Keeping current visitor metrics in portfolioData.js.');
+    console.log('[Umami Visitor Updater] ℹ️  No Umami credentials configured.');
+    console.log('FREE OPTION (Umami Free Plan):');
+    console.log('  1. In Umami Cloud (https://cloud.umami.is), edit your website.');
+    console.log('  2. Enable "Share URL" under the Share tab.');
+    console.log('  3. Copy your public share link (e.g. https://cloud.umami.is/share/abc123xyz/...)');
+    console.log('  4. Add it to GitHub repository secrets:');
+    console.log('     Name: UMAMI_SHARE_URL (or UMAMI_SHARE_ID)');
+    console.log('     Value: <your-share-url-or-id>');
+    console.log('Keeping existing visitor data intact in portfolioData.js.');
     console.log('============================================================\n');
     process.exit(0);
   }
@@ -86,25 +115,30 @@ async function run() {
     Accept: 'application/json',
     'User-Agent': 'my-page visitor updater (https://github.com/tanthinhdt/my-page)'
   };
+  
+  let endpoint = `https://api.umami.is/v1/websites/${WEBSITE_ID}/metrics?type=country&startAt=0&endAt=${Date.now()}`;
+
   if (API_KEY) {
     headers['x-umami-api-key'] = API_KEY;
-  }
-  if (SHARE_TOKEN) {
+  } else if (SHARE_TOKEN) {
+    endpoint = `https://cloud.umami.is/api/websites/${WEBSITE_ID}/metrics?type=country&startAt=0&endAt=${Date.now()}`;
     headers['x-umami-share-token'] = SHARE_TOKEN;
   }
 
-  const endpoint = `https://api.umami.is/v1/websites/${WEBSITE_ID}/metrics?type=country&startAt=0&endAt=${Date.now()}`;
   console.log(`Fetching visitor analytics from Umami (${WEBSITE_ID})...`);
 
   const response = await fetch(endpoint, { headers });
   if (!response.ok) {
     const errorText = await response.text();
-    throw new Error(`Umami API request failed (${response.status} ${response.statusText}): ${errorText}`);
+    console.warn(`[Umami Visitor Updater] Request returned ${response.status}: ${errorText}`);
+    console.warn('Skipping update to preserve existing metrics.');
+    process.exit(0);
   }
 
   const data = await response.json();
   if (!Array.isArray(data)) {
-    throw new Error(`Unexpected Umami API response structure: ${JSON.stringify(data)}`);
+    console.warn(`[Umami Visitor Updater] Unexpected response format. Keeping existing data.`);
+    process.exit(0);
   }
 
   if (data.length === 0) {
@@ -142,7 +176,7 @@ async function run() {
 
   mapped.sort((a, b) => b.visitors - a.visitors);
 
-  // Take top 5-6 countries, aggregate remaining into "Other countries"
+  // Take top 5 countries, aggregate remaining into "Other countries"
   const TOP_COUNT = 5;
   const topCountries = mapped.slice(0, TOP_COUNT);
   const remaining = mapped.slice(TOP_COUNT);
@@ -179,5 +213,5 @@ async function run() {
 
 run().catch((err) => {
   console.error('[Umami Visitor Updater] Error:', err.message);
-  process.exit(1);
+  process.exit(0);
 });
