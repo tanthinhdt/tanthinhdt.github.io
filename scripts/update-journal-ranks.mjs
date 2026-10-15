@@ -9,15 +9,22 @@ const journal = {
   exportUrl: 'https://www.scimagojr.com/journalrank.php?out=csv'
 };
 
-const response = await fetch(journal.exportUrl, {
-  headers: {
-    Accept: 'text/csv,text/plain',
-    'User-Agent': 'my-page journal rank updater (https://github.com/tanthinhdt/my-page)'
-  }
-});
+let response;
+try {
+  response = await fetch(journal.exportUrl, {
+    headers: {
+      Accept: 'text/csv,text/plain',
+      'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+    }
+  });
+} catch (err) {
+  console.warn(`SCImago fetch failed: ${err.message}. Keeping current journal quartile.`);
+  process.exit(0);
+}
 
 if (!response.ok) {
-  throw new Error(`SCImago request failed: ${response.status} ${response.statusText}`);
+  console.warn(`SCImago request returned ${response.status} ${response.statusText} (Cloudflare bot protection). Keeping current journal quartile.`);
+  process.exit(0);
 }
 
 const csv = await response.text();

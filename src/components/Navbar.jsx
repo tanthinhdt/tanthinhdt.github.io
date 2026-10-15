@@ -1,13 +1,32 @@
 import React, { useState } from 'react';
 import { NavLink, Link } from 'react-router-dom';
-import { Sun, Moon, Menu, X } from 'lucide-react';
+import { Sun, Moon, Monitor, Menu, X } from 'lucide-react';
 import { languages, useLanguage } from '../i18n';
 
-export default function Navbar({ theme, toggleTheme }) {
+export default function Navbar({ theme, themePreference = 'system', systemTheme = 'light', cycleTheme, toggleTheme }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { language, setLanguage, t } = useLanguage();
 
+  const handleToggle = cycleTheme || toggleTheme;
+
   const closeMobile = () => setMobileMenuOpen(false);
+
+  const getThemeTitle = () => {
+    if (themePreference === 'system') {
+      return `Theme: System (${systemTheme}) · Click for Light`;
+    }
+    if (themePreference === 'light') {
+      return 'Theme: Light · Click for Dark';
+    }
+    return 'Theme: Dark · Click for System';
+  };
+
+  const renderThemeIcon = () => {
+    if (themePreference === 'system') {
+      return <Monitor size={18} />;
+    }
+    return theme === 'light' ? <Sun size={18} /> : <Moon size={18} />;
+  };
 
   return (
     <nav className="navbar">
@@ -64,23 +83,24 @@ export default function Navbar({ theme, toggleTheme }) {
 
           {/* Theme Switcher Button */}
           <button 
-            onClick={toggleTheme} 
+            onClick={handleToggle} 
             className="theme-toggle-btn"
-            aria-label="Toggle theme"
-            title={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
+            aria-label={`Theme: ${themePreference}. Click to cycle.`}
+            title={getThemeTitle()}
           >
-            {theme === 'light' ? <Moon size={18} /> : <Sun size={18} />}
+            {renderThemeIcon()}
           </button>
         </div>
 
         {/* Mobile controls */}
         <div className="mobile-controls flex items-center gap-2">
           <button 
-            onClick={toggleTheme} 
+            onClick={handleToggle} 
             className="theme-toggle-btn"
-            aria-label="Toggle theme"
+            aria-label={`Theme: ${themePreference}. Click to cycle.`}
+            title={getThemeTitle()}
           >
-            {theme === 'light' ? <Moon size={18} /> : <Sun size={18} />}
+            {renderThemeIcon()}
           </button>
           
           <button 

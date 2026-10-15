@@ -12,17 +12,37 @@ import { LanguageProvider } from './i18n';
 import './index.css';
 
 export default function App() {
-  const [theme, setTheme] = useState(() => {
-    return localStorage.getItem('theme') || 'light';
+  const [themePreference, setThemePreference] = useState(() => {
+    return localStorage.getItem('theme-preference') || localStorage.getItem('theme') || 'system';
   });
+  const [systemTheme, setSystemTheme] = useState(() =>
+    typeof window !== 'undefined' && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+  );
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    const handleSystemThemeChange = (event) => {
+      setSystemTheme(event.matches ? 'dark' : 'light');
+    };
+
+    mediaQuery.addEventListener('change', handleSystemThemeChange);
+    return () => mediaQuery.removeEventListener('change', handleSystemThemeChange);
+  }, []);
+
+  const theme = themePreference === 'system' ? systemTheme : themePreference;
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem('theme', theme);
-  }, [theme]);
+    localStorage.setItem('theme-preference', themePreference);
+    localStorage.setItem('theme', themePreference);
+  }, [theme, themePreference]);
 
-  const toggleTheme = () => {
-    setTheme(prev => (prev === 'light' ? 'dark' : 'light'));
+  const cycleTheme = () => {
+    setThemePreference((prev) => {
+      if (prev === 'system') return 'light';
+      if (prev === 'light') return 'dark';
+      return 'system';
+    });
   };
 
   return (
@@ -30,7 +50,13 @@ export default function App() {
       <HashRouter>
         <ScrollToTop />
         <div className="app-container">
-          <Navbar theme={theme} toggleTheme={toggleTheme} />
+          <Navbar 
+            theme={theme} 
+            themePreference={themePreference} 
+            systemTheme={systemTheme} 
+            cycleTheme={cycleTheme}
+            toggleTheme={cycleTheme} 
+          />
         
         <main>
           <Routes>

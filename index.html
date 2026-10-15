@@ -6,6 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Personal portfolio and academic page of Duong Tan Thinh (Evan / 양진성)" />
     <title>Duong Tan Thinh</title>
+    <script>
+      (function() {
+        try {
+          var pref = localStorage.getItem('theme-preference') || localStorage.getItem('theme') || 'system';
+          var resolved = pref === 'system'
+            ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
+            : pref;
+          document.documentElement.setAttribute('data-theme', resolved);
+        } catch (e) {}
+      })();
+    </script>
     <script defer src="https://cloud.umami.is/script.js" data-website-id="672b9d84-7f2b-4d64-ba8f-3cc5d026f9dc"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
