@@ -84,12 +84,12 @@ export const publicationsData = [
   }
 ];
 
-// Replace these values with the country totals from the site's analytics provider.
+// Updated automatically by Umami analytics workflow
 export const visitorCountriesData = [
-  { country: "Vietnam", flag: "🇻🇳", visitors: 68 },
-  { country: "South Korea", flag: "🇰🇷", visitors: 14 },
-  { country: "United States", flag: "🇺🇸", visitors: 9 },
-  { country: "Japan", flag: "🇯🇵", visitors: 6 },
+  { country: "Vietnam", code: "VN", flag: "🇻🇳", visitors: 68, coordinates: [108.2772, 14.0583] },
+  { country: "South Korea", code: "KR", flag: "🇰🇷", visitors: 14, coordinates: [127.7669, 35.9078] },
+  { country: "United States", code: "US", flag: "🇺🇸", visitors: 9, coordinates: [-95.7129, 37.0902] },
+  { country: "Japan", code: "JP", flag: "🇯🇵", visitors: 6, coordinates: [138.2529, 36.2048] },
   { country: "Other countries", flag: "🌎", visitors: 3 }
 ];
 

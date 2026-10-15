@@ -29,26 +29,34 @@ export default function HomePage() {
   };
 
   const highlightPubs = publicationsData.filter(p => p.isHighlight);
-  const visitorCountryNames = {
-    Vietnam: ['Vietnam'],
-    'South Korea': ['South Korea', 'Korea'],
-    'United States': ['United States', 'United States of America'],
-    Japan: ['Japan']
-  };
-  const visitorLocations = {
-    Vietnam: [108, 16],
-    'South Korea': [128, 36],
-    'United States': [-100, 38],
-    Japan: [138, 36]
-  };
-  const visitorCounts = Object.fromEntries(
-    visitorCountriesData.map((entry) => [entry.country, entry.visitors])
-  );
   const maxVisitors = Math.max(...visitorCountriesData.map((entry) => entry.visitors), 1);
 
-  const getCountryVisitors = (countryName) => {
-    const entry = Object.entries(visitorCountryNames).find(([, aliases]) => aliases.includes(countryName));
-    return entry ? visitorCounts[entry[0]] ?? 0 : 0;
+  const getCountryVisitors = (geoName) => {
+    const directMatch = visitorCountriesData.find(
+      (entry) => entry.country.toLowerCase() === geoName.toLowerCase()
+    );
+    if (directMatch) return directMatch.visitors;
+
+    const normalizedGeo = geoName === 'United States of America' ? 'United States'
+      : geoName === 'Czech Republic' ? 'Czechia'
+      : geoName === 'Korea' || geoName === 'Republic of Korea' ? 'South Korea'
+      : geoName === 'United Kingdom' || geoName === 'Great Britain' ? 'United Kingdom'
+      : geoName === 'Russian Federation' ? 'Russia'
+      : geoName;
+    const aliasMatch = visitorCountriesData.find(
+      (entry) => entry.country.toLowerCase() === normalizedGeo.toLowerCase()
+    );
+    if (aliasMatch) return aliasMatch.visitors;
+
+    const partialMatch = visitorCountriesData.find(
+      (entry) => entry.country !== 'Other countries' && (
+        entry.country.toLowerCase().includes(geoName.toLowerCase()) ||
+        geoName.toLowerCase().includes(entry.country.toLowerCase())
+      )
+    );
+    if (partialMatch) return partialMatch.visitors;
+
+    return 0;
   };
 
   return (
@@ -175,17 +183,16 @@ export default function HomePage() {
           <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1rem' }}>
             {educationData.map((edu) => (
               <motion.div key={edu.id} variants={itemVariants} className="glass-panel" style={{ padding: '1.5rem' }}>
-                <div className="flex gap-3">
+                <div className="flex gap-4 items-center">
                   {edu.logo && (
-                    <div style={{ width: '92px', height: '81px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                    <div className="institution-logo-badge">
                       <img
                         src={edu.logo}
                         alt={`${content(edu.id, 'institution', edu.institution)} logo`}
-                        style={{ width: '81px', height: 'auto', display: 'block' }}
                       />
                     </div>
                   )}
-                  <div>
+                  <div style={{ flex: 1, minWidth: 0 }}>
                     <div className="flex items-center gap-2 mb-1">
                       <span className="tag">{formatPeriod(edu.period)}</span>
                     </div>
@@ -389,12 +396,14 @@ export default function HomePage() {
                       );
                     })}
                   </Geographies>
-                  {Object.entries(visitorLocations).map(([country, coordinates]) => (
-                    <Marker key={country} coordinates={coordinates}>
-                      <circle r={5 + ((visitorCounts[country] ?? 0) / maxVisitors) * 6} className="visitor-map-marker" />
-                      <circle r="3" className="visitor-map-marker-core" />
-                    </Marker>
-                  ))}
+                  {visitorCountriesData
+                    .filter((entry) => Array.isArray(entry.coordinates) && entry.coordinates.length === 2)
+                    .map((entry) => (
+                      <Marker key={entry.country} coordinates={entry.coordinates}>
+                        <circle r={5 + ((entry.visitors ?? 0) / maxVisitors) * 6} className="visitor-map-marker" />
+                        <circle r="3" className="visitor-map-marker-core" />
+                      </Marker>
+                    ))}
                 </ComposableMap>
               </div>
               <div className="visitor-country-list" aria-label={t('home.countryList')}>

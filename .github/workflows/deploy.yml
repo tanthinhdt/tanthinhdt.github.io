@@ -5,7 +5,7 @@ on:
     branches: [ main, master ]
   workflow_dispatch:
   workflow_run:
-    workflows: ["Update citation counts"]
+    workflows: ["Update citation counts", "Update visitor analytics"]
     types:
       - completed
 
