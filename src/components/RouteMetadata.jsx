@@ -22,10 +22,11 @@ export default function RouteMetadata() {
   const { language, t } = useLanguage();
 
   useEffect(() => {
-    const routeKey = routeKeys[pathname] || 'notFound';
+    const normalizedPath = pathname.length > 1 ? pathname.replace(/\/$/, '') : pathname;
+    const routeKey = routeKeys[normalizedPath] || 'notFound';
     const title = t(`seo.${routeKey}.title`);
     const description = t(`seo.${routeKey}.description`);
-    const canonicalUrl = `${SITE_URL}${pathname === '/' ? '' : pathname}`;
+    const canonicalUrl = `${SITE_URL}${normalizedPath === '/' ? '' : normalizedPath}`;
 
     document.title = title;
     setMeta('meta[name="description"]', 'content', description);
