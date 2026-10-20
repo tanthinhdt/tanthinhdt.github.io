@@ -1,16 +1,38 @@
-# React + Vite
+# Duong Tan Thinh — Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Multilingual research portfolio for Duong Tan Thinh, built with React and Vite and deployed to GitHub Pages.
 
-Currently, two official plugins are available:
+## Local development
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+```bash
+npm install
+npm run dev
+```
 
-## React Compiler
+Production checks:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```bash
+npm run build
+npm run lint
+```
 
-## Expanding the Oxlint configuration
+## Content
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+- Profile, publications, experience, credentials, education, and awards: `src/data/portfolioData.js`
+- Interface translations: `src/i18n.jsx`
+- Page components: `src/pages/`
+- Public certificates and images: `public/`
+
+When adding a publication, include a stable `id`, DOI, external paper URL, abstract, keywords, and BibTeX. Add translated content under the same ID in `src/i18n.jsx`.
+
+## Automated updates
+
+- `npm run update-citations` refreshes Crossref citation counts.
+- `npm run update-journal-ranks` refreshes journal quartiles.
+- `npm run update-visitors` refreshes Umami country metrics when the required Umami environment variables are available.
+
+The corresponding scheduled workflows live in `.github/workflows/`.
+
+## Deployment
+
+Pushes to `main` are built and deployed through `.github/workflows/deploy.yml`. Clean client-side routes are supported on GitHub Pages through `public/404.html`.

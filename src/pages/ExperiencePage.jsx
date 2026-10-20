@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { CheckCircle2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { experienceData } from '../data/portfolioData';
-import { useLanguage } from '../i18n';
+import { useLanguage } from '../useLanguage';
 
 export default function ExperiencePage() {
   const { t, content, formatPeriod } = useLanguage();

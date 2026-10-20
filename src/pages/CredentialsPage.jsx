@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { Award, ExternalLink, FileText } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { credentialsData } from '../data/portfolioData';
-import { useLanguage } from '../i18n';
+import { useLanguage } from '../useLanguage';
 
 export default function CredentialsPage() {
   const { t, content, formatPeriod } = useLanguage();

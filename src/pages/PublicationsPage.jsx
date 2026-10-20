@@ -2,19 +2,25 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { ExternalLink, Search, Copy, Check, FileCode, Tag, Quote } from 'lucide-react';
 import { publicationsData } from '../data/portfolioData';
-import { useLanguage } from '../i18n';
+import { useLanguage } from '../useLanguage';
 
 export default function PublicationsPage() {
   const { t, content } = useLanguage();
   const [activeFilter, setActiveFilter] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [copiedId, setCopiedId] = useState(null);
+  const [copyError, setCopyError] = useState(false);
   const [expandedBibtex, setExpandedBibtex] = useState({});
 
-  const handleCopyBibtex = (id, bibtex) => {
-    navigator.clipboard.writeText(bibtex);
-    setCopiedId(id);
-    setTimeout(() => setCopiedId(null), 2000);
+  const handleCopyBibtex = async (id, bibtex) => {
+    try {
+      await navigator.clipboard.writeText(bibtex);
+      setCopyError(false);
+      setCopiedId(id);
+      setTimeout(() => setCopiedId(null), 2000);
+    } catch {
+      setCopyError(true);
+    }
   };
 
   const toggleBibtex = (id) => {
@@ -23,9 +29,8 @@ export default function PublicationsPage() {
 
   const filteredPubs = publicationsData.filter(pub => {
     const matchesFilter = 
-      activeFilter === 'all' || 
-      pub.category === activeFilter ||
-      (activeFilter === 'highlight' && pub.isHighlight);
+      activeFilter === 'all' ||
+      pub.category === activeFilter;
 
     const query = searchQuery.toLowerCase();
     const matchesSearch = 
@@ -57,20 +62,26 @@ export default function PublicationsPage() {
           {/* Filter Pills */}
           <div className="flex gap-2" style={{ flexWrap: 'wrap' }}>
             <button 
+              type="button"
               className={`filter-btn ${activeFilter === 'all' ? 'active' : ''}`}
               onClick={() => setActiveFilter('all')}
+              aria-pressed={activeFilter === 'all'}
             >
               {t('publications.all')} ({publicationsData.length})
             </button>
             <button 
+              type="button"
               className={`filter-btn ${activeFilter === 'conference' ? 'active' : ''}`}
               onClick={() => setActiveFilter('conference')}
+              aria-pressed={activeFilter === 'conference'}
             >
               {t('publications.conferences')}
             </button>
             <button 
+              type="button"
               className={`filter-btn ${activeFilter === 'journal' ? 'active' : ''}`}
               onClick={() => setActiveFilter('journal')}
+              aria-pressed={activeFilter === 'journal'}
             >
               {t('publications.journals')}
             </button>
@@ -81,6 +92,7 @@ export default function PublicationsPage() {
             <Search size={16} style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }} />
             <input 
               type="text" 
+              aria-label={t('publications.search')}
               placeholder={t('publications.search')}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
@@ -114,10 +126,12 @@ export default function PublicationsPage() {
                 <span className="tag" style={{ fontSize: '0.75rem', color: 'var(--text-muted)', background: 'transparent' }}>
                   DOI: {pub.doi}
                 </span>
-                <span className="citation-badge">
-                  <Quote size={13} />
-                  {pub.citationCount} {pub.citationCount === 1 ? t('publications.citation') : t('publications.citations')}
-                </span>
+                {pub.citationCount > 0 && (
+                  <span className="citation-badge">
+                    <Quote size={13} />
+                    {pub.citationCount} {pub.citationCount === 1 ? t('publications.citation') : t('publications.citations')}
+                  </span>
+                )}
                 {pub.journalQuartile && (
                   <span className="quartile-badge">
                     {t('publications.quartile')} {pub.journalQuartile}
@@ -197,6 +211,7 @@ export default function PublicationsPage() {
                 )}
 
                 <button 
+                  type="button"
                   onClick={() => handleCopyBibtex(pub.id, pub.bibtex)}
                   className="icon-btn" 
                   style={{ width: 'auto', padding: '0.6rem 1rem', gap: '0.4rem', fontSize: '0.85rem', fontWeight: 500 }}
@@ -216,9 +231,12 @@ export default function PublicationsPage() {
                 </button>
 
                 <button 
+                  type="button"
                   onClick={() => toggleBibtex(pub.id)}
                   className="icon-btn" 
                   style={{ width: 'auto', padding: '0.6rem 1rem', gap: '0.4rem', fontSize: '0.85rem', fontWeight: 500 }}
+                  aria-expanded={Boolean(expandedBibtex[pub.id])}
+                  aria-controls={`bibtex-${pub.id}`}
                 >
                   <FileCode size={16} />
                   <span>{expandedBibtex[pub.id] ? t('publications.hide') : t('publications.show')}</span>
@@ -228,6 +246,7 @@ export default function PublicationsPage() {
               {/* Expandable BibTeX preview */}
               {expandedBibtex[pub.id] && (
                 <motion.div 
+                  id={`bibtex-${pub.id}`}
                   initial={{ opacity: 0, height: 0 }}
                   animate={{ opacity: 1, height: 'auto' }}
                   className="mt-4"
@@ -248,6 +267,9 @@ export default function PublicationsPage() {
             </motion.div>
           ))
         )}
+      </div>
+      <div className="sr-only" aria-live="polite">
+        {copyError ? t('publications.copyFailed') : copiedId ? t('publications.copied') : ''}
       </div>
     </div>
   );

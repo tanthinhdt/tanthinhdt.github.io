@@ -1,7 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { profileData } from '../data/portfolioData';
-import { useLanguage } from '../i18n';
+import { useLanguage } from '../useLanguage';
+
+const CURRENT_YEAR = new Date().getFullYear();
 
 export default function Footer() {
   const { t } = useLanguage();
@@ -16,7 +18,7 @@ export default function Footer() {
           <Link to="/credentials" style={{ color: 'var(--text-secondary)' }}>{t('nav.credentials')}</Link>
         </div>
         <p style={{ fontSize: '0.9rem' }}>
-          © {new Date().getFullYear()} {profileData.name} ({profileData.englishName} / {profileData.koreanName}). {t('footer.rights')}
+          © {CURRENT_YEAR} {profileData.name} ({profileData.englishName} / {profileData.koreanName}). {t('footer.rights')}
         </p>
       </div>
     </footer>

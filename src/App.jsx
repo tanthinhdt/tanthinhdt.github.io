@@ -1,15 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import { HashRouter, Routes, Route } from 'react-router-dom';
+import React, { lazy, Suspense, useState, useEffect } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { MotionConfig } from 'framer-motion';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
+import RouteMetadata from './components/RouteMetadata';
+import SkipLink from './components/SkipLink';
 import HomePage from './pages/HomePage';
-import ExperiencePage from './pages/ExperiencePage';
-import PublicationsPage from './pages/PublicationsPage';
-import AwardsPage from './pages/AwardsPage';
-import CredentialsPage from './pages/CredentialsPage';
 import { LanguageProvider } from './i18n';
 import './index.css';
+
+const ExperiencePage = lazy(() => import('./pages/ExperiencePage'));
+const PublicationsPage = lazy(() => import('./pages/PublicationsPage'));
+const AwardsPage = lazy(() => import('./pages/AwardsPage'));
+const CredentialsPage = lazy(() => import('./pages/CredentialsPage'));
+const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 
 export default function App() {
   const [themePreference, setThemePreference] = useState(() => {
@@ -47,31 +52,37 @@ export default function App() {
 
   return (
     <LanguageProvider>
-      <HashRouter>
-        <ScrollToTop />
-        <div className="app-container">
-          <Navbar 
-            theme={theme} 
-            themePreference={themePreference} 
-            systemTheme={systemTheme} 
-            cycleTheme={cycleTheme}
-            toggleTheme={cycleTheme} 
-          />
-        
-        <main>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/experience" element={<ExperiencePage />} />
-            <Route path="/publications" element={<PublicationsPage />} />
-            <Route path="/awards" element={<AwardsPage />} />
-            <Route path="/credentials" element={<CredentialsPage />} />
-            <Route path="*" element={<HomePage />} />
-          </Routes>
-        </main>
+      <BrowserRouter>
+        <MotionConfig reducedMotion="user">
+          <ScrollToTop />
+          <RouteMetadata />
+          <SkipLink />
+          <div className="app-container">
+            <Navbar
+              theme={theme}
+              themePreference={themePreference}
+              systemTheme={systemTheme}
+              cycleTheme={cycleTheme}
+              toggleTheme={cycleTheme}
+            />
 
-          <Footer />
-        </div>
-      </HashRouter>
+            <main id="main-content">
+              <Suspense fallback={<div className="route-loading" role="status">Loading…</div>}>
+                <Routes>
+                  <Route path="/" element={<HomePage />} />
+                  <Route path="/experience" element={<ExperiencePage />} />
+                  <Route path="/publications" element={<PublicationsPage />} />
+                  <Route path="/awards" element={<AwardsPage />} />
+                  <Route path="/credentials" element={<CredentialsPage />} />
+                  <Route path="*" element={<NotFoundPage />} />
+                </Routes>
+              </Suspense>
+            </main>
+
+            <Footer />
+          </div>
+        </MotionConfig>
+      </BrowserRouter>
     </LanguageProvider>
   );
 }

@@ -1,141 +1,101 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Mail, ChevronRight, BookOpen, Briefcase, Award, GraduationCap, MapPin, Globe, Cpu, Sparkles, ExternalLink, ArrowRight, Quote } from 'lucide-react';
-import { ComposableMap, Geographies, Geography, Marker } from 'react-simple-maps';
-import worldMap from 'world-atlas/countries-110m.json';
-import portraitImg from '../assets/portrait.png';
+import {
+  ArrowRight,
+  AudioWaveform,
+  Award,
+  Briefcase,
+  ChevronRight,
+  Cpu,
+  ExternalLink,
+  GraduationCap,
+  Leaf,
+  Mail,
+  MapPin,
+  Quote,
+  Sparkles
+} from 'lucide-react';
+import portraitWebp from '../assets/portrait.webp';
 import { GithubIcon, LinkedinIcon, OrcidIcon } from '../components/Icons';
-import { profileData, publicationsData, experienceData, educationData, awardsData, visitorCountriesData } from '../data/portfolioData';
-import { useLanguage } from '../i18n';
+import {
+  awardsData,
+  educationData,
+  experienceData,
+  profileData,
+  publicationsData
+} from '../data/portfolioData';
+import { useLanguage } from '../useLanguage';
+
+const projectVisuals = {
+  'mapr-2025': { number: '01', icon: AudioWaveform, className: 'research-visual--speech' },
+  'procs-2024': { number: '02', icon: Leaf, className: 'research-visual--bio' }
+};
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { staggerChildren: 0.12 } }
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 16 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] }
+  }
+};
 
 export default function HomePage() {
   const { t, content, formatPeriod } = useLanguage();
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: { 
-      opacity: 1,
-      transition: { staggerChildren: 0.15 }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 16 },
-    visible: { 
-      opacity: 1, 
-      y: 0, 
-      transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] } 
-    }
-  };
-
-  const highlightPubs = publicationsData.filter(p => p.isHighlight);
-  const maxVisitors = Math.max(...visitorCountriesData.map((entry) => entry.visitors), 1);
-
-  const getCountryVisitors = (geoName) => {
-    const directMatch = visitorCountriesData.find(
-      (entry) => entry.country.toLowerCase() === geoName.toLowerCase()
-    );
-    if (directMatch) return directMatch.visitors;
-
-    const normalizedGeo = geoName === 'United States of America' ? 'United States'
-      : geoName === 'Czech Republic' ? 'Czechia'
-      : geoName === 'Korea' || geoName === 'Republic of Korea' ? 'South Korea'
-      : geoName === 'United Kingdom' || geoName === 'Great Britain' ? 'United Kingdom'
-      : geoName === 'Russian Federation' ? 'Russia'
-      : geoName;
-    const aliasMatch = visitorCountriesData.find(
-      (entry) => entry.country.toLowerCase() === normalizedGeo.toLowerCase()
-    );
-    if (aliasMatch) return aliasMatch.visitors;
-
-    const partialMatch = visitorCountriesData.find(
-      (entry) => entry.country !== 'Other countries' && (
-        entry.country.toLowerCase().includes(geoName.toLowerCase()) ||
-        geoName.toLowerCase().includes(entry.country.toLowerCase())
-      )
-    );
-    if (partialMatch) return partialMatch.visitors;
-
-    return 0;
-  };
+  const featuredProjects = publicationsData.filter((publication) => publication.isHighlight);
 
   return (
     <div className="page-content">
-      {/* Hero Section */}
-      <motion.section 
-        className="section" 
-        style={{ minHeight: '88vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', paddingTop: '7.5rem' }}
+      <motion.section
+        className="section hero-section"
         initial="hidden"
         animate="visible"
         variants={containerVariants}
       >
         <div className="container hero-wrapper">
-          {/* Left Content */}
-          <div style={{ flex: '1 1 500px' }}>
-            <motion.div variants={itemVariants} className="flex items-center gap-2 mb-3" style={{ flexWrap: 'wrap' }}>
-              <span className="tag">
-                <Globe size={13} style={{ marginRight: 5, verticalAlign: 'middle' }} /> {profileData.origin}
-              </span>
-              <span className="tag">{t('home.profileTitle')}</span>
+          <div className="hero-copy">
+            <motion.div variants={itemVariants} className="hero-eyebrow">
+              <span className="status-dot" aria-hidden="true" />
+              {t('home.currentStatus')}
             </motion.div>
-            
-            <motion.h1 variants={itemVariants} style={{ fontSize: 'clamp(2.5rem, 5.5vw, 4.2rem)', lineHeight: 1.15, marginBottom: '1rem' }}>
-              {t('home.greeting')} <br />
-              <span className="text-gradient">{profileData.name}</span>
+
+            <motion.h1 variants={itemVariants}>
+              {t('home.greeting')} <span className="text-gradient">{profileData.name}</span>
             </motion.h1>
 
-            {/* Name Badges */}
-            <motion.div variants={itemVariants} className="name-alias-badges">
-              <div className="alias-chip">
-                <span>{t('home.englishName')}</span> <strong>{profileData.englishName}</strong>
-              </div>
-              <div className="alias-chip">
-                <span>{t('home.koreanName')}</span> <strong>{profileData.koreanName}</strong>
-              </div>
-              <div className="alias-chip">
-                <MapPin size={13} style={{ color: 'var(--accent-primary)' }} />
-                <span>{t('home.from')}</span> <strong>Vietnam</strong>
-              </div>
-            </motion.div>
+            <motion.p variants={itemVariants} className="hero-positioning">
+              {t('home.positioning')}
+            </motion.p>
 
-            <motion.p variants={itemVariants} style={{ fontSize: '1.15rem', color: 'var(--text-secondary)', maxWidth: '580px', marginBottom: '2rem' }}>
+            <motion.p variants={itemVariants} className="hero-summary">
               {t('home.profileBio')}
             </motion.p>
 
-            <motion.div variants={itemVariants} style={{ marginBottom: '2rem' }}>
-              <h2 className="flex items-center gap-2" style={{ fontSize: '1.1rem', marginBottom: '0.75rem' }}>
-                <Cpu size={20} style={{ color: 'var(--accent-purple)' }} />
-                {t('home.researchInterests')}
-              </h2>
-              <div className="flex gap-2" style={{ flexWrap: 'wrap' }}>
-                <span className="alias-chip">
-                  <Sparkles size={14} style={{ color: 'var(--accent-primary)' }} />
-                  {t('home.interest1')}
-                </span>
-                <span className="alias-chip">
-                  <Sparkles size={14} style={{ color: 'var(--accent-primary)' }} />
-                  {t('home.interest2')}
-                </span>
-                <span className="alias-chip">
-                  <Sparkles size={14} style={{ color: 'var(--accent-primary)' }} />
-                  {t('home.interest3')}
-                </span>
-                <span className="alias-chip">
-                  <Sparkles size={14} style={{ color: 'var(--accent-primary)' }} />
-                  {t('home.interest4')}
-                </span>
+            <motion.div variants={itemVariants} className="name-alias-badges">
+              <div className="alias-chip"><span>{t('home.englishName')}</span> <strong>{profileData.englishName}</strong></div>
+              <div className="alias-chip"><span>{t('home.koreanName')}</span> <strong>{profileData.koreanName}</strong></div>
+              <div className="alias-chip">
+                <MapPin size={13} aria-hidden="true" />
+                <span>{t('home.from')}</span> <strong>{t('countries.Vietnam')}</strong>
               </div>
             </motion.div>
-            
-            <motion.div variants={itemVariants} className="flex gap-3 items-center" style={{ flexWrap: 'wrap' }}>
-              <a href={`mailto:${profileData.personalEmail}`} className="btn-primary">
-                <Mail size={18} />
-                {t('home.personalEmail')}
+
+            <motion.div variants={itemVariants} className="hero-actions">
+              <a href="#selected-work" className="btn-primary">
+                {t('home.viewSelectedWork')} <ArrowRight size={17} />
               </a>
               <a href={`mailto:${profileData.affiliationEmail}`} className="btn-secondary">
-                <Mail size={18} />
-                {t('home.affiliationEmail')}
+                <Mail size={17} /> {t('home.contactMe')}
               </a>
+            </motion.div>
+
+            <motion.div variants={itemVariants} className="hero-socials" aria-label={t('home.profiles')}>
               <a href={profileData.github} target="_blank" rel="noreferrer" className="icon-btn" aria-label="GitHub">
                 <GithubIcon size={20} />
               </a>
@@ -148,279 +108,211 @@ export default function HomePage() {
             </motion.div>
           </div>
 
-          {/* Right Portrait */}
-          <motion.div 
-            variants={itemVariants} 
-            className="portrait-card"
-            whileHover={{ scale: 1.02 }}
-            transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-          >
-            <div className="portrait-glow"></div>
+          <motion.div variants={itemVariants} className="portrait-card">
+            <div className="portrait-glow" />
             <div className="portrait-image-wrapper">
-              <img src={portraitImg} alt={`${profileData.name} (${profileData.englishName} / ${profileData.koreanName})`} className="portrait-img" />
+              <img
+                src={portraitWebp}
+                width="655"
+                height="823"
+                alt={`${profileData.name} (${profileData.englishName} / ${profileData.koreanName})`}
+                className="portrait-img"
+                fetchPriority="high"
+                decoding="async"
+              />
             </div>
             <div className="portrait-badge">
-              <Sparkles size={14} style={{ color: 'var(--accent-purple)' }} />
-              <span>{profileData.englishName} • {profileData.koreanName}</span>
+              <Sparkles size={14} aria-hidden="true" />
+              <span>{t('home.profileTitle')}</span>
             </div>
           </motion.div>
         </div>
       </motion.section>
 
-      {/* Education Section */}
       <motion.section
-        className="section"
+        id="selected-work"
+        className="section selected-work-section anchor-target"
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, margin: "-80px" }}
+        viewport={{ once: true, margin: '-80px' }}
         variants={containerVariants}
       >
         <div className="container">
-          <motion.h2 variants={itemVariants} className="section-title" style={{ marginBottom: '2rem' }}>
-            <GraduationCap size={28} style={{ color: 'var(--accent-primary)' }} />
-            {t('home.education')}
-          </motion.h2>
-          <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1rem' }}>
-            {educationData.map((edu) => (
-              <motion.div key={edu.id} variants={itemVariants} className="glass-panel" style={{ padding: '1.5rem' }}>
-                <div className="flex gap-4 items-center">
-                  {edu.logo && (
-                    <div className="institution-logo-badge">
-                      <img
-                        src={edu.logo}
-                        alt={`${content(edu.id, 'institution', edu.institution)} logo`}
-                      />
-                    </div>
-                  )}
-                  <div style={{ flex: 1, minWidth: 0 }}>
-                    <div className="flex items-center gap-2 mb-1">
-                      <span className="tag">{formatPeriod(edu.period)}</span>
-                    </div>
-                    <h3 className="mb-1" style={{ fontSize: '1.15rem' }}>{content(edu.id, 'degree', edu.degree)}</h3>
-                    <div className="text-sm mb-2" style={{ fontWeight: 600, color: 'var(--text-primary)' }}>{content(edu.id, 'institution', edu.institution)}</div>
-                    <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>{content(edu.id, 'details', edu.details)}</p>
-                    {edu.grade && <p className="text-sm" style={{ color: 'var(--accent-primary)', fontWeight: 600 }}>{t('home.grade')} {content(edu.id, 'grade', edu.grade)}</p>}
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </motion.section>
-
-      {/* Publications Highlights Section */}
-      <motion.section 
-        className="section"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-80px" }}
-        variants={containerVariants}
-      >
-        <div className="container">
-          <div className="flex items-center" style={{ justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem', marginBottom: '2.5rem' }}>
+          <motion.div variants={itemVariants} className="section-heading-row">
             <div>
-              <motion.h2 variants={itemVariants} className="section-title" style={{ marginBottom: '0.5rem' }}>
-                <BookOpen size={28} style={{ color: 'var(--accent-primary)' }}/>
-                {t('home.highlightedPublications')}
-              </motion.h2>
+              <span className="section-kicker">{t('home.selectedWorkKicker')}</span>
+              <h2 className="section-title">
+                <Cpu size={28} aria-hidden="true" />
+                {t('home.selectedWork')}
+              </h2>
+              <p className="section-intro">{t('home.selectedWorkIntro')}</p>
             </div>
-            <Link to="/publications" className="btn-primary" style={{ padding: '0.65rem 1.25rem', fontSize: '0.9rem' }}>
+            <Link to="/publications" className="text-link">
               {t('home.viewAllPublications')} <ArrowRight size={16} />
             </Link>
+          </motion.div>
+
+          <div className="research-grid">
+            {featuredProjects.map((publication, index) => {
+              const visual = projectVisuals[publication.id] || {
+                number: String(index + 1).padStart(2, '0'),
+                icon: Cpu,
+                className: 'research-visual--speech'
+              };
+              const ProjectIcon = visual.icon;
+
+              return (
+                <motion.article key={publication.id} variants={itemVariants} className="research-card glass-panel">
+                  <div className={`research-visual ${visual.className}`} aria-hidden="true">
+                    <span>{visual.number}</span>
+                    <ProjectIcon size={44} strokeWidth={1.5} />
+                  </div>
+
+                  <div className="research-card-content">
+                    <div className="research-meta">
+                      <span className="tag">{publication.year}</span>
+                      <span className="tag">{publication.category === 'conference' ? t('home.conference') : t('home.journal')}</span>
+                      {publication.citationCount > 0 && (
+                        <span className="citation-badge">
+                          <Quote size={13} aria-hidden="true" />
+                          {publication.citationCount} {publication.citationCount === 1 ? t('home.citation') : t('home.citations')}
+                        </span>
+                      )}
+                    </div>
+
+                    <h3>{content(publication.id, 'title', publication.title)}</h3>
+                    <p>{content(publication.id, 'abstract', publication.abstract)}</p>
+
+                    <div className="research-keywords" aria-label={t('home.methods')}>
+                      {content(publication.id, 'keywords', publication.keywords).slice(0, 4).map((keyword) => (
+                        <span key={keyword}>{keyword}</span>
+                      ))}
+                    </div>
+
+                    <div className="research-links">
+                      <a href={publication.link} target="_blank" rel="noopener noreferrer" className="btn-primary">
+                        {t('home.viewPaper')} <ExternalLink size={15} />
+                      </a>
+                      <span className="doi-label">DOI {publication.doi}</span>
+                    </div>
+                  </div>
+                </motion.article>
+              );
+            })}
+          </div>
+        </div>
+      </motion.section>
+
+      <motion.section
+        className="section"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: '-80px' }}
+        variants={containerVariants}
+      >
+        <div className="container overview-grid">
+          <div>
+            <div className="overview-heading">
+              <motion.h2 variants={itemVariants} className="section-title">
+                <Briefcase size={26} aria-hidden="true" /> {t('home.experience')}
+              </motion.h2>
+              <Link to="/experience" className="text-link">{t('home.details')} <ChevronRight size={16} /></Link>
+            </div>
+
+            <div className="overview-list">
+              {experienceData.slice(0, 2).map((experience) => (
+                <Link key={experience.id} to={`/experience#${experience.id}`} className="overview-link-card">
+                  <motion.div variants={itemVariants} className="glass-panel">
+                    <span className="tag">{formatPeriod(experience.period)}</span>
+                    <h3>{content(experience.id, 'role', experience.role)}</h3>
+                    <div className="card-organization">{experience.organization}</div>
+                    <p>{content(experience.id, 'description', experience.description)}</p>
+                  </motion.div>
+                </Link>
+              ))}
+            </div>
           </div>
 
-          <div className="flex" style={{ flexDirection: 'column', gap: '1.25rem' }}>
-            {highlightPubs.map((pub, index) => (
-              <motion.div
-                key={index}
-                variants={itemVariants}
-                className="glass-panel"
-                style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '1.5rem', flexWrap: 'wrap' }}
-              >
-                <div style={{ flex: '1 1 340px' }}>
-                  <div className="flex items-center gap-2 mb-2" style={{ flexWrap: 'wrap' }}>
-                    <span className="tag">{pub.year}</span>
-                    <span className="tag" style={{ background: 'rgba(20, 184, 166, 0.08)', color: 'var(--accent-cyan)', borderColor: 'rgba(20, 184, 166, 0.2)' }}>
-                      {pub.category === 'conference' ? t('home.conference') : t('home.journal')}
-                    </span>
-                    <span className="tag" style={{ background: 'rgba(5, 150, 105, 0.08)', color: 'var(--accent-purple)', borderColor: 'rgba(5, 150, 105, 0.2)' }}>
-                      {t('home.featured')}
-                    </span>
-                    <span className="citation-badge">
-                      <Quote size={13} />
-                      {pub.citationCount} {pub.citationCount === 1 ? t('home.citation') : t('home.citations')}
-                    </span>
+          <div>
+            <div className="overview-heading">
+              <motion.h2 variants={itemVariants} className="section-title">
+                <Award size={26} aria-hidden="true" /> {t('home.awards')}
+              </motion.h2>
+              <Link to="/awards" className="text-link">{t('home.details')} <ChevronRight size={16} /></Link>
+            </div>
+
+            {awardsData.slice(0, 1).map((award) => (
+              <Link key={award.id} to={`/awards#${award.id}`} className="overview-link-card">
+                <motion.div variants={itemVariants} className="glass-panel award-preview-card">
+                  <div>
+                    <div className="award-meta">
+                      <span className="tag">{formatPeriod(award.year)}</span>
+                      <span className="tag">
+                        {t('home.issuedBy')} {content(award.id, 'organization', award.organization)}
+                      </span>
+                    </div>
+                    <h3>{content(award.id, 'title', award.title)}</h3>
+                    <p>{content(award.id, 'description', award.description)}</p>
                   </div>
-                  <h3 className="mb-2" style={{ fontSize: '1.2rem', lineHeight: 1.4 }}>
-                    <a href={pub.link} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-primary)' }}>
-                      {content(pub.id, 'title', pub.title)}
-                    </a>
-                  </h3>
-                  <div className="text-sm mb-1" style={{ color: 'var(--text-secondary)' }}>
-                    {pub.authors.map((author, i) => (
-                      <React.Fragment key={i}>
-                        {author.highlight ? (
-                          <strong style={{ color: 'var(--text-primary)', fontWeight: 700, textDecoration: 'underline', textUnderlineOffset: '3px', textDecorationColor: 'var(--accent-primary)' }}>
-                            {author.name}
-                          </strong>
-                        ) : (
-                          <span>{author.name}</span>
-                        )}
-                        {i < pub.authors.length - 1 && ', '}
-                      </React.Fragment>
-                    ))}
-                  </div>
-                  <div className="text-sm" style={{ color: 'var(--accent-primary)', fontWeight: 500 }}>{pub.venue}</div>
-                </div>
-                <div className="flex gap-2">
-                  <a
-                    href={pub.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn-primary"
-                    style={{ padding: '0.6rem 1.2rem', fontSize: '0.875rem' }}
-                  >
-                    {t('home.viewPaper')} <ExternalLink size={15} />
-                  </a>
-                </div>
-              </motion.div>
+                </motion.div>
+              </Link>
             ))}
           </div>
         </div>
       </motion.section>
 
-      {/* Experience & Awards Brief Overview */}
-      <motion.section 
-        className="section"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-80px" }}
-        variants={containerVariants}
-      >
-        <div className="container grid">
-          {/* Experience preview */}
-          <div>
-            <div className="flex items-center" style={{ justifyContent: 'space-between', marginBottom: '2rem' }}>
-              <motion.h2 variants={itemVariants} className="section-title" style={{ marginBottom: 0 }}>
-                <Briefcase size={26} style={{ color: 'var(--accent-primary)' }}/> 
-                {t('home.experience')}
-              </motion.h2>
-              <Link to="/experience" style={{ fontSize: '0.9rem', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '4px' }}>
-                {t('home.details')} <ChevronRight size={16} />
-              </Link>
-            </div>
-            
-            <div className="flex" style={{ flexDirection: 'column', gap: '1rem' }}>
-              {experienceData.map((exp) => (
-                <Link key={exp.id} to={`/experience#${exp.id}`} style={{ color: 'inherit', display: 'block' }}>
-                  <motion.div variants={itemVariants} className="glass-panel" style={{ padding: '1.5rem' }}>
-                    <div className="flex items-center gap-2 mb-1">
-                      <span className="tag">{formatPeriod(exp.period)}</span>
-                    </div>
-                    <h3 className="mb-1" style={{ fontSize: '1.15rem' }}>{content(exp.id, 'role', exp.role)}</h3>
-                    <div className="text-sm mb-2" style={{ fontWeight: 500, color: 'var(--text-primary)' }}>{exp.organization}</div>
-                    <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>{content(exp.id, 'description', exp.description)}</p>
-                  </motion.div>
-                </Link>
-              ))}
-            </div>
-          </div>
-
-          {/* Awards preview */}
-          <div>
-            <div className="flex items-center" style={{ justifyContent: 'space-between', marginBottom: '2rem' }}>
-              <motion.h2 variants={itemVariants} className="section-title" style={{ marginBottom: 0 }}>
-                <Award size={26} style={{ color: 'var(--accent-primary)' }}/> 
-                {t('home.awards')}
-              </motion.h2>
-              <Link to="/awards" style={{ fontSize: '0.9rem', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '4px' }}>
-                {t('home.details')} <ChevronRight size={16} />
-              </Link>
-            </div>
-            
-            <div className="flex" style={{ flexDirection: 'column', gap: '1rem' }}>
-              {awardsData.slice(0, 1).map((award) => (
-                <Link key={award.id} to={`/awards#${award.id}`} style={{ color: 'inherit', display: 'block' }}>
-                  <motion.div variants={itemVariants} className="glass-panel" style={{ padding: '1.5rem' }}>
-                    <div className="flex items-center gap-2 mb-1">
-                      <span className="tag">{formatPeriod(award.year)}</span>
-                    </div>
-                    <h3 className="mb-1" style={{ fontSize: '1.15rem' }}>{content(award.id, 'title', award.title)}</h3>
-                    <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>{content(award.id, 'description', award.description)}</p>
-                  </motion.div>
-                </Link>
-              ))}
-            </div>
-          </div>
-        </div>
-      </motion.section>
-
-      {/* Visitor Countries Section */}
       <motion.section
-        className="section"
+        className="section education-section"
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, margin: "-80px" }}
+        viewport={{ once: true, margin: '-80px' }}
         variants={containerVariants}
       >
         <div className="container">
-          <div className="visitor-heading">
-            <div>
-              <motion.h2 variants={itemVariants} className="section-title" style={{ marginBottom: '0.5rem' }}>
-                <Globe size={28} style={{ color: 'var(--accent-primary)' }} />
-                {t('home.visitors')}
-              </motion.h2>
-            </div>
-          </div>
+          <motion.h2 variants={itemVariants} className="section-title">
+            <GraduationCap size={28} aria-hidden="true" /> {t('home.education')}
+          </motion.h2>
 
-          <motion.div variants={itemVariants} className="glass-panel visitor-countries-panel">
-            <div className="visitor-map-layout">
-              <div className="visitor-map" aria-label={t('home.visitorsLabel')}>
-                <ComposableMap projectionConfig={{ scale: 145 }} width={800} height={390}>
-                  <Geographies geography={worldMap}>
-                    {({ geographies }) => geographies.map((geo) => {
-                      const visitors = getCountryVisitors(geo.properties.name);
-                      return (
-                        <Geography
-                          key={geo.rsmKey}
-                          geography={geo}
-                          className={visitors > 0 ? 'visitor-map-country is-visited' : 'visitor-map-country'}
-                          style={{
-                            default: { fill: visitors > 0 ? `color-mix(in srgb, var(--accent-primary) ${35 + Math.round((visitors / maxVisitors) * 50)}%, var(--glass-bg))` : 'var(--glass-border)', outline: 'none' },
-                            hover: { fill: 'var(--accent-cyan)', outline: 'none' },
-                            pressed: { fill: 'var(--accent-primary)', outline: 'none' }
-                          }}
-                          tabIndex={visitors > 0 ? 0 : -1}
-                          aria-label={visitors > 0 ? `${geo.properties.name}: ${visitors} visitors` : geo.properties.name}
-                        />
-                      );
-                    })}
-                  </Geographies>
-                  {visitorCountriesData
-                    .filter((entry) => Array.isArray(entry.coordinates) && entry.coordinates.length === 2)
-                    .map((entry) => (
-                      <Marker key={entry.country} coordinates={entry.coordinates}>
-                        <circle r={5 + ((entry.visitors ?? 0) / maxVisitors) * 6} className="visitor-map-marker" />
-                        <circle r="3" className="visitor-map-marker-core" />
-                      </Marker>
-                    ))}
-                </ComposableMap>
-              </div>
-              <div className="visitor-country-list" aria-label={t('home.countryList')}>
-                {visitorCountriesData.map((entry) => (
-                  <div className="visitor-country" key={entry.country}>
-                    <div className="visitor-country-name">
-                      <span className="visitor-flag" aria-hidden="true">{entry.flag}</span>
-                      <span>{t(`countries.${entry.country}`) === `countries.${entry.country}` ? entry.country : t(`countries.${entry.country}`)}</span>
-                    </div>
-                    <strong>{entry.visitors}</strong>
+          <div className="education-grid">
+            {educationData.map((education) => (
+              <motion.article key={education.id} variants={itemVariants} className="glass-panel education-card">
+                {education.logo && (
+                  <div className="institution-logo-badge">
+                    <img
+                      src={education.logo}
+                      alt=""
+                      width="68"
+                      height="68"
+                      loading="lazy"
+                      decoding="async"
+                    />
                   </div>
-                ))}
-              </div>
-            </div>
-          </motion.div>
+                )}
+                <div>
+                  <span className="tag">{formatPeriod(education.period)}</span>
+                  <h3>{content(education.id, 'degree', education.degree)}</h3>
+                  <div className="card-organization">{content(education.id, 'institution', education.institution)}</div>
+                  <p>{content(education.id, 'details', education.details)}</p>
+                  {education.grade && <strong className="education-grade">{t('home.grade')} {content(education.id, 'grade', education.grade)}</strong>}
+                </div>
+              </motion.article>
+            ))}
+          </div>
         </div>
       </motion.section>
+
+      <section className="section contact-section">
+        <div className="container">
+          <div className="contact-panel">
+            <span className="section-kicker">{t('home.contactKicker')}</span>
+            <h2>{t('home.contactTitle')}</h2>
+            <p>{t('home.contactDescription')}</p>
+            <a href={`mailto:${profileData.affiliationEmail}`} className="btn-primary">
+              <Mail size={17} /> {t('home.contactMe')}
+            </a>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

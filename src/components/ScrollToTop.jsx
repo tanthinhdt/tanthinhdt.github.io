@@ -6,13 +6,14 @@ export default function ScrollToTop() {
 
   useEffect(() => {
     const frame = window.requestAnimationFrame(() => {
+      const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
       const targetId = hash ? decodeURIComponent(hash.slice(1)) : '';
       const target = targetId ? document.getElementById(targetId) : null;
 
       if (target) {
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        target.scrollIntoView({ behavior, block: 'start' });
       } else {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        window.scrollTo({ top: 0, behavior });
       }
     });
 

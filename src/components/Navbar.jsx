@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import { Sun, Moon, Monitor, Menu, X } from 'lucide-react';
-import { languages, useLanguage } from '../i18n';
+import { languages } from '../languageConfig';
+import { useLanguage } from '../useLanguage';
 
 export default function Navbar({ theme, themePreference = 'system', systemTheme = 'light', cycleTheme, toggleTheme }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -13,12 +14,12 @@ export default function Navbar({ theme, themePreference = 'system', systemTheme 
 
   const getThemeTitle = () => {
     if (themePreference === 'system') {
-      return `Theme: System (${systemTheme}) · Click for Light`;
+      return `${t('controls.themeSystem')} (${systemTheme})`;
     }
     if (themePreference === 'light') {
-      return 'Theme: Light · Click for Dark';
+      return t('controls.themeLight');
     }
-    return 'Theme: Dark · Click for System';
+    return t('controls.themeDark');
   };
 
   const renderThemeIcon = () => {
@@ -29,7 +30,7 @@ export default function Navbar({ theme, themePreference = 'system', systemTheme 
   };
 
   return (
-    <nav className="navbar">
+    <nav className="navbar" aria-label={t('controls.primaryNavigation')}>
       <div className="container flex items-center" style={{ justifyContent: 'space-between' }}>
         <Link 
           to="/" 
@@ -85,7 +86,7 @@ export default function Navbar({ theme, themePreference = 'system', systemTheme 
           <button 
             onClick={handleToggle} 
             className="theme-toggle-btn"
-            aria-label={`Theme: ${themePreference}. Click to cycle.`}
+            aria-label={`${getThemeTitle()}. ${t('controls.cycleTheme')}`}
             title={getThemeTitle()}
           >
             {renderThemeIcon()}
@@ -97,7 +98,7 @@ export default function Navbar({ theme, themePreference = 'system', systemTheme 
           <button 
             onClick={handleToggle} 
             className="theme-toggle-btn"
-            aria-label={`Theme: ${themePreference}. Click to cycle.`}
+            aria-label={`${getThemeTitle()}. ${t('controls.cycleTheme')}`}
             title={getThemeTitle()}
           >
             {renderThemeIcon()}
@@ -106,7 +107,9 @@ export default function Navbar({ theme, themePreference = 'system', systemTheme 
           <button 
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)} 
             className="theme-toggle-btn"
-            aria-label="Toggle navigation menu"
+            aria-label={t('controls.toggleMenu')}
+            aria-expanded={mobileMenuOpen}
+            aria-controls="mobile-navigation"
           >
             {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
@@ -115,7 +118,7 @@ export default function Navbar({ theme, themePreference = 'system', systemTheme 
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="mobile-drawer glass-panel" style={{ margin: '0.75rem 1.5rem', padding: '1rem' }}>
+        <div id="mobile-navigation" className="mobile-drawer glass-panel" style={{ margin: '0.75rem 1.5rem', padding: '1rem' }}>
           <div className="flex" style={{ flexDirection: 'column', gap: '0.5rem' }}>
             <NavLink to="/" end onClick={closeMobile} className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
               {t('nav.home')}

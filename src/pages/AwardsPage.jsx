@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ExternalLink, Trophy } from 'lucide-react';
 import { awardsData } from '../data/portfolioData';
-import { useLanguage } from '../i18n';
+import { useLanguage } from '../useLanguage';
 
 export default function AwardsPage() {
   const { t, content, formatPeriod } = useLanguage();
@@ -65,7 +65,11 @@ export default function AwardsPage() {
                 <div style={{ padding: '0.5rem', borderRadius: '14px', background: 'var(--glass-bg)', border: '1px solid var(--glass-border)' }}>
                   <img
                     src={award.imageUrl}
-                    alt={`${award.title} certificate and commemorative plaque`}
+                    alt={content(award.id, 'title', award.title)}
+                    width="1280"
+                    height="960"
+                    loading="lazy"
+                    decoding="async"
                     style={{ display: 'block', width: '100%', height: '150px', objectFit: 'cover', borderRadius: '9px' }}
                   />
                 </div>

@@ -190,6 +190,7 @@ export const educationData = [
     degree: "Combined Master's and PhD",
     institution: "Sungkyunkwan University",
     period: "Sep 2025 - Present",
+    grade: "In progress",
     logo: publicAsset("skku-logo.png"),
     details: "Major: Integrative Biotechnology."
   },
