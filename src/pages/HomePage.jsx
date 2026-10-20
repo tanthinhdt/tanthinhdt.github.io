@@ -245,13 +245,11 @@ export default function HomePage() {
               <Link key={award.id} to={`/awards#${award.id}`} className="overview-link-card">
                 <motion.div variants={itemVariants} className="glass-panel award-preview-card">
                   <div>
-                    <div className="award-meta">
-                      <span className="tag">{formatPeriod(award.year)}</span>
-                      <span className="tag">
-                        {t('home.issuedBy')} {content(award.id, 'organization', award.organization)}
-                      </span>
-                    </div>
+                    <span className="tag">{formatPeriod(award.year)}</span>
                     <h3>{content(award.id, 'title', award.title)}</h3>
+                    <div className="card-organization">
+                      {content(award.id, 'organization', award.organization)}
+                    </div>
                     <p>{content(award.id, 'description', award.description)}</p>
                   </div>
                 </motion.div>
