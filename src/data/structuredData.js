@@ -5,8 +5,8 @@ const personId = `${SITE_URL}/#person`;
 
 const pageMetadata = {
   '/': {
-    title: 'Duong Tan Thinh — Multimodal AI Researcher',
-    description: 'Research portfolio of Duong Tan Thinh, exploring multimodal AI for low-resource speech and biomedical applications.'
+    title: 'Duong Tan Thinh — Biomedical AI Researcher',
+    description: 'Research portfolio of Duong Tan Thinh, focusing on artificial intelligence for peptides and medical imaging.'
   },
   '/experience/': {
     title: 'Experience — Duong Tan Thinh',
@@ -51,7 +51,7 @@ const person = {
   image: `${SITE_URL}/portrait-og.jpg`,
   email: 'mailto:tanthinhdt@skku.edu',
   jobTitle: 'Graduate Researcher',
-  description: 'Graduate researcher studying multimodal artificial intelligence, bioinformatics, genomics, and biomedical applications.',
+  description: 'Graduate researcher applying bioinformatics and artificial intelligence to peptide research and medical imaging.',
   affiliation: {
     '@type': 'CollegeOrUniversity',
     name: 'Sungkyunkwan University',
@@ -60,7 +60,7 @@ const person = {
   memberOf: {
     '@type': 'Organization',
     name: 'Computational Biology and Bioinformatics Laboratory',
-    alternateName: 'BALA Lab',
+    alternateName: 'CBBL',
     url: 'https://balalab-skku.org/',
     parentOrganization: {
       '@type': 'CollegeOrUniversity',
@@ -79,12 +79,11 @@ const person = {
     'https://balalab-skku.org/currentmembers/'
   ],
   knowsAbout: [
-    'Multimodal deep learning',
-    'Audio-visual speech recognition',
     'Computer vision',
     'Bioinformatics',
-    'Genomics',
-    'Natural language processing',
+    'Peptide informatics',
+    'Therapeutic peptides',
+    'Medical imaging',
     'Biomedical artificial intelligence'
   ]
 };

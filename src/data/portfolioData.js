@@ -6,8 +6,8 @@ export const profileData = {
   englishName: "Evan",
   koreanName: "양진성",
   origin: "Vietnam 🇻🇳",
-  title: "Developer & Researcher",
-  bio: "Passionate software developer and researcher exploring the frontiers of artificial intelligence, intelligent systems, and scalable modern web applications.",
+  title: "Biomedical AI Researcher",
+  bio: "Graduate researcher applying bioinformatics and artificial intelligence to peptide research and medical imaging.",
   personalEmail: "thinhduon9@gmail.com",
   affiliationEmail: "tanthinhdt@skku.edu",
   github: "https://github.com/tanthinhdt",
@@ -17,18 +17,18 @@ export const profileData = {
 
 export const labData = {
   name: "Computational Biology and Bioinformatics Laboratory",
-  shortName: "BALA Lab",
+  shortName: "CBBL",
   url: "https://balalab-skku.org/",
   membersUrl: "https://balalab-skku.org/currentmembers/"
 };
 
 export const updatesData = [
   {
-    id: "update-bala-lab-2025",
+    id: "update-cbbl-2025",
     date: "Sep 2025",
     dateTime: "2025-09",
-    title: "Joined BALA Lab at Sungkyunkwan University",
-    description: "Began the combined Master's and PhD program, focusing on bioinformatics, genomics, and natural language processing.",
+    title: "Joined CBBL at Sungkyunkwan University",
+    description: "Began the combined Master's and PhD program, focusing on peptide research and medical imaging through bioinformatics and AI.",
     url: labData.membersUrl,
     external: true
   },
