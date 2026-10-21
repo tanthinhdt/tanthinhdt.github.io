@@ -34,7 +34,7 @@ const translations = {
       all: 'All Publications', conferences: 'Conferences', journals: 'Journals',
       search: 'Search by title, author, topic...', empty: 'No publications match your search criteria.',
       citation: 'citation', citations: 'citations', journal: 'journal', quartile: 'Journal', conference: 'conference', checked: 'checked',
-      read: 'Read Paper', certificate: 'View Conference Certificate', poster: 'View Poster', sourceCode: 'Source Code', copy: 'Copy BibTeX',
+      read: 'Read Paper', certificate: 'View Conference Certificate', poster: 'View Poster', sourceCode: 'Source Code', dataset: 'Hugging Face Dataset', copy: 'Copy BibTeX',
       copied: 'BibTeX Copied!', copyFailed: 'Unable to copy BibTeX.', hide: 'Hide BibTeX', show: 'Show BibTeX'
     },
     awards: {
@@ -91,7 +91,7 @@ const translations = {
       all: 'Tất cả công bố', conferences: 'Hội nghị', journals: 'Tạp chí',
       search: 'Tìm theo tiêu đề, tác giả, chủ đề...', empty: 'Không có công bố phù hợp với tìm kiếm.',
       citation: 'trích dẫn', citations: 'trích dẫn', journal: 'tạp chí', quartile: 'Tạp chí', conference: 'hội nghị', checked: 'kiểm tra',
-      read: 'Đọc bài viết', certificate: 'Xem chứng nhận hội nghị', poster: 'Xem poster', sourceCode: 'Mã nguồn', copy: 'Sao chép BibTeX',
+      read: 'Đọc bài viết', certificate: 'Xem chứng nhận hội nghị', poster: 'Xem poster', sourceCode: 'Mã nguồn', dataset: 'Bộ dữ liệu Hugging Face', copy: 'Sao chép BibTeX',
       copied: 'Đã sao chép BibTeX!', copyFailed: 'Không thể sao chép BibTeX.', hide: 'Ẩn BibTeX', show: 'Hiện BibTeX'
     },
     awards: {
@@ -148,7 +148,7 @@ const translations = {
       all: '전체 논문', conferences: '학술대회', journals: '저널',
       search: '제목, 저자, 주제로 검색...', empty: '검색 조건에 맞는 논문이 없습니다.',
       citation: '회 인용', citations: '회 인용', journal: '저널', quartile: '저널', conference: '학술대회', checked: '확인',
-      read: '논문 읽기', certificate: '학술대회 인증서 보기', poster: '포스터 보기', sourceCode: '소스 코드', copy: 'BibTeX 복사',
+      read: '논문 읽기', certificate: '학술대회 인증서 보기', poster: '포스터 보기', sourceCode: '소스 코드', dataset: 'Hugging Face 데이터셋', copy: 'BibTeX 복사',
       copied: 'BibTeX가 복사되었습니다!', copyFailed: 'BibTeX를 복사할 수 없습니다.', hide: 'BibTeX 숨기기', show: 'BibTeX 보기'
     },
     awards: {

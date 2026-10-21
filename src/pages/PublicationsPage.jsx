@@ -236,6 +236,18 @@ export default function PublicationsPage() {
                   </a>
                 )}
 
+                {pub.datasetUrl && (
+                  <a
+                    href={pub.datasetUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-secondary"
+                    style={{ padding: '0.6rem 1.25rem', fontSize: '0.875rem' }}
+                  >
+                    {t('publications.dataset')} <ExternalLink size={15} aria-hidden="true" />
+                  </a>
+                )}
+
                 <button 
                   type="button"
                   onClick={() => handleCopyBibtex(pub.id, pub.bibtex)}
