@@ -39,7 +39,7 @@ function staticRouteEntries() {
   return {
     name: 'static-route-entries',
     apply: 'build',
-    async closeBundle() {
+    async writeBundle() {
       const rootHtml = await readFile('dist/index.html', 'utf8')
 
       await Promise.all(Object.entries(routeMetadata).map(async ([route, metadata]) => {

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ExternalLink, Search, Copy, Check, FileCode, Tag, Quote } from 'lucide-react';
+import { ExternalLink, Search, Copy, Check, FileCode, FileText, Tag, Quote } from 'lucide-react';
+import { GithubIcon } from '../components/Icons';
 import { publicationsData } from '../data/portfolioData';
 import { useLanguage } from '../useLanguage';
 
@@ -112,7 +113,8 @@ export default function PublicationsPage() {
           filteredPubs.map((pub) => (
             <motion.div 
               key={pub.id} 
-              className="glass-panel" 
+              id={pub.id}
+              className="glass-panel anchor-target"
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4 }}
@@ -207,6 +209,30 @@ export default function PublicationsPage() {
                     style={{ padding: '0.6rem 1.25rem', fontSize: '0.875rem' }}
                   >
                     {t('publications.certificate')} <ExternalLink size={15} />
+                  </a>
+                )}
+
+                {pub.posterUrl && (
+                  <a
+                    href={pub.posterUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-secondary"
+                    style={{ padding: '0.6rem 1.25rem', fontSize: '0.875rem' }}
+                  >
+                    {t('publications.poster')} <FileText size={15} aria-hidden="true" />
+                  </a>
+                )}
+
+                {pub.sourceCodeUrl && (
+                  <a
+                    href={pub.sourceCodeUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-secondary"
+                    style={{ padding: '0.6rem 1.25rem', fontSize: '0.875rem' }}
+                  >
+                    {t('publications.sourceCode')} <span aria-hidden="true"><GithubIcon size={15} /></span>
                   </a>
                 )}
 

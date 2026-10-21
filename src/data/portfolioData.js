@@ -68,6 +68,8 @@ export const publicationsData = [
     category: "conference",
     doi: "10.1109/MAPR67746.2025.11133884",
     link: "https://ieeexplore.ieee.org/abstract/document/11133884/",
+    posterUrl: publicAsset("publications/mapr-2025/vietnamese-audio-visual-speech-recognition-poster.pdf"),
+    sourceCodeUrl: "https://github.com/tanthinhdt/vasr",
     citationCount: 0,
     citationSource: "Crossref",
     citationChecked: "October 2026",
