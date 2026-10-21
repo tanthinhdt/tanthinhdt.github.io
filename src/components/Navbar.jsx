@@ -55,16 +55,16 @@ export default function Navbar({ theme, themePreference = 'system', systemTheme 
             <NavLink to="/" end className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
               {t('nav.home')}
             </NavLink>
-            <NavLink to="/experience" className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
+            <NavLink to="/experience/" className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
               {t('nav.experience')}
             </NavLink>
-            <NavLink to="/publications" className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
+            <NavLink to="/publications/" className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
               {t('nav.publications')}
             </NavLink>
-            <NavLink to="/awards" className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
+            <NavLink to="/awards/" className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
               {t('nav.awards')}
             </NavLink>
-            <NavLink to="/credentials" className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
+            <NavLink to="/credentials/" className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
               {t('nav.credentials')}
             </NavLink>
           </div>
@@ -123,16 +123,16 @@ export default function Navbar({ theme, themePreference = 'system', systemTheme 
             <NavLink to="/" end onClick={closeMobile} className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
               {t('nav.home')}
             </NavLink>
-            <NavLink to="/experience" onClick={closeMobile} className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
+            <NavLink to="/experience/" onClick={closeMobile} className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
               {t('nav.experience')}
             </NavLink>
-            <NavLink to="/publications" onClick={closeMobile} className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
+            <NavLink to="/publications/" onClick={closeMobile} className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
               {t('nav.publications')}
             </NavLink>
-            <NavLink to="/awards" onClick={closeMobile} className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
+            <NavLink to="/awards/" onClick={closeMobile} className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
               {t('nav.awards')}
             </NavLink>
-            <NavLink to="/credentials" onClick={closeMobile} className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
+            <NavLink to="/credentials/" onClick={closeMobile} className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'}>
               {t('nav.credentials')}
             </NavLink>
           </div>

@@ -12,10 +12,10 @@ export default function Footer() {
       <div className="container">
         <div className="flex gap-4 mb-4" style={{ justifyContent: 'center', flexWrap: 'wrap' }}>
           <Link to="/" style={{ color: 'var(--text-secondary)' }}>{t('nav.home')}</Link>
-          <Link to="/experience" style={{ color: 'var(--text-secondary)' }}>{t('nav.experience')}</Link>
-          <Link to="/publications" style={{ color: 'var(--text-secondary)' }}>{t('nav.publications')}</Link>
-          <Link to="/awards" style={{ color: 'var(--text-secondary)' }}>{t('nav.awards')}</Link>
-          <Link to="/credentials" style={{ color: 'var(--text-secondary)' }}>{t('nav.credentials')}</Link>
+          <Link to="/experience/" style={{ color: 'var(--text-secondary)' }}>{t('nav.experience')}</Link>
+          <Link to="/publications/" style={{ color: 'var(--text-secondary)' }}>{t('nav.publications')}</Link>
+          <Link to="/awards/" style={{ color: 'var(--text-secondary)' }}>{t('nav.awards')}</Link>
+          <Link to="/credentials/" style={{ color: 'var(--text-secondary)' }}>{t('nav.credentials')}</Link>
         </div>
         <p style={{ fontSize: '0.9rem' }}>
           © {CURRENT_YEAR} {profileData.name} ({profileData.englishName} / {profileData.koreanName}). {t('footer.rights')}

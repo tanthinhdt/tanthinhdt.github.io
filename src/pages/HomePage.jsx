@@ -147,7 +147,7 @@ export default function HomePage() {
               </h2>
               <p className="section-intro">{t('home.selectedWorkIntro')}</p>
             </div>
-            <Link to="/publications" className="text-link">
+            <Link to="/publications/" className="text-link">
               {t('home.viewAllPublications')} <ArrowRight size={16} />
             </Link>
           </motion.div>
@@ -216,12 +216,12 @@ export default function HomePage() {
               <motion.h2 variants={itemVariants} className="section-title">
                 <Briefcase size={26} aria-hidden="true" /> {t('home.experience')}
               </motion.h2>
-              <Link to="/experience" className="text-link">{t('home.details')} <ChevronRight size={16} /></Link>
+              <Link to="/experience/" className="text-link">{t('home.details')} <ChevronRight size={16} /></Link>
             </div>
 
             <div className="overview-list">
               {experienceData.slice(0, 2).map((experience) => (
-                <Link key={experience.id} to={`/experience#${experience.id}`} className="overview-link-card">
+                <Link key={experience.id} to={`/experience/#${experience.id}`} className="overview-link-card">
                   <motion.div variants={itemVariants} className="glass-panel">
                     <span className="tag">{formatPeriod(experience.period)}</span>
                     <h3>{content(experience.id, 'role', experience.role)}</h3>
@@ -238,11 +238,11 @@ export default function HomePage() {
               <motion.h2 variants={itemVariants} className="section-title">
                 <Award size={26} aria-hidden="true" /> {t('home.awards')}
               </motion.h2>
-              <Link to="/awards" className="text-link">{t('home.details')} <ChevronRight size={16} /></Link>
+              <Link to="/awards/" className="text-link">{t('home.details')} <ChevronRight size={16} /></Link>
             </div>
 
             {awardsData.slice(0, 1).map((award) => (
-              <Link key={award.id} to={`/awards#${award.id}`} className="overview-link-card">
+              <Link key={award.id} to={`/awards/#${award.id}`} className="overview-link-card">
                 <motion.div variants={itemVariants} className="glass-panel award-preview-card">
                   <div>
                     <span className="tag">{formatPeriod(award.year)}</span>

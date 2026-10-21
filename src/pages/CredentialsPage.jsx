@@ -67,7 +67,7 @@ export default function CredentialsPage() {
                   </>
                 )}
                 {credential.experienceId && (
-                  <Link className="btn-secondary" to={`/experience#${credential.experienceId}`}>
+                  <Link className="btn-secondary" to={`/experience/#${credential.experienceId}`}>
                     {t('credentials.experience')}
                   </Link>
                 )}

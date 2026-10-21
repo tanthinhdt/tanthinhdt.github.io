@@ -64,7 +64,7 @@ export default function ExperiencePage() {
             {exp.credentialId && (
               <Link
                 className="btn-secondary"
-                to={`/credentials#${exp.credentialId}`}
+                to={`/credentials/#${exp.credentialId}`}
                 style={{ marginTop: '1.5rem' }}
               >
                 {t('experience.credential')}

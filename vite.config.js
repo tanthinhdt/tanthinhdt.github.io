@@ -22,7 +22,7 @@ const routeMetadata = {
 }
 
 function replaceMeta(html, route, metadata) {
-  const url = `https://tanthinhdt.github.io/${route}`
+  const url = `https://tanthinhdt.github.io/${route}/`
 
   return html
     .replace(/<title>[^<]*<\/title>/, `<title>${metadata.title}</title>`)

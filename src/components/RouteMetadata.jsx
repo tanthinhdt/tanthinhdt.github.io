@@ -26,7 +26,8 @@ export default function RouteMetadata() {
     const routeKey = routeKeys[normalizedPath] || 'notFound';
     const title = t(`seo.${routeKey}.title`);
     const description = t(`seo.${routeKey}.description`);
-    const canonicalUrl = `${SITE_URL}${normalizedPath === '/' ? '' : normalizedPath}`;
+    const canonicalPath = normalizedPath === '/' ? '/' : `${normalizedPath}/`;
+    const canonicalUrl = `${SITE_URL}${canonicalPath}`;
 
     document.title = title;
     setMeta('meta[name="description"]', 'content', description);
