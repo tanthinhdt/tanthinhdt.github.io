@@ -18,8 +18,9 @@ npm run lint
 
 ## Content
 
-- Profile, publications, experience, credentials, education, and awards: `src/data/portfolioData.js`
+- Profile, updates, publications, experience, credentials, education, awards, and lab affiliation: `src/data/portfolioData.js`
 - Interface translations: `src/i18n.jsx`
+- Structured identity data: `src/data/structuredData.js`
 - Page components: `src/pages/`
 - Public certificates and images: `public/`
 
@@ -35,4 +36,4 @@ The corresponding scheduled workflows live in `.github/workflows/`.
 
 ## Deployment
 
-Pushes to `main` are built and deployed through `.github/workflows/deploy.yml`. Clean client-side routes are supported on GitHub Pages through `public/404.html`.
+Pushes to `main` are built and deployed through `.github/workflows/deploy.yml`. The production build prerenders each public route before React hydrates it in the browser. Clean client-side routes are supported on GitHub Pages through `public/404.html`.

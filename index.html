@@ -45,33 +45,62 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
-    <script type="application/ld+json">
+    <script id="structured-data" type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "Duong Tan Thinh",
-        "alternateName": ["Dương Tấn Thịnh", "Evan", "양진성"],
-        "url": "https://tanthinhdt.github.io",
-        "image": "https://tanthinhdt.github.io/portrait-og.jpg",
-        "email": "mailto:tanthinhdt@skku.edu",
-        "affiliation": {
-          "@type": "CollegeOrUniversity",
-          "name": "Sungkyunkwan University"
-        },
-        "alumniOf": {
-          "@type": "CollegeOrUniversity",
-          "name": "FPT University"
-        },
-        "sameAs": [
-          "https://github.com/tanthinhdt",
-          "https://www.linkedin.com/in/tanthinhdt",
-          "https://orcid.org/0009-0007-0142-7523"
-        ],
-        "knowsAbout": [
-          "Multimodal deep learning",
-          "Audio-visual speech recognition",
-          "Computer vision",
-          "Biomedical artificial intelligence"
+        "@graph": [
+          {
+            "@type": "WebSite",
+            "@id": "https://tanthinhdt.github.io/#website",
+            "url": "https://tanthinhdt.github.io/",
+            "name": "Duong Tan Thinh",
+            "alternateName": "Tan Thinh",
+            "inLanguage": ["en", "vi", "ko"],
+            "publisher": { "@id": "https://tanthinhdt.github.io/#person" }
+          },
+          {
+            "@type": "Person",
+            "@id": "https://tanthinhdt.github.io/#person",
+            "name": "Duong Tan Thinh",
+            "alternateName": ["Dương Tấn Thịnh", "Tan-Thinh Duong", "Thinh Duong Tan", "Evan", "양진성"],
+            "url": "https://tanthinhdt.github.io/",
+            "image": "https://tanthinhdt.github.io/portrait-og.jpg",
+            "email": "mailto:tanthinhdt@skku.edu",
+            "jobTitle": "Graduate Researcher",
+            "affiliation": {
+              "@type": "CollegeOrUniversity",
+              "name": "Sungkyunkwan University",
+              "url": "https://www.skku.edu/"
+            },
+            "memberOf": {
+              "@type": "Organization",
+              "name": "Computational Biology and Bioinformatics Laboratory",
+              "alternateName": "BALA Lab",
+              "url": "https://balalab-skku.org/"
+            },
+            "alumniOf": {
+              "@type": "CollegeOrUniversity",
+              "name": "FPT University",
+              "url": "https://daihoc.fpt.edu.vn/"
+            },
+            "sameAs": [
+              "https://github.com/tanthinhdt",
+              "https://www.linkedin.com/in/tanthinhdt",
+              "https://orcid.org/0009-0007-0142-7523",
+              "https://balalab-skku.org/currentmembers/"
+            ],
+            "knowsAbout": ["Multimodal deep learning", "Audio-visual speech recognition", "Computer vision", "Bioinformatics", "Genomics", "Natural language processing", "Biomedical artificial intelligence"]
+          },
+          {
+            "@type": "ProfilePage",
+            "@id": "https://tanthinhdt.github.io/#webpage",
+            "url": "https://tanthinhdt.github.io/",
+            "name": "Duong Tan Thinh — Multimodal AI Researcher",
+            "description": "Research portfolio of Duong Tan Thinh, exploring multimodal AI for low-resource speech and biomedical applications.",
+            "isPartOf": { "@id": "https://tanthinhdt.github.io/#website" },
+            "mainEntity": { "@id": "https://tanthinhdt.github.io/#person" },
+            "inLanguage": "en"
+          }
         ]
       }
     </script>

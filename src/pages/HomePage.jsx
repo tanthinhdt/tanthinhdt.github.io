@@ -23,7 +23,8 @@ import {
   educationData,
   experienceData,
   profileData,
-  publicationsData
+  publicationsData,
+  updatesData
 } from '../data/portfolioData';
 import { useLanguage } from '../useLanguage';
 
@@ -126,6 +127,50 @@ export default function HomePage() {
               <span>{t('home.profileTitle')}</span>
             </div>
           </motion.div>
+        </div>
+      </motion.section>
+
+      <motion.section
+        className="section updates-section"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: '-80px' }}
+        variants={containerVariants}
+      >
+        <div className="container">
+          <motion.div variants={itemVariants} className="section-heading-row updates-heading">
+            <div>
+              <span className="section-kicker">{t('home.updatesKicker')}</span>
+              <h2 className="section-title">{t('home.updates')}</h2>
+              <p className="section-intro">{t('home.updatesIntro')}</p>
+            </div>
+          </motion.div>
+
+          <div className="updates-grid">
+            {updatesData.map((update) => {
+              const contentBlock = (
+                <motion.article variants={itemVariants} className="glass-panel update-card">
+                  <time dateTime={update.dateTime}>{formatPeriod(update.date)}</time>
+                  <h3>{content(update.id, 'title', update.title)}</h3>
+                  <p>{content(update.id, 'description', update.description)}</p>
+                  <span className="update-action">
+                    {update.external ? t('home.visitLab') : t('home.readUpdate')}
+                    <ExternalLink size={14} aria-hidden="true" />
+                  </span>
+                </motion.article>
+              );
+
+              return update.external ? (
+                <a key={update.id} href={update.url} target="_blank" rel="noopener noreferrer" className="update-link-card">
+                  {contentBlock}
+                </a>
+              ) : (
+                <Link key={update.id} to={update.url} className="update-link-card">
+                  {contentBlock}
+                </Link>
+              );
+            })}
+          </div>
         </div>
       </motion.section>
 
@@ -290,6 +335,12 @@ export default function HomePage() {
                   <span className="tag">{formatPeriod(education.period)}</span>
                   <h3>{content(education.id, 'degree', education.degree)}</h3>
                   <div className="card-organization">{content(education.id, 'institution', education.institution)}</div>
+                  {education.lab && (
+                    <a className="education-lab-link" href={education.labUrl} target="_blank" rel="noopener noreferrer">
+                      <span>{t('home.researchLab')}: {education.lab}</span>
+                      <ExternalLink size={13} aria-hidden="true" />
+                    </a>
+                  )}
                   <p>{content(education.id, 'details', education.details)}</p>
                   {education.grade && <strong className="education-grade">{t('home.grade')} {content(education.id, 'grade', education.grade)}</strong>}
                 </div>

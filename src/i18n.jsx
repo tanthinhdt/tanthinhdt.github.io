@@ -14,6 +14,7 @@ const translations = {
       positioning: 'I study multimodal AI for low-resource speech and biomedical applications.',
       profileBio: 'My work connects audio-visual learning, computer vision, and biotechnology to build intelligent systems grounded in real-world research problems.',
       viewSelectedWork: 'View selected work', contactMe: 'Contact me', profiles: 'Professional profiles',
+      updatesKicker: 'Research journey', updates: 'Selected Updates', updatesIntro: 'Recent academic and research milestones.', visitLab: 'View lab profile', readUpdate: 'View details', researchLab: 'Research lab',
       selectedWorkKicker: 'Research in practice', selectedWork: 'Selected Research', selectedWorkIntro: 'Peer-reviewed work spanning audio-visual speech recognition and vision-based biomedical applications.', methods: 'Methods and topics',
       contactKicker: 'Let’s connect', contactTitle: 'Interested in research or collaboration?', contactDescription: 'I welcome conversations about multimodal learning, low-resource AI, and biomedical applications.',
       researchInterests: 'Research Interests', personalEmail: 'Personal Email', affiliationEmail: 'Affiliation Email',
@@ -70,6 +71,7 @@ const translations = {
       positioning: 'Tôi nghiên cứu AI đa phương thức cho tiếng nói ít tài nguyên và các ứng dụng y sinh.',
       profileBio: 'Công việc của tôi kết nối học âm thanh–hình ảnh, thị giác máy tính và công nghệ sinh học để xây dựng các hệ thống thông minh dựa trên những bài toán nghiên cứu thực tế.',
       viewSelectedWork: 'Xem nghiên cứu nổi bật', contactMe: 'Liên hệ', profiles: 'Hồ sơ chuyên môn',
+      updatesKicker: 'Hành trình nghiên cứu', updates: 'Cập nhật nổi bật', updatesIntro: 'Các cột mốc học thuật và nghiên cứu gần đây.', visitLab: 'Xem hồ sơ phòng lab', readUpdate: 'Xem chi tiết', researchLab: 'Phòng nghiên cứu',
       selectedWorkKicker: 'Nghiên cứu trong thực tiễn', selectedWork: 'Nghiên cứu nổi bật', selectedWorkIntro: 'Các công trình phản biện về nhận dạng tiếng nói nghe–nhìn và ứng dụng y sinh dựa trên thị giác máy tính.', methods: 'Phương pháp và chủ đề',
       contactKicker: 'Kết nối', contactTitle: 'Bạn quan tâm đến nghiên cứu hoặc hợp tác?', contactDescription: 'Tôi sẵn sàng trao đổi về học đa phương thức, AI ít tài nguyên và các ứng dụng y sinh.',
       researchInterests: 'Lĩnh vực nghiên cứu', personalEmail: 'Email cá nhân', affiliationEmail: 'Email trường',
@@ -126,6 +128,7 @@ const translations = {
       positioning: '저자원 음성과 바이오메디컬 응용을 위한 멀티모달 AI를 연구합니다.',
       profileBio: '오디오·비주얼 학습, 컴퓨터 비전, 생명공학을 연결하여 실제 연구 문제에 기반한 지능형 시스템을 개발합니다.',
       viewSelectedWork: '주요 연구 보기', contactMe: '연락하기', profiles: '전문 프로필',
+      updatesKicker: '연구 여정', updates: '주요 소식', updatesIntro: '최근 학업 및 연구 이정표입니다.', visitLab: '연구실 프로필 보기', readUpdate: '자세히 보기', researchLab: '소속 연구실',
       selectedWorkKicker: '실제 연구', selectedWork: '주요 연구', selectedWorkIntro: '오디오·비주얼 음성 인식과 비전 기반 바이오메디컬 응용에 관한 동료 심사 연구입니다.', methods: '방법 및 주제',
       contactKicker: '연락하기', contactTitle: '연구 또는 협업에 관심이 있으신가요?', contactDescription: '멀티모달 학습, 저자원 AI, 바이오메디컬 응용에 관한 대화를 환영합니다.',
       researchInterests: '연구 분야', personalEmail: '개인 이메일', affiliationEmail: '학교 이메일',
@@ -195,6 +198,9 @@ const contentTranslations = {
     'credential-fptu-ai-engineer': { title: 'Chứng nhận học việc Kỹ sư AI', issuer: 'Đại học FPT', description: 'Chứng nhận do Đại học FPT cấp sau khi hoàn thành chương trình học việc Kỹ sư AI tại Gradients Technologies Joint Stock Company.' },
     'edu-2': { degree: 'Thạc sĩ và Tiến sĩ liên thông', institution: 'Đại học Sungkyunkwan', details: 'Chuyên ngành: Công nghệ sinh học tích hợp.', grade: 'Đang theo học' },
     'edu-1': { degree: 'Bằng cử nhân', institution: 'Đại học FPT', details: 'Chuyên ngành: Trí tuệ nhân tạo.', grade: 'Xuất sắc' },
+    'update-bala-lab-2025': { title: 'Gia nhập BALA Lab tại Đại học Sungkyunkwan', description: 'Bắt đầu chương trình Thạc sĩ–Tiến sĩ liên thông, tập trung vào tin sinh học, hệ gen học và xử lý ngôn ngữ tự nhiên.' },
+    'update-mapr-2025': { title: 'Công bố nghiên cứu nhận dạng tiếng nói nghe–nhìn tiếng Việt', description: 'Trình bày nghiên cứu phản biện tại MAPR về kết hợp tín hiệu âm thanh và chuyển động môi cho nhận dạng tiếng nói tiếng Việt.' },
+    'update-valedictorian-2024': { title: 'Được vinh danh là thủ khoa Đại học FPT', description: 'Được công nhận là Thủ khoa Khóa 3 ngành Kỹ thuật và Công nghệ nhờ thành tích học tập và năng lực lãnh đạo.' },
     'award-fptu-valedictorian-engineering-technology-2024': { organization: 'Đại học FPT', title: 'Thủ khoa Khóa 3 ngành Kỹ thuật và Công nghệ', description: 'Được vinh danh là Thủ khoa Khóa 3 ngành Kỹ thuật và Công nghệ nhờ thành tích học tập và năng lực lãnh đạo xuất sắc.' },
     'mapr-2025': { title: 'Vietnamese Automatic Speech Recognition Utilizing Audio and Visual Data', abstract: 'Nghiên cứu kỹ thuật nhận dạng tiếng nói nghe–nhìn được tối ưu cho tiếng Việt, giải quyết thách thức ít tài nguyên bằng cách kết hợp chuyển động môi với tín hiệu âm thanh.', keywords: ['Nhận dạng tiếng nói', 'Hợp nhất nghe–nhìn', 'Học sâu', 'Tiếng Việt', 'MAPR'] },
     'procs-2024': { title: 'Medicinal plant recognition based on Vision Transformer and BEiT', abstract: 'Ứng dụng Vision Transformer tự giám sát và BEiT để phân loại cây dược liệu với độ chính xác cao hơn so với các kiến trúc CNN truyền thống.', keywords: ['Vision Transformer (ViT)', 'BEiT', 'Nhận dạng thực vật', 'Thị giác máy tính', 'Cây dược liệu'] }
@@ -221,6 +227,9 @@ const contentTranslations = {
     'credential-fptu-ai-engineer': { title: 'AI 엔지니어 견습 인증서', issuer: 'FPT 대학교', description: 'Gradients Technologies Joint Stock Company에서 AI 엔지니어 견습 과정을 수료하여 FPT 대학교에서 발급한 인증서입니다.' },
     'edu-2': { degree: '석사·박사 통합 과정', institution: '성균관대학교', details: '전공: 융합생명공학.', grade: '재학 중' },
     'edu-1': { degree: '학사 학위', institution: 'FPT 대학교', details: '전공: 인공지능.', grade: '최우수' },
+    'update-bala-lab-2025': { title: '성균관대학교 BALA Lab 합류', description: '바이오인포매틱스, 유전체학, 자연어 처리를 중심으로 석사·박사 통합 과정을 시작했습니다.' },
+    'update-mapr-2025': { title: '베트남어 오디오·비주얼 음성 인식 연구 발표', description: '베트남어 음성 인식을 위해 음향 신호와 입술 움직임을 결합한 동료 심사 연구를 MAPR에서 발표했습니다.' },
+    'update-valedictorian-2024': { title: 'FPT 대학교 수석 졸업생 선정', description: '학업 성취와 리더십을 인정받아 공학 및 기술 3기 수석 졸업생으로 선정되었습니다.' },
     'award-fptu-valedictorian-engineering-technology-2024': { organization: 'FPT 대학교', title: '공학 및 기술 3기 수석 졸업생', description: '탁월한 학업 성취와 리더십을 인정받아 공학 및 기술 3기 수석 졸업생으로 선정되었습니다.' },
     'mapr-2025': { title: 'Vietnamese Automatic Speech Recognition Utilizing Audio and Visual Data', abstract: '베트남어에 최적화된 오디오·비주얼 음성 인식 기법을 연구하며, 입술 움직임과 음향 신호를 결합해 저자원 문제를 다룹니다.', keywords: ['음성 인식', '오디오·비주얼 융합', '딥러닝', '베트남어', 'MAPR'] },
     'procs-2024': { title: 'Medicinal plant recognition based on Vision Transformer and BEiT', abstract: '자기지도 Vision Transformer와 BEiT를 적용하여 전통적인 CNN 구조보다 높은 정확도로 약용 식물을 분류합니다.', keywords: ['Vision Transformer (ViT)', 'BEiT', '식물 인식', '컴퓨터 비전', '약용 식물'] }
@@ -233,15 +242,22 @@ const monthNames = {
 };
 
 export function LanguageProvider({ children }) {
-  const [language, setLanguage] = useState(() => {
-    const saved = localStorage.getItem('language');
-    return saved && translations[saved] ? saved : 'en';
-  });
+  const [language, setLanguage] = useState('en');
+  const [preferenceReady, setPreferenceReady] = useState(false);
 
   useEffect(() => {
+    const saved = localStorage.getItem('language');
+    // Restore the saved language only after the English server markup hydrates.
+    // oxlint-disable-next-line react/set-state-in-effect
+    if (saved && translations[saved]) setLanguage(saved);
+    setPreferenceReady(true);
+  }, []);
+
+  useEffect(() => {
+    if (!preferenceReady) return;
     localStorage.setItem('language', language);
     document.documentElement.lang = language;
-  }, [language]);
+  }, [language, preferenceReady]);
 
   const value = useMemo(() => ({
     language,

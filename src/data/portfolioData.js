@@ -15,6 +15,43 @@ export const profileData = {
   orcid: "https://orcid.org/0009-0007-0142-7523",
 };
 
+export const labData = {
+  name: "Computational Biology and Bioinformatics Laboratory",
+  shortName: "BALA Lab",
+  url: "https://balalab-skku.org/",
+  membersUrl: "https://balalab-skku.org/currentmembers/"
+};
+
+export const updatesData = [
+  {
+    id: "update-bala-lab-2025",
+    date: "Sep 2025",
+    dateTime: "2025-09",
+    title: "Joined BALA Lab at Sungkyunkwan University",
+    description: "Began the combined Master's and PhD program, focusing on bioinformatics, genomics, and natural language processing.",
+    url: labData.membersUrl,
+    external: true
+  },
+  {
+    id: "update-mapr-2025",
+    date: "2025",
+    dateTime: "2025",
+    title: "Published Vietnamese audio-visual speech recognition research",
+    description: "Presented peer-reviewed work at MAPR on combining acoustic signals with visual lip dynamics for Vietnamese speech recognition.",
+    url: "/publications/#mapr-2025",
+    external: false
+  },
+  {
+    id: "update-valedictorian-2024",
+    date: "Nov 2024",
+    dateTime: "2024-11",
+    title: "Named FPT University valedictorian",
+    description: "Recognized as Valedictorian of the Engineering and Technology Batch 3 for academic excellence and leadership.",
+    url: "/awards/#award-fptu-valedictorian-engineering-technology-2024",
+    external: false
+  }
+];
+
 export const publicationsData = [
   {
     id: "mapr-2025",
@@ -192,7 +229,9 @@ export const educationData = [
     period: "Sep 2025 - Present",
     grade: "In progress",
     logo: publicAsset("skku-logo.png"),
-    details: "Major: Integrative Biotechnology."
+    details: "Major: Integrative Biotechnology.",
+    lab: labData.shortName,
+    labUrl: labData.url
   },
   {
     id: "edu-1",

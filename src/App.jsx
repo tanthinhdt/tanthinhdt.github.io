@@ -16,20 +16,38 @@ const AwardsPage = lazy(() => import('./pages/AwardsPage'));
 const CredentialsPage = lazy(() => import('./pages/CredentialsPage'));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 
-export default function App() {
-  const [themePreference, setThemePreference] = useState(() => {
-    return localStorage.getItem('theme-preference') || localStorage.getItem('theme') || 'system';
-  });
-  const [systemTheme, setSystemTheme] = useState(() =>
-    typeof window !== 'undefined' && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
-  );
+const lazyRouteComponents = {
+  ExperiencePage,
+  PublicationsPage,
+  AwardsPage,
+  CredentialsPage,
+  NotFoundPage
+};
+
+export function AppContent({ routeComponents = lazyRouteComponents }) {
+  const {
+    ExperiencePage: ExperienceRoute,
+    PublicationsPage: PublicationsRoute,
+    AwardsPage: AwardsRoute,
+    CredentialsPage: CredentialsRoute,
+    NotFoundPage: NotFoundRoute
+  } = routeComponents;
+  const [themePreference, setThemePreference] = useState('system');
+  const [systemTheme, setSystemTheme] = useState('light');
+  const [preferencesReady, setPreferencesReady] = useState(false);
 
   useEffect(() => {
+    const savedTheme = localStorage.getItem('theme-preference') || localStorage.getItem('theme') || 'system';
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
     const handleSystemThemeChange = (event) => {
       setSystemTheme(event.matches ? 'dark' : 'light');
     };
 
+    // Restore browser preferences only after the server-rendered defaults hydrate.
+    // oxlint-disable-next-line react/set-state-in-effect
+    setThemePreference(savedTheme);
+    setSystemTheme(mediaQuery.matches ? 'dark' : 'light');
+    setPreferencesReady(true);
     mediaQuery.addEventListener('change', handleSystemThemeChange);
     return () => mediaQuery.removeEventListener('change', handleSystemThemeChange);
   }, []);
@@ -37,10 +55,11 @@ export default function App() {
   const theme = themePreference === 'system' ? systemTheme : themePreference;
 
   useEffect(() => {
+    if (!preferencesReady) return;
     document.documentElement.setAttribute('data-theme', theme);
     localStorage.setItem('theme-preference', themePreference);
     localStorage.setItem('theme', themePreference);
-  }, [theme, themePreference]);
+  }, [preferencesReady, theme, themePreference]);
 
   const cycleTheme = () => {
     setThemePreference((prev) => {
@@ -51,37 +70,43 @@ export default function App() {
   };
 
   return (
+    <MotionConfig reducedMotion="user">
+      <ScrollToTop />
+      <RouteMetadata />
+      <SkipLink />
+      <div className="app-container">
+        <Navbar
+          theme={theme}
+          themePreference={themePreference}
+          systemTheme={systemTheme}
+          cycleTheme={cycleTheme}
+          toggleTheme={cycleTheme}
+        />
+
+        <main id="main-content">
+          <Suspense fallback={<div className="route-loading" role="status">Loading…</div>}>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/experience" element={<ExperienceRoute />} />
+              <Route path="/publications" element={<PublicationsRoute />} />
+              <Route path="/awards" element={<AwardsRoute />} />
+              <Route path="/credentials" element={<CredentialsRoute />} />
+              <Route path="*" element={<NotFoundRoute />} />
+            </Routes>
+          </Suspense>
+        </main>
+
+        <Footer />
+      </div>
+    </MotionConfig>
+  );
+}
+
+export default function App() {
+  return (
     <LanguageProvider>
       <BrowserRouter>
-        <MotionConfig reducedMotion="user">
-          <ScrollToTop />
-          <RouteMetadata />
-          <SkipLink />
-          <div className="app-container">
-            <Navbar
-              theme={theme}
-              themePreference={themePreference}
-              systemTheme={systemTheme}
-              cycleTheme={cycleTheme}
-              toggleTheme={cycleTheme}
-            />
-
-            <main id="main-content">
-              <Suspense fallback={<div className="route-loading" role="status">Loading…</div>}>
-                <Routes>
-                  <Route path="/" element={<HomePage />} />
-                  <Route path="/experience" element={<ExperiencePage />} />
-                  <Route path="/publications" element={<PublicationsPage />} />
-                  <Route path="/awards" element={<AwardsPage />} />
-                  <Route path="/credentials" element={<CredentialsPage />} />
-                  <Route path="*" element={<NotFoundPage />} />
-                </Routes>
-              </Suspense>
-            </main>
-
-            <Footer />
-          </div>
-        </MotionConfig>
+        <AppContent />
       </BrowserRouter>
     </LanguageProvider>
   );
