@@ -71,6 +71,7 @@ export const publicationsData = [
     posterUrl: publicAsset("publications/mapr-2025/vietnamese-audio-visual-speech-recognition-poster.pdf"),
     sourceCodeUrl: "https://github.com/tanthinhdt/vasr",
     datasetUrl: "https://huggingface.co/datasets/tanthinhdt/vasr",
+    datasetIconUrl: publicAsset("brand/hugging-face-logo.svg"),
     citationCount: 0,
     citationSource: "Crossref",
     citationChecked: "October 2026",

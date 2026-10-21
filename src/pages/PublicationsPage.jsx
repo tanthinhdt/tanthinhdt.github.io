@@ -244,7 +244,14 @@ export default function PublicationsPage() {
                     className="btn-secondary"
                     style={{ padding: '0.6rem 1.25rem', fontSize: '0.875rem' }}
                   >
-                    {t('publications.dataset')} <ExternalLink size={15} aria-hidden="true" />
+                    {t('publications.dataset')}
+                    <img
+                      src={pub.datasetIconUrl}
+                      width="18"
+                      height="18"
+                      alt=""
+                      aria-hidden="true"
+                    />
                   </a>
                 )}
 
