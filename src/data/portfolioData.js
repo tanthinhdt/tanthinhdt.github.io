@@ -105,7 +105,7 @@ export const publicationsData = [
     journalRankSource: "SCImago Journal Rank",
     journalRankYear: "2024",
     journalRankChecked: "October 2026",
-    citationCount: 16,
+    citationCount: 17,
     citationSource: "Crossref",
     citationChecked: "October 2026",
     isHighlight: true,
